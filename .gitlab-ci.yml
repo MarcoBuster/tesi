@@ -1,0 +1,19 @@
+# Thanks to https://gitlab.com/martisak/latex-pipeline/
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+  - build
+
+compile:
+  image: blang/latex:ctanfull
+  stage: build
+  script:
+    - make pdf
+  artifacts:
+    name: "$CI_COMMIT_REF_NAME"
+    paths:
+      - elaborato.pdf
+    expire_in: 1 month
+
