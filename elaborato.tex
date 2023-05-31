@@ -1,0 +1,111 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                         %
+%			TEMPLATE LATEX PER TESI                                       %
+%			______________                                                %
+%                                                                         %
+%           Ultima revisione: 13 aprile 2023                              %
+%           Revisori: G.Presti; L.A.Ludovico; F. Avanzini; M. Tiraboschi, %
+%                     Marco Aceti                                         %
+%                                                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,italian]{report}
+\usepackage{template}
+
+
+% CORSO DI LAUREA:
+\def\myCDL{Corso di Laurea in Informatica}
+
+% TITOLO TESI:
+\def\myTitle{Trasporto ferroviario e Open Data}
+
+% AUTORE:
+\def\myName{\textbf{Marco Aceti}}
+\def\myMat{Matr.\ 963032}
+
+% RELATORE E CORRELATORE:
+\def\myRefereeA{Prof.\ Andrea Trentini}
+%\def\myRefereeB{Prof. Federico Avanzini}
+%\def\myRefereeC{Prof. Giorgio Presti} % commentare in caso di un solo correlatore
+
+% ANNO ACCADEMICO
+\def\myYY{2022-2023}
+
+% Il seguente comando introduce un elenco delle figure dopo l'indice (facoltativo)
+%\figurespagetrue
+
+% Il seguente comando introduce un elenco delle tabelle dopo l'indice (facoltativo)
+%\tablespagetrue
+
+%
+%			PREAMBOLO
+%			Inserire qui eventuali package da includere o definizioni di comandi personalizzati
+%
+
+% Package di formato
+\usepackage[a4paper]{geometry}		% Formato del foglio
+\usepackage[italian]{babel}			% Supporto per l'italiano
+\usepackage[utf8]{inputenc}			% Supporto per UTF-8
+%\usepackage[a-1b]{pdfx}			% File conforme allo standard PDF-A (obbligatorio per la consegna)
+
+% Package per la grafica
+\usepackage{graphicx}				% Funzioni avanzate per le immagini
+\usepackage{hologo}					% Bibtex logo with \hologo{BibTeX}
+
+% Package tipografici
+\usepackage{amssymb,amsmath,amsthm} % Simboli matematici
+\usepackage{listings}				% Scrittura di codice
+
+% Package ipertesto
+\usepackage{url}					% Visualizza e rendere interattii gli URL
+\usepackage{hyperref}				% Rende interattivi i collegamenti interni
+
+
+\begin{document}
+	
+	% Creazione automatica del frontespizio
+	\frontespizio
+	\beforepreface
+	
+	% DEDICA
+	\hfill
+	\begin{minipage}{15cm}
+		\hfill
+		\begin{minipage}[t]{11cm}
+			\raggedleft \large
+			{
+				\sl
+				
+				Nei confronti di Trenord \\
+				sono state usate espressioni violente come \\
+				``disastro, incubo, degrado, punizione''. \\
+				\bigskip
+				Abbiamo sempre rispettato le opinioni di tutti,\\
+				ma dinanzi a tanta accanita disinformazione crediamo doveroso rivolgerci direttamente a voi, clienti e viaggiatori, per darvi i dati reali di quanto accaduto ed offrirvi le corrette spiegazioni.
+				
+				\bigskip
+			}
+		\end{minipage} \\
+			\raggedleft \large
+			%\textbf{-- Paolo Garavaglia} \\
+			%\textrm{Direttore Comunicazioni e Relazioni Esterne, Trenord} \\
+			
+			\textbf{Lettera ai clienti Trenord} \\
+			Milano, 2 febbraio 2022
+	\end{minipage}
+	
+	\prefacesection{Ringraziamenti}
+	Questa sezione, facoltativa, contiene i ringraziamenti.
+	
+	\afterpreface
+	
+	\chapter{Introduzione}
+	\label{cap:introduzione}
+	
+	Introduzione
+	
+	\bibliographystyle{unsrt}
+	\bibliography{bibliografia}
+	\addcontentsline{toc}{chapter}{Bibliografia}
+
+\end{document}
