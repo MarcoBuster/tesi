@@ -25,8 +25,6 @@
 
 % RELATORE E CORRELATORE:
 \def\myRefereeA{Prof.\ Andrea Trentini}
-%\def\myRefereeB{Prof. Federico Avanzini}
-%\def\myRefereeC{Prof. Giorgio Presti} % commentare in caso di un solo correlatore
 
 % ANNO ACCADEMICO
 \def\myYY{2022-2023}
@@ -39,7 +37,6 @@
 
 %
 %			PREAMBOLO
-%			Inserire qui eventuali package da includere o definizioni di comandi personalizzati
 %
 
 % Package di formato
@@ -51,6 +48,11 @@
 % Package per la grafica
 \usepackage{graphicx}				% Funzioni avanzate per le immagini
 \usepackage{hologo}					% Bibtex logo with \hologo{BibTeX}
+
+% Citazioni e bibliografia
+\usepackage[style=italian]{csquotes}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\addbibresource{bibliografia.bib}
 
 % Package tipografici
 \usepackage{amssymb,amsmath,amsthm} % Simboli matematici
@@ -90,22 +92,68 @@
 			%\textbf{-- Paolo Garavaglia} \\
 			%\textrm{Direttore Comunicazioni e Relazioni Esterne, Trenord} \\
 			
-			\textbf{Lettera ai clienti Trenord} \\
+			\textbf{Trenord, Lettera ai clienti} \\
 			Milano, 2 febbraio 2022
 	\end{minipage}
 	
-	\prefacesection{Ringraziamenti}
-	Questa sezione, facoltativa, contiene i ringraziamenti.
+	% \prefacesection{Ringraziamenti}
+	% Questa sezione, facoltativa, contiene i ringraziamenti.
 	
 	\afterpreface
 	
 	\chapter{Introduzione}
-	\label{cap:introduzione}
+	Ad oggi in Italia non esistono Open Data generalizzati sulla \textit{reale} performance del \textbf{trasporto pubblico ferroviario}; l'accesso a tali metriche è ostacolato da \textbf{barriere tecnologiche e legali}, spesso ingiustificate. 
+	Le poche e frammentate statistiche pubblicamente disponibili su eventi come \textit{ritardi} o \textit{cancellazioni} sono spesso arbitrariamente aggregate, impedendo l'uso di strumenti di analisi avanzati. \\
 	
-	Introduzione
+	\textit{Come può un Cittadino, quindi, valutare l'operato delle imprese ferroviarie e degli enti committenti senza l'accesso ai \textbf{dati reali} sul servizio?} \\
 	
-	\bibliographystyle{unsrt}
-	\bibliography{bibliografia}
+	Il lavoro di tesi si articola sull’idea di \textbf{preservare i dati istantanei} della circolazione ferroviaria dalla piattaforma ViaggiaTreno per produrre Open Data storici, \textit{machine-readable} e di qualità.
+	Inoltre, verranno proposte a fini dimostrativi alcune analisi dei dati raccolti.
+	
+	\section{Il trasporto ferroviario in Italia}
+	
+	Sul territorio nazionale sono previsti due soggetti distinti che operano sulla ferrovia:
+	\begin{itemize}
+		\item le \textbf{imprese ferroviarie}, ovvero
+		\textcquote[art.\ 2, comma 1, lettera a)]{Dlgs112}{qualsiasi impresa pubblica o privata
+			titolare di una licenza, la cui attività principale consiste nella
+			prestazione di servizi per il trasporto sia di merci sia di persone
+			per ferrovia e che garantisce obbligatoriamente la trazione};
+		\item i \textbf{gestori dell'infrastruttura}, ovvero
+		\textcquote[art.\ 2, comma 1, lettera b)]{Dlgs112}{qualsiasi organismo o impresa responsabili dell'esercizio, della manutenzione e del rinnovo dell'infrastruttura ferroviaria di una rete nonché della partecipazione al suo sviluppo come stabilito dallo Stato nell'ambito della sua politica generale sullo sviluppo e sul finanziamento dell'infrastruttura}.
+	\end{itemize}
+
+	\subsection{Le Società sul territorio}
+	
+	Attualmente sono certificate 18 \textbf{imprese ferroviarie} per il servizio passeggeri \cite{ElencoIF}, tra cui Trenitalia S.p.A., Trenord S.r.l.\ e Trenitalia Tper S.C.a.R.L.
+	Il principale \textbf{gestore dell'infrastruttura} è Rete Ferroviaria Italiana S.p.A.\ (RFI, 16829 km \cite{RfiKm}), seguito da Ferrovie Emilia Romagna (343 km \cite{FerKm}) e Ferrovienord (330 km \cite{FerNordKm}).
+	Il gruppo \textbf{Ferrovie dello Stato Italiane S.p.A.} è una partecipata del Ministero dell'Economia e delle Finanze \cite{MefGruppoFS} e controlla totalmente alcune delle Società già citate, come Trenitalia S.p.A.\ e Rete Ferroviaria Italiana S.p.A.\ \cite{ControllateFS}. 
+	
+	\paragraph{Lombardia}
+	
+	Trenord S.r.l.\ è una \textit{joint venture}\footnote{Contratto di accordo tra due o più imprese al fine di raggiungere un obiettivo comune} di Trenitalia (al 50\%) e il gruppo FNM S.p.A.\ (FerrovieNord Milano, al 50\%) \cite{TrenordChiSiamo}. 
+	Quest'ultimo è posseduto da Regione Lombardia (al 57,57\%) e da Trenitalia stessa (al 14,74\%); il restante 27,69\% è quotato in Borsa \cite{BorsaItalianaFNM}.
+	La bizzarra composizione societaria cela una totale partecipazione di Trenitalia S.p.A.\ del $\sim 57\%$, di Regione Lombardia del $\sim 28$\% e del restante $\sim 15\%$ da parte di azionisti privati.
+	
+	L'infrastruttura è gestita sia da RFI\ (1740 km \cite{RfiKm}) che da Ferrovienord (controllata da FNM, 330 km \cite{FerNordKm}).
+	
+	\paragraph{Emilia-Romagna}
+	
+	La Trenitalia Tper S.C.a.R.L.\ è una società consortile partecipata da Trenitalia S.p.A.\ (al 70\%) e TPER S.p.a.\ (Trasporto Passeggeri Emilia-Romagna, al 30\%) \cite{NascitaTper}; quest'ultima è a sua volta ripartita tra diversi soggetti pubblici dell'Emilia Romagna \cite{SociTper}.
+	
+	Similmente alla Lombardia, l'infrastruttura è gestita sia da RFI (1319 km \cite{RfiKm}) che da FER S.r.l.\ (controllata dalla Regione \cite{FerChiSiamo}, 343 km \cite{FerKm}).
+	
+	\subsection{Il servizio pubblico e il mercato}
+	
+	La fornitura del servizio di trasporto ferroviario passeggeri è costituita da \textbf{offerte a mercato} (treni ad alta velocità) e \textbf{contratti di servizio pubblico}, stipulati dalle imprese ferroviarie con lo Stato (per le tratte a media e lunga percorrenza) o con le Regioni (per le connessioni regionali e interregionali) \cite[vedi][paragrafo \textit{``Gli obblighi di servizio pubblico e i contratti di servizio''}]{CameraTrasportoFerroviario}.
+	
+	Il servizio pubblico può essere oggetto di \textbf{compensazioni economiche} da parte dell'Ente, ma queste devono essere commisurate in base a dei \textbf{parametri ben definiti} \cite[art.\ 4 comma 1]{Reg1370}.
+	Fino al 25 dicembre 2023 permane la possibilità delle autorità di affidare direttamente i contratti di servizio pubblico, senza gara \cite[art.\ 8, comma 2, lettera iii)]{Reg1370}.
+	
+	Il quadro normativo evidenzia la \textbf{funzione pubblica} del servizio di trasporto ferroviario regionale e interregionale, esente dalle normali logiche di libero mercato ma \textcquote{CameraTrasportoFerroviario}{\textit{funzionale ad assicurare \textbf{il diritto costituzionale alla mobilità}}}.
+	La forte responsabilità politica degli enti committenti nel definire concessioni, contratti di servizio e compensazioni ha un grande impatto sulla qualità del trasporto ferroviario, sia in termini di programmazione che di \textit{performance}.
+
+	\printbibliography
 	\addcontentsline{toc}{chapter}{Bibliografia}
 
 \end{document}
