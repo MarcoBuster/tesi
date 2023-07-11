@@ -11,6 +11,7 @@
 
 \documentclass[12pt,italian]{report}
 \usepackage{template}
+\usepackage[colorinlistoftodos]{todonotes}
 
 
 % CORSO DI LAUREA:
@@ -66,7 +67,7 @@
 
 
 \begin{document}
-	
+
 	% Creazione automatica del frontespizio
 	\frontespizio
 	\beforepreface
@@ -103,9 +104,13 @@
 	
 	\afterpreface
 	
+	\listoftodos
+	
 	\chapter{Introduzione}
 	Ad oggi in Italia non esistono Open Data generalizzati sulla \textit{reale} performance del \textbf{trasporto pubblico ferroviario}; l'accesso a tali metriche è ostacolato da \textbf{barriere tecnologiche e legali}, spesso ingiustificate. 
 	Le poche e frammentate statistiche pubblicamente disponibili su eventi come \textit{ritardi} o \textit{cancellazioni} sono spesso arbitrariamente aggregate, impedendo l'uso di strumenti di analisi avanzati. \\
+	
+	\todo{atrent: non serve doppio backslash}
 	
 	\textit{Come può un Cittadino, quindi, valutare l'operato delle imprese ferroviarie e degli enti committenti senza l'accesso ai \textbf{dati reali} sul servizio?} \\
 	
