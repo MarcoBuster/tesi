@@ -65,6 +65,9 @@
 \usepackage{url}					% Visualizza e rendere interattii gli URL
 \usepackage{hyperref}				% Rende interattivi i collegamenti interni
 
+% Path immagini
+\graphicspath{ {./images/} }
+
 \begin{document}
 
 % Creazione automatica del frontespizio
@@ -83,9 +86,9 @@
 			\bigskip
 			Abbiamo sempre rispettato le opinioni di tutti,\\
 			ma dinanzi a tanta accanita disinformazione crediamo
-			doveroso rivolgerci direttamente a voi, clienti e
-			viaggiatori, per darvi i dati reali di quanto accaduto ed
-			offrirvi le corrette spiegazioni.
+            doveroso rivolgerci direttamente a voi, clienti e
+            viaggiatori, per darvi i dati reali di quanto accaduto ed
+            offrirvi le corrette spiegazioni.
 
 			\bigskip }
 	\end{minipage} \\
@@ -108,7 +111,7 @@
 
 Ad oggi in Italia non esistono Open Data generalizzati sulla
 \textit{reale} performance del \textbf{trasporto pubblico
-	ferroviario}; l'accesso a tali metriche è ostacolato da
+    ferroviario}; l'accesso a tali metriche è ostacolato da
 \textbf{barriere tecnologiche e legali}, spesso ingiustificate.  Le
 poche e frammentate statistiche pubblicamente disponibili su eventi
 come \textit{ritardi} o \textit{cancellazioni} sono spesso
@@ -116,11 +119,11 @@ arbitrariamente aggregate, impedendo l'uso di strumenti di analisi
 avanzati.
 
 \textit{Come può un Cittadino, quindi, valutare l'operato delle
-	imprese ferroviarie e degli enti committenti senza l'accesso ai
-	\textbf{dati reali} sul servizio?}
+    imprese ferroviarie e degli enti committenti senza l'accesso ai
+    \textbf{dati reali} sul servizio?}
 
 Il lavoro di tesi si articola sull’idea di \textbf{preservare i dati
-	istantanei} della circolazione ferroviaria dalla piattaforma
+    istantanei} della circolazione ferroviaria dalla piattaforma
 ViaggiaTreno per produrre Open Data storici, \textit{machine-readable}
 e di qualità.  Inoltre, verranno proposte a fini dimostrativi alcune
 analisi dei dati raccolti.
@@ -131,18 +134,18 @@ Sul territorio nazionale sono previsti due soggetti distinti che
 operano sulla ferrovia:
 \begin{itemize}
 	\item le \textbf{imprese ferroviarie}, ovvero \textcquote[art.\ 2,
-	comma 1, lettera a)]{Dlgs112}{qualsiasi impresa pubblica o privata
-		titolare di una licenza, la cui attività principale consiste
-		nella prestazione di servizi per il trasporto sia di merci sia
-		di persone per ferrovia e che garantisce obbligatoriamente la
-		trazione};
+    comma 1, lettera a)]{Dlgs112}{qualsiasi impresa pubblica o privata
+        titolare di una licenza, la cui attività principale consiste
+        nella prestazione di servizi per il trasporto sia di merci sia
+        di persone per ferrovia e che garantisce obbligatoriamente la
+        trazione};
 	\item i \textbf{gestori dell'infrastruttura}, ovvero
-	\textcquote[art.\ 2, comma 1, lettera b)]{Dlgs112}{qualsiasi
-		organismo o impresa responsabili dell'esercizio, della
-		manutenzione e del rinnovo dell'infrastruttura ferroviaria di
-		una rete nonché della partecipazione al suo sviluppo come
-		stabilito dallo Stato nell'ambito della sua politica generale
-		sullo sviluppo e sul finanziamento dell'infrastruttura}.
+    \textcquote[art.\ 2, comma 1, lettera b)]{Dlgs112}{qualsiasi
+        organismo o impresa responsabili dell'esercizio, della
+        manutenzione e del rinnovo dell'infrastruttura ferroviaria di
+        una rete nonché della partecipazione al suo sviluppo come
+        stabilito dallo Stato nell'ambito della sua politica generale
+        sullo sviluppo e sul finanziamento dell'infrastruttura}.
 \end{itemize}
 
 \subsection{Le Società sul territorio}
@@ -154,7 +157,7 @@ Trenord S.r.l.\ e Trenitalia Tper S.C.a.R.L.  Il principale
 S.p.A.\ (RFI, 16829 km \cite{RfiKm}), seguito da Ferrovie Emilia
 Romagna (343 km \cite{FerKm}) e Ferrovienord (330 km
 \cite{FerNordKm}).  Il gruppo \textbf{Ferrovie dello Stato Italiane
-	S.p.A.} è una partecipata del Ministero dell'Economia e delle
+    S.p.A.} è una partecipata del Ministero dell'Economia e delle
 Finanze \cite{MefGruppoFS} e controlla totalmente alcune delle Società
 già citate, come Trenitalia S.p.A.\ e Rete Ferroviaria Italiana
 S.p.A.\ \cite{ControllateFS}.
@@ -162,8 +165,8 @@ S.p.A.\ \cite{ControllateFS}.
 \subsubsection{Lombardia}
 
 Trenord S.r.l.\ è una \textit{joint venture}\footnote{Contratto di
-	accordo tra due o più imprese al fine di raggiungere un obiettivo
-	comune} di Trenitalia (al 50\%) e il gruppo FNM S.p.A.\
+    accordo tra due o più imprese al fine di raggiungere un obiettivo
+    comune} di Trenitalia (al 50\%) e il gruppo FNM S.p.A.\
 (FerrovieNord Milano, al 50\%) \cite{TrenordChiSiamo}.  Quest'ultimo è
 posseduto da Regione Lombardia (al 57,57\%) e da Trenitalia stessa (al
 14,74\%); il restante 27,69\% è quotato in Borsa
@@ -192,10 +195,10 @@ costituita da \textbf{offerte a mercato} (treni ad alta velocità) e
 ferroviarie con lo Stato (per le tratte a media e lunga percorrenza) o
 con le Regioni (per le connessioni regionali e interregionali)
 \cite[vedi][paragrafo \textit{``Gli obblighi di servizio pubblico e i
-	contratti di servizio''}]{CameraTrasportoFerroviario}.
+    contratti di servizio''}]{CameraTrasportoFerroviario}.
 
 Il servizio pubblico può essere oggetto di \textbf{compensazioni
-	economiche} da parte dell'Ente, ma queste devono essere
+    economiche} da parte dell'Ente, ma queste devono essere
 commisurate in base a dei \textbf{parametri ben definiti} \cite[art.\
 4, comma 1]{Reg1370}.  Fino al 25 dicembre 2023 permane la possibilità
 delle autorità di affidare direttamente i contratti di servizio
@@ -205,7 +208,7 @@ Il quadro normativo evidenzia la \textbf{funzione pubblica} del
 servizio di trasporto ferroviario regionale e interregionale, esente
 dalle normali logiche di libero mercato ma
 \textcquote{CameraTrasportoFerroviario}{\textit{funzionale ad
-		assicurare \textbf{il diritto costituzionale alla mobilità}}}.
+        assicurare \textbf{il diritto costituzionale alla mobilità}}}.
 La forte responsabilità politica degli enti committenti nel definire
 concessioni, contratti di servizio e compensazioni ha un grande
 impatto sulla qualità del trasporto ferroviario, sia in termini di
@@ -222,37 +225,37 @@ metriche ben precise (e spesso richiamate da numerosi contratti di
 servizio) qui di seguito esposte. \\ Nel PIR viene inoltre descritta
 la c.d.\ \textbf{\textit{performance regime}}, un meccanismo di premi
 e penali adottata \textcquote[art.\ 21]{Dlgs112}{\textit{al fine di
-		ridurre al minimo le disfunzioni conseguenti ad eventuali
-		perturbazioni arrecate alla circolazione dei treni}}.
+        ridurre al minimo le disfunzioni conseguenti ad eventuali
+        perturbazioni arrecate alla circolazione dei treni}}.
 	
 \subsubsection{Metodo di calcolo delle penali}
 
 La metrica alla base del calcolo della performance di regime è il
 c.d.\ \textbf{scostamento}, ovvero la differenza in minuti tra
 l'orario di passaggio reale del treno in una \textit{stazione
-	rilevante} e l'orario programmato \cite[app.\ 5.C,
+    rilevante} e l'orario programmato \cite[app.\ 5.C,
 \textit{``Definizioni''}]{RfiPir}.  Ad ogni scostamento maggiore di 2
 minuti o dovuto ad anormalità deve essere attribuita una \textbf{causa
-	di ritardo}, riconducibile al gestore dell'infrastruttura,
+    di ritardo}, riconducibile al gestore dell'infrastruttura,
 all'impresa ferroviaria, ad altra impresa ferroviaria o forza
 maggiore.  Al fine di calcolo delle penali vengono utilizzati i
 seguenti \textbf{coefficienti} \cite[app.\ 5.C, \textit{``Metodi di
-	calcolo''}]{RfiPir}:
+    calcolo''}]{RfiPir}:
 
 \begin{itemize}
 	\item $P_\text{u}$: penale unitaria pari a 1,00€ al minuto;
 	\item $P_\text{sop}$: penale unitaria per ogni treno soppresso
-	pari a $120 P_\text{u}$;
+    pari a $120 P_\text{u}$;
 	\item $C_\text{t}$: tipologia di linea \cite[app.\ 5C, tabella
-	1]{RfiPir};
+    1]{RfiPir};
 	\item $C_\text{cat}$: categoria del treno \cite[app.\ 5C, tabella
-	4]{RfiPir};
+    4]{RfiPir};
 	\item $C_\text{rit}$: ritardo complessivo della corsa \cite[app.\
-	5C, tabelle 2a, 2b, 2c]{RfiPir};
+    5C, tabelle 2a, 2b, 2c]{RfiPir};
 	\item $C_\text{sop}$: stato di soppressione \cite[app.\ 5C,
-	tabella 6]{RfiPir};
+    tabella 6]{RfiPir};
 	\item $C_\text{ser}$: tipologia di servizio \cite[app.\ 5C,
-	tabella 3]{RfiPir};
+    tabella 3]{RfiPir};
 \end{itemize}
 
 Dall'\textbf{insieme degli scostamenti} $S$ sono definite le seguenti
@@ -260,28 +263,28 @@ metriche:
 
 \begin{itemize}
 	\item $M_\text{GI} : S \rightarrow \mathbb N^+$ minuti di ritardo
-	attribuiti al gestore dell'infrastruttura;
+    attribuiti al gestore dell'infrastruttura;
 	\item $M_\text{FI} : S \rightarrow \mathbb N^+$: minuti di ritardo
-	attribuiti all'impresa ferroviaria;
+    attribuiti all'impresa ferroviaria;
 	\item $M_{a, b} : S \rightarrow \mathbb N^+$: minuti di ritardo
-	attribuiti all'impresa ferroviaria $a$ provocati ai treni
-	dell'impresa $b$.
+    attribuiti all'impresa ferroviaria $a$ provocati ai treni
+    dell'impresa $b$.
 \end{itemize}
 
 Per le \textbf{soppressioni} sono definite ulteriori metriche:
 \begin{itemize}
 	\item $S_\text{GI}$: numero di treni con provvedimento di
-	soppressione, anche parziale, per responsabilità del gestore
-	dell'infrastruttura;
+    soppressione, anche parziale, per responsabilità del gestore
+    dell'infrastruttura;
 	\item $P_\text{GI}$: rapporto tra treni-km soppressi per
-	responsabilità del gestore dell'infrastruttura e treni-km
-	programmati;
+    responsabilità del gestore dell'infrastruttura e treni-km
+    programmati;
 	\item $S_{a, b}$: numero di treni dell'impresa ferroviaria $b$ con
-	provvedimento di soppressione, anche parziale, per responsabilità
-	dell'impresa ferroviaria $a$;
+    provvedimento di soppressione, anche parziale, per responsabilità
+    dell'impresa ferroviaria $a$;
 	\item $P_{a, b}$: rapporto tra treni-km dell'impresa ferroviaria
-	$b$ soppressi per responsabilità dell'impresa $a$ e treni-km
-	programmati.
+    $b$ soppressi per responsabilità dell'impresa $a$ e treni-km
+    programmati.
 \end{itemize}
 
 Le \textbf{penali} sono pertanto corrisposte tramite tre flussi
@@ -289,20 +292,20 @@ indipendenti:
 
 \begin{itemize}[noitemsep]
 	\item \textbf{da gestore dell'infrastruttura a impresa
-		ferroviaria}
+        ferroviaria}
 	\begin{align*} P_\text{F1} &= P_\text{u} \cdot \sum_{s \in S}
-		\left ( M_\text{GI}(s) \cdot C_\text{t} \cdot C_\text{cat}
-			\cdot C_\text{rit} \right) + P_\text{sop} \cdot
-		S_\text{GI} \cdot P_\text{GI} \cdot C_\text{sop};
-		\intertext{\item \textbf{da impresa ferroviaria al gestore
-				dell'infrastruttura}} P_\text{F2} &= P_\text{u} \cdot
-		\sum_{s \in S} \left ( M_\text{FI}(s) \cdot C_\text{t} \cdot
-			C_\text{ser} \cdot C_\text{car} \cdot C_\text{rit} \right
-		); \intertext{\item \textbf{da impresa ferroviaria ad altra
-				impresa ferroviaria}} P_\text{F3} &= P_\text{u} \cdot
-		\sum_{s \in S} \left ( M_{a,b}(s) \cdot C_\text{t} \cdot
-			C_\text{cat} \cdot C_\text{rit} \right ) + P_\text{sop}
-		\cdot S_{a,b} \cdot P_{a,b} \cdot C_\text{sop}.
+        \left ( M_\text{GI}(s) \cdot C_\text{t} \cdot C_\text{cat}
+            \cdot C_\text{rit} \right) + P_\text{sop} \cdot
+        S_\text{GI} \cdot P_\text{GI} \cdot C_\text{sop};
+        \intertext{\item \textbf{da impresa ferroviaria al gestore
+                dell'infrastruttura}} P_\text{F2} &= P_\text{u} \cdot
+        \sum_{s \in S} \left ( M_\text{FI}(s) \cdot C_\text{t} \cdot
+            C_\text{ser} \cdot C_\text{car} \cdot C_\text{rit} \right
+        ); \intertext{\item \textbf{da impresa ferroviaria ad altra
+                impresa ferroviaria}} P_\text{F3} &= P_\text{u} \cdot
+        \sum_{s \in S} \left ( M_{a,b}(s) \cdot C_\text{t} \cdot
+            C_\text{cat} \cdot C_\text{rit} \right ) + P_\text{sop}
+        \cdot S_{a,b} \cdot P_{a,b} \cdot C_\text{sop}.
 	\end{align*}
 \end{itemize}
 
@@ -313,10 +316,10 @@ dell'infrastruttura, ma invertendo le responsabilità sì.
 \subsubsection{Flusso economico}
 
 È bene notare come \textcquote{RfiPir}{\textit{il flusso economico
-		annuo tra GI\footnote{Gestore dell'Infrastruttura} e ogni
-		singola IF\footnote{Impresa Ferroviaria} non potrà superare il
-		valore del 5\% del totale del pedaggio consuntivato nel corso
-		dell’anno}}. Nel caso dovesse registrarsi un importo a favore
+        annuo tra GI\footnote{Gestore dell'Infrastruttura} e ogni
+        singola IF\footnote{Impresa Ferroviaria} non potrà superare il
+        valore del 5\% del totale del pedaggio consuntivato nel corso
+        dell’anno}}. Nel caso dovesse registrarsi un importo a favore
 del GI, l'80\% di tale somma verrà \textbf{ridistribuita} alle altre
 IF proporzionalmente in base a un punteggio
 $$
@@ -337,6 +340,135 @@ In sintesi, il sistema di ridistribuzione delle penali premia le
 imprese ferroviarie più virtuose ($C_\text{correttivo}$)
 incentivandole a migliorare ($C_\text{base}$) al fine di aumentare la
 \textbf{performance regime} complessiva.
+
+\section{Infrastruttura tecnologica}
+
+La circolazione ferroviaria è regolata dal gestore
+dell'infrastruttura.  All'interno delle stazioni e in linea esistono
+dei sistemi (come i \textbf{circuiti di binario}) in grado di
+stabilire se un tratto di binario è occupato o libero.  All'inizio di
+una corsa, un operatore \textit{``battezza''} un tratto occupato
+inserendo il numero di treno corrispondente.  Man mano che il treno
+occupa e libera altri tratti di binario adiacenti, il \textbf{sistema
+    informatico} lo segue.  In questo modo, il gestore
+dell'infrastruttura conosce sempre la posizione aggiornata di tutti i
+treni sulle proprie linee.
+
+Lo stato dei treni viene quindi trasmesso alle imprese ferroviarie che
+lo elaborano e lo comunicano ai viaggiatori attraverso siti web e
+applicazioni.
+
+\subsection{API di Viaggiatreno}
+
+\begin{figure}[h]
+	\centering
+    \includegraphics[width=1\textwidth]{images/viaggiatreno.png}
+	\caption{Homepage di Viaggiatreno}
+\end{figure}
+
+Il portale Viaggiatreno\footnote{https://viaggiatreno.it} è stato
+sviluppato da Trenitalia ed è attivo almeno dal
+2006\footnote{Informazione ricavata dal \texttt{whois} del dominio}.
+Il sito web permette numerose operazioni, come:
+\begin{itemize}
+	\item \textbf{cercare un treno} per numero o itinerario e
+    visualizzare il ritardo, le fermate, luogo e orario di ultimo
+    rilevamento;
+	\item \textbf{cercare una stazione} per nome e visualizzare
+    partenze e arrivi;
+	\item \textbf{leggere o ascoltare le informazioni sulla mobilità}
+    (Infomobilità).
+\end{itemize}
+
+La caratteristica più interessante ai fini del progetto è la
+possibilità di operare anche tramite delle semplici \textbf{API HTTP},
+senza autenticazione o apparenti limiti tecnologici.  Utilizzando lo
+strumento \textit{``Ispeziona elemento''} di un qualsiasi browser è
+possibile tracciare le richieste invocate dal frontend in JavaScript a
+seguito delle azioni dell'utente e farsi un'idea dei metodi API
+disponibili.
+
+Le API di Viaggiatreno non dispongono di una documentazione ufficiale
+e non sono conformi alla architettura REST o ad altri standard
+\textit{de facto} \cite{Giunta}.  Numerosi tentativi sono stati fatti
+dalla comunità open source italiana per documentarle: in particolare
+ringrazio Stefano (sabas) \cite{Sabas}, Luca Grandi \cite{Grandi} e
+Fabrizio Tarizzo \cite{Tarizzo} per il loro fondamentale contributo.
+I metodi sono generalmente accessibili al percorso
+\texttt{/infomobilita/resteasy/viaggiatreno/$M$/$P_1$/$P_2$/$\dots$/$P_n$}
+dove $M$ è il nome del metodo e $P_1, P_2, \dots, P_n$ i suoi
+parametri. A seconda della richiesta l'API può rispondere in JSON o in
+altri formati \textit{plain text}.
+
+Con Viaggiatreno è possibile trovare le corse di Trenitalia
+(regionali, alta velocità, Intercity e Intercity Notte), Trenord, TPER
+e OBB (Ferrovie Austriache).  Curiosamente, non è possibile cercare i
+treni di Italo-NTV, concorrente commerciale del gruppo Ferrovie dello
+Stato.
+
+\subsection{API di Trenord}
+
+\begin{figure}[h]
+	\centering
+    \includegraphics[width=1\textwidth]{images/trenord_api.png}
+	\caption{Dettagli di una corsa sul portale web di Trenord}
+\end{figure}
+
+Trenord mette a disposizione ai viaggiatori un'applicazione mobile e
+un portale web per consultare lo stato dei treni in circolazione e gli
+arrivi e le partenze di una stazione.
+
+Similmente a Viaggiatreno, con lo strumento \textit{``Ispeziona
+    elemento''} si possono facilmente individuare delle \textbf{API
+    HTTP} sotto la URL \texttt{https://admin.trenord.it}.  Nonostante
+l'assenza di una documentazione ufficiale, l'interazione con le API
+Trenord è più intuitiva e prevedibile rispetto a quelle di
+Viaggiatreno.  Le risposte sono sempre in JSON e le richieste seguono
+i principi REST di HTTP GET.
+
+Dai portali di Trenord non si trovano corse non operate dall'impresa
+stessa, come i regionali di Trenitalia o l'alta velocità.  Nonostante
+ciò, le API Trenord si sono rilevate utili per verificare e correggere
+alcune incongruenze riscontrate in quelle di Viaggiatreno.
+
+\subsection{Terminologia}
+
+Prima di analizzare le API e procedere con il progetto occorre fissare
+alcuni termini e concetti fondamentali, sorprendentemente spesso
+controintuitivi.
+
+Una \textbf{stazione} è un \textit{luogo di sosta temporanea} per i
+convogli ferroviari.  Ha un \textit{nome} e uno o più \textit{codici}
+corrispondenti, utilizzati per identificarla.  I nomi delle stazioni
+non necessariamente rispettano i nomi delle località in cui sono
+situate e una città può naturalmente includere più stazioni.  In
+alcuni casi l'API ritorna ``stazioni'' non più attive o inesistenti,
+come posti di movimento o depositi ferroviari.
+
+Con il termine \textbf{treno} si intende la \textit{corsa di un
+    convoglio ferroviario}.  I treni che non fanno servizio
+viaggiatori sono oltre gli obiettivi del progetto.  Ogni treno ha una
+\textit{numero}, una \textit{origine}, una \textit{destinazione}, una
+collezione ordinata di \textit{fermate intermedie} e altre proprietà
+che verranno approfondite nei prossimi capitoli.  Il numero di treno
+non è un \textbf{identificatore univoco} e non può essere utilizzato
+come tale, in quanto può essere riassegnato a treni di altre imprese
+ferroviarie.  La stessa \textit{corsa} può variare tra giornate
+diverse, sia per motivi programmati (per esempio, fermate
+straordinarie nel weekend) che non (treni parzialmente soppressi).  Un
+treno è univocamente identificato dalla tripla
+$(\texttt{Data}, \, \texttt{Origine}, \, \texttt{Numero})$.
+
+Una \textbf{fermata} è una stazione in cui un treno, oltre che a
+transitare, \textit{sosta}.  L'\textit{origine} e la
+\textit{destinazione} sono considerarsi fermate particolari: un treno
+sosta quindi in almeno due fermate, la prima e l'ultima.  Ad ogni
+fermata è associato un \textit{orario programmato} ed
+\textit{effettivo} di arrivo e partenza la cui differenza è il
+relativo ritardo.  La prima fermata non può avere un orario di arrivo
+e viceversa.  Le fermate possono essere ordinarie, straordinarie o
+soppresse.  Un treno avente alcune fermate sorppresse è detto
+\textit{parzialmente soppresso}, uno con tutte \textit{soppresso}.
 
 \printbibliography
 
