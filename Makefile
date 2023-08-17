@@ -4,7 +4,7 @@ SOURCES=elaborato.tex
 PDF_OBJECTS=$(SOURCES:.tex=.pdf)
 
 LATEXMK=latexmk
-LATEXMK_OPTIONS=-bibtex -pdf -pdflatex="pdflatex -interaction=nonstopmode"
+LATEXMK_OPTIONS=-bibtex -pdf -pdflatex="pdflatex -interaction=nonstopmode -shell-escape"
 
 DOCKER=docker
 DOCKER_COMMAND=run --rm -w /data/ --env LATEXMK_OPTIONS_EXTRA=$(LATEXMK_OPTIONS_EXTRA)
@@ -26,5 +26,6 @@ dist-clean: clean
 	-rm $(FILENAME).tar.gz
 
 render:
-	$(DOCKER) $(DOCKER_COMMAND) $(DOCKER_MOUNT) blang/latex:ctanfull \
+	$(DOCKER) $(DOCKER_COMMAND) $(DOCKER_MOUNT) kjarosh/latex:2023.1 \
+		apk add make && \
 		make pdf

@@ -55,11 +55,18 @@
 \usepackage[style=italian]{csquotes}
 \usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
 \addbibresource{bibliografia.bib}
+\usepackage[toc]{appendix}
 
 % Package tipografici
 \usepackage{lmodern,textcomp}		% Latin Modern font
 \usepackage{amssymb,amsmath,amsthm} % Simboli matematici
 \usepackage{listings}				% Scrittura di codice
+\usepackage{minted}                 % Scrittura di codice
+
+% Sistema note a pié di pagina nelle tabelle
+\usepackage{footnote}
+\makesavenoteenv{tabular}
+\makesavenoteenv{table}
 
 % Package ipertesto
 \usepackage{url}					% Visualizza e rendere interattii gli URL
@@ -358,10 +365,10 @@ Lo stato dei treni viene quindi trasmesso alle imprese ferroviarie che
 lo elaborano e lo comunicano ai viaggiatori attraverso siti web e
 applicazioni.
 
-\subsection{API di Viaggiatreno}
+\subsection{Portale Viaggiatreno}
+\label{viaggiatreno}
 
-\begin{figure}[h]
-	\centering
+\begin{figure}[h] \centering
     \includegraphics[width=1\textwidth]{images/viaggiatreno.png}
 	\caption{Homepage di Viaggiatreno}
 \end{figure}
@@ -388,25 +395,13 @@ possibile tracciare le richieste invocate dal frontend in JavaScript a
 seguito delle azioni dell'utente e farsi un'idea dei metodi API
 disponibili.
 
-Le API di Viaggiatreno non dispongono di una documentazione ufficiale
-e non sono conformi alla architettura REST o ad altri standard
-\textit{de facto} \cite{Giunta}.  Numerosi tentativi sono stati fatti
-dalla comunità open source italiana per documentarle: in particolare
-ringrazio Stefano (sabas) \cite{Sabas}, Luca Grandi \cite{Grandi} e
-Fabrizio Tarizzo \cite{Tarizzo} per il loro fondamentale contributo.
-I metodi sono generalmente accessibili al percorso
-\texttt{/infomobilita/resteasy/viaggiatreno/$M$/$P_1$/$P_2$/$\dots$/$P_n$}
-dove $M$ è il nome del metodo e $P_1, P_2, \dots, P_n$ i suoi
-parametri. A seconda della richiesta l'API può rispondere in JSON o in
-altri formati \textit{plain text}.
-
 Con Viaggiatreno è possibile trovare le corse di Trenitalia
 (regionali, alta velocità, Intercity e Intercity Notte), Trenord, TPER
 e OBB (Ferrovie Austriache).  Curiosamente, non è possibile cercare i
 treni di Italo-NTV, concorrente commerciale del gruppo Ferrovie dello
 Stato.
 
-\subsection{API di Trenord}
+\subsection{Sito web di Trenord}
 
 \begin{figure}[h]
 	\centering
@@ -429,13 +424,25 @@ i principi REST di HTTP GET.
 Dai portali di Trenord non si trovano corse non operate dall'impresa
 stessa, come i regionali di Trenitalia o l'alta velocità.  Nonostante
 ciò, le API Trenord si sono rilevate utili per verificare e correggere
-alcune incongruenze riscontrate in quelle di Viaggiatreno.
+alcune incongruenze riscontrate in quelle di Viaggiatreno. \\
 
-\subsection{Terminologia}
+In Appendice \ref{documentazione} sono documentati alcuni metodi
+rilevanti delle due API.
 
-Prima di analizzare le API e procedere con il progetto occorre fissare
-alcuni termini e concetti fondamentali, sorprendentemente spesso
-controintuitivi.
+\printbibliography
+
+\addcontentsline{toc}{chapter}{Bibliografia}
+
+\appendix
+
+\chapter{Documentazione}
+\label{documentazione}
+
+\section{Terminologia}
+\label{terminologia}
+
+Prima di analizzare le API occorre fissare alcuni termini e concetti
+fondamentali, sorprendentemente spesso controintuitivi.
 
 Una \textbf{stazione} è un \textit{luogo di sosta temporanea} per i
 convogli ferroviari.  Ha un \textit{nome} e uno o più \textit{codici}
@@ -470,8 +477,513 @@ e viceversa.  Le fermate possono essere ordinarie, straordinarie o
 soppresse.  Un treno avente alcune fermate sorppresse è detto
 \textit{parzialmente soppresso}, uno con tutte \textit{soppresso}.
 
-\printbibliography
+\section{API di Viaggiatreno}
 
-\addcontentsline{toc}{chapter}{Bibliografia}
+Le API di Viaggiatreno (vedi la Sezione \ref{viaggiatreno}) non
+dispongono di una documentazione ufficiale e non sono conformi alla
+architettura REST o ad altri standard \textit{de facto} \cite{Giunta}.
+Numerosi tentativi sono stati fatti dalla comunità open source
+italiana per documentarle: in particolare ringrazio Stefano (sabas)
+\cite{Sabas}, Luca Grandi \cite{Grandi} e Fabrizio Tarizzo
+\cite{Tarizzo} per il loro fondamentale contributo.  I metodi sono
+generalmente accessibili al percorso
+\texttt{/infomobilita/\-resteasy/\-viaggiatreno/\-$M$/\-$P_1$/\-$P_2$/\-$\dots$/\-$P_n$}
+dove $M$ è il nome del metodo e $P_1, P_2, \dots, P_n$ i suoi
+parametri. A seconda della richiesta l'API può rispondere in JSON o in
+altri formati \textit{plain text}.
+
+
+\subsection{\texttt{/cercaStazione/<nome>}}
+
+Il metodo ritorna \textit{tutte le stazioni} cui nome inizia con il
+nome indicato.  Per ogni stazione viene ritornato il suo codice, un
+nome ``lungo'' e uno ``breve'' e il nome della città in cui si trova.
+
+\subsubsection{Esempio}
+
+$\Rsh$ \texttt{/cercaStazione/MILANO}
+\begin{minted}{js}
+[
+  {
+    "nomeLungo": "MILANO CENTRALE", // nome lungo
+    "nomeBreve": "Milano Centrale", // nome breve (può essere nullo)
+    "label": "Milano",              // città (può essere nullo)
+    "id": "S01700"                  // codice stazione
+  },
+  // ...
+]
+\end{minted}
+
+\subsubsection{Avvertenze}
+
+Il metodo non restituisce tutte le stazioni.  Ad esempio, la stazione
+di Arcene (BG) non viene mai ritornata, neanche cercandola dal sito
+web.  L'unico modo per reperire il suo ID è consultare le fermate di
+un treno in corsa.
+
+\subsection{\texttt{/regione/<codiceStazione>}}
+
+Il metodo ritorna il codice della regione di appartenza della stazione
+richiesta.  Il contenuto della risposta, in testo semplice, può essere
+utilizzato nel metodo successivo.
+
+\begin{table}[h] \centering
+    \begin{tabular}{r|l}
+      Codice & Nome \\
+      \hline
+      1 & Lombardia \\
+      2 & Liguria \\
+      3 & Piemonte \\
+      4 & Valle D'Aosta \\
+      5 & Lazio \\
+      6 & Umbria \\
+      7 & Molise \\
+      8 & Emilia Romagna \\
+      9 & Trentino-Alto Adige \\
+      10 & Friuli Venezia Giulia \\
+      11 & Marche \\
+    \end{tabular}
+    \begin{tabular}{r|l}
+      Codice & Nome \\
+      \hline
+      12 & Veneto \\
+      13 & Toscana \\
+      14 & Sicilia \\
+      15 & Basilicata \\
+      16 & Puglia \\
+      17 & Calabria \\
+      18 & Campania \\
+      19 & Abruzzo \\
+      20 & Sardegna \\
+      21 & Trentino-Alto Adige \\
+      22 & Trentino-Alto Adige
+    \end{tabular}
+    \caption{Codici API delle regioni italiane}
+    \label{regioni}
+\end{table}
+
+\subsubsection{Esempio}
+
+$\Rsh$ \texttt{/regione/S01700} \hfill (Milano Centrale)
+\begin{minted}{text}
+1
+\end{minted}
+
+\subsubsection{Avvertenze}
+
+Osservando la Tabella \ref{regioni} si può notare che le stazioni
+della regione Trentino-Alto Adige assumono 3 codice regione
+differenti, senza nessun pattern apparente.  Non tutte le stazioni
+sono riconosciute, specialmente quelle in gestione a Ferrovienord.  In
+tal caso, la risposta dell'API è \texttt{0}.
+
+\subsection{\texttt{/elencoStazioni/<codiceRegione>}}
+
+Il metodo ritorna tutte le stazioni della regione data.  Con il codice
+\texttt{0} vengono ritornate solo le stazioni principali.  La
+funzionalità è presumibilmente utilizzata per popolare la mappa
+presente in homepage.
+
+La risposta è in formato JSON e per ogni elemento viene fornito un
+superinsieme di informazioni rispetto a \texttt{cercaStazione}, come
+la latitudine e longitudine.
+
+\subsubsection{Esempio}
+
+$\Rsh$ \texttt{/elencoStazioni/3} \hfill (Piemonte)
+\begin{minted}{js}
+[
+ {
+    "codReg": 3,  // Codice regione
+    "tipoStazione": 3,
+    "dettZoomStaz": [  // (può non essere presente)
+      {
+        "codiceStazione": "S01013",
+        "zoomStartRange": 8,
+        "zoomStopRange": 9,
+        "pinpointVisibile": true,
+        "pinpointVisible": true,
+        "labelVisibile": true,
+        "labelVisible": true,
+        "codiceRegione": null
+      },
+      {
+        "codiceStazione": "S01013",
+        "zoomStartRange": 10,
+        "zoomStopRange": 11,
+        "pinpointVisibile": true,
+        "pinpointVisible": true,
+        "labelVisibile": true,
+        "labelVisible": true,
+        "codiceRegione": null
+      }
+    ],
+    "pstaz": [],
+    "mappaCitta": {
+      "urlImagePinpoint": "",
+      "urlImageBaloon": ""
+    },
+    "codiceStazione": "S01013",
+    "codStazione": "S01013",
+    "lat": 45.943821,  // Latitudine (può essere nullo)
+    "lon": 8.47224,  // Longitudine (può essere nullo)
+    "latMappaCitta": 0,
+    "lonMappaCitta": 0,
+    "localita": {  // Medesime proprietà di cercaStazione
+      "nomeLungo": "VERBANIA-PALLANZA",
+      "nomeBreve": "Verbania",
+      "label": "Verbania-Pallanza",
+      "id": "S01013"
+    },
+    "esterno": false,
+    "offsetX": -4,
+    "offsetY": 10,
+    "nomeCitta": "Verbania"  // Vedere avvertenze
+  }, ...
+]
+\end{minted}
+
+\subsubsection{Avvertenze}
+
+Il campo \texttt{nomeCitta} può essere nullo oppure ``\texttt{A}''
+(stesso significato).  Sono generalmente ritornate più stazioni
+rispetto a \texttt{cercaStazione}, ma comunque non tutte: le stazioni
+senza informazioni sulla localizzazione, come Aiello (UD), sono
+ignorate \textit{in toto}.  Alcune ``stazioni'' sono punti di appoggio
+per generare la mappa e sono da ignorare: si distinguno in quanto
+hanno \texttt{tipoStazione} uguale a ``\texttt{4}''.  Infine, esistono
+stazioni figuranti in più regioni contemporaneamente: per esempio, la
+stazione di Casalmaggiore (CR) risulta essere sia in Lombardia che in
+Emilia Romagna.  Verificando con \texttt{/regione}, però, la stazione
+risulta correttamente in Lombardia.
+
+\subsection{\texttt{/<partenze|arrivi>/<orarioAttuale>}}
+
+I metodi \texttt{partenze} e \texttt{arrivi} ritornano i treni in
+partenza o in arrivo della stazione data.  Il campo
+\texttt{orarioAttuale} è da indicare nel formato \texttt{\%a \%b \%d
+    \%Y \%H:\%M:\%S \%Z\%z} e non può essere diverso dall'orario in
+cui si invia la richiesta.
+
+La risposta è in formato JSON e contiene molte informazioni sia sul
+treno che sulla \textit{fermata} nella stazione richiesta.
+
+\subsubsection{Esempio}
+
+$\Rsh$ \texttt{/partenze/S01700/Wed Mar 08 2023 17:04:00 GMT+0100}
+\hfill (Milano Centrale) \\
+
+\noindent \textit{La risposta è nello stesso formato degli elementi
+    dell'array \texttt{fermate} documentato con il metodo
+    \texttt{andamentoTreno} (\ref{andamentoTreno}) --- è quindi stata
+    omessa.}
+
+\subsection{\texttt{/cercaNumeroTrenoTrenoAutocomplete/<numeroTreno>}}
+\label{trenoAutocomplete}
+
+Come detto precedentemente (\ref{terminologia}), un treno è
+univocamente identificabile dalla combinazione del suo numero, origine
+e data di partenza.  Il metodo
+\texttt{cerca\-Numero\-Treno\-Treno\-Autocomplete} serve per
+disambugare treni aventi lo stesso numero, ritornando il codice della
+stazione di origine e il
+\textit{timestamp}\footnote{\label{timestamp}Tutti i timestamp
+    dell'API di Viaggiatreno sono intesi come \textit{numero di
+        \textbf{millisecondi} passati dal 1° gennaio 1970}, nel fuso
+    orario locale.} della mezzanotte del giorno di partenza della
+corsa.
+
+La risposta è in \texttt{text/plain} e non rispetta formati standard
+(JSON, XML, CSV, \dots).
+
+\subsubsection{Esempio}
+
+$\Rsh$ \texttt{/cercaNumeroTrenoTrenoAutocomplete/2107}
+
+\begin{minted}{text}
+2107 - TORINO PORTA NUOVA|2107-S00219-1678230000000
+2107 - MILANO NORD CADORNA|2107-N00001-1678230000000
+\end{minted}
+
+Il primo risultato è un regionale di Trenitalia da Torino P.N., il
+secondo è un Malpensa Express di Trenord da Milano Nord Cadorna.
+
+\subsection{\texttt{/andamentoTreno/<origine>/<numero>/<data>}}
+\label{andamentoTreno}
+
+Il metodo \texttt{andamentoTreno} fornisce tutte le informazioni su un
+treno e le sue fermate.  L'\texttt{origine} è il codice della stazione
+cui il treno ha origine, \texttt{numero} è il numero del treno e
+\texttt{data} è il timestamp della mezzanotte del giorno di partenza
+del treno, ritornato dal metodo precedente (\ref{trenoAutocomplete}).
+
+Il JSON risultante contiene molti campi ridondanti o sempre nulli, con
+nomi inconsistenti e a volte bizzarri.  Molti di essi non sono
+documentabili, in quanto mancano evidenze del loro utilizzo.
+
+I campi cui nome inizia con ``\texttt{comp}'' sembrano essere rivolti
+alla UI di Viaggiatreno, in quanto i loro valori sono più
+\textit{human-friendly}. Quelli terminanti con ``\texttt{Zero}''
+marcano le informazioni originali -- pertanto obsolenn te -- prima di una
+riprogrammazione (come la soppressione di alcune fermate).
+
+\subsubsection{Esempio}
+
+$\Rsh$ \texttt{/andamentoTreno/S01717/10124/1692136800000} \hfill (REG
+10124 da Brescia)
+
+\begin{minted}[texcomments=true]{js}
+{
+  "tipoTreno": "PG",
+  "orientamento": null,
+  "codiceCliente": 63,  // Impresa ferroviaria, vedi Tabella \ref{codice_cliente}
+  "fermateSoppresse": null,
+  "dataPartenza": null,
+  "fermate": [  // Lista delle fermate
+    // ...
+    {
+      "orientamento": null,
+      "kcNumTreno": null,
+      "stazione": "OSPITALETTO TRAVAGLIATO",  // Nome della fermata
+      "id": "S01716",  // Codice della stazione della fermata
+      "listaCorrispondenze": null,
+      "programmata": 1692180300000,  // Vedi arrivo\_teorico
+      "programmataZero": null,
+      "effettiva": 1692180300000,  // Vedi arrivo\_effettivo
+      "ritardo": 0,  // Vedi ritardoArrivo
+      "partenzaTeoricaZero": null,
+      "arrivoTeoricoZero": null,
+      "partenza_teorica": 1692180360000,  // Orario di partenza programmato
+      "arrivo_teorico": 1692180300000,  // Orario di arrivo programmato
+      "isNextChanged": false,
+      "partenzaReale": 1692180420000,  // Orario di partenza effettivo
+      "arrivoReale": 1692180300000,  // Orario di arrivo effettivo
+      "ritardoPartenza": 1,  // Ritardo in partenza
+      "ritardoArrivo": 0,  // Ritardo in arrivo
+      "progressivo": 3,  // Numero progressivo della fermata
+      "binarioEffettivoArrivoCodice": "4663",
+      "binarioEffettivoArrivoTipo": "0",
+      "binarioEffettivoArrivoDescrizione": "2"  // Binario di arrivo
+      "binarioProgrammatoArrivoCodice": null,
+      "binarioProgrammatoArrivoDescrizione": null,
+      "binarioEffettivoPartenzaCodice": "4694",
+      "binarioEffettivoPartenzaTipo": "0",
+      "binarioEffettivoPartenzaDescrizione": "2",  // Binario di partenza
+      "binarioProgrammatoPartenzaCodice": null,
+      "binarioProgrammatoPartenzaDescrizione": null,
+      "tipoFermata": "F",  // Tipologia di fermata, vedi Tabella \ref{tipo_fermata}
+      "visualizzaPrevista": true,
+      "nextChanged": false,
+      "nextTrattaType": 0,
+      "actualFermataType": 1,
+      "materiale_label": null
+    },
+    // ...
+  ],
+  "anormalita": null,
+  "provvedimenti": null,
+  "segnalazioni": null,
+  "oraUltimoRilevamento": 1692180630000,  // Orario ultimo rilevamento
+  "stazioneUltimoRilevamento": "ROVATO",  // Ultimo punto di rilevamento
+  "idDestinazione": "S01529",  // Codice della stazione di destinazione
+  "idOrigine": "S01717",  // Codice della stazione di origine
+  "cambiNumero": [],
+  "hasProvvedimenti": false,
+  "descOrientamento": [
+    "--",
+    "--",
+    "--",
+    "--",
+    "--",
+    "--",
+    "--",
+    "--",
+    "--"
+  ],
+  "compOraUltimoRilevamento": "12:10",  // Orario ultimo rilevamento
+  "motivoRitardoPrevalente": null,
+  "descrizioneVCO": "",
+  "materiale_label": null,
+  "numeroTreno": 10124,  // Numero treno
+  "categoria": "REG",  // Categoria del treno
+  "categoriaDescrizione": null,
+  "origine": "BRESCIA",  // Nome della stazione di origine
+  "codOrigine": null,
+  "destinazione": "BERGAMO",  // Nome della stazione di destinazione
+  "codDestinazione": null,
+  "origineEstera": null,
+  "destinazioneEstera": null,
+  "oraPartenzaEstera": null,
+  "oraArrivoEstera": null,
+  "tratta": 0,
+  "regione": 0,
+  "origineZero": "BRESCIA",  // Origine originale, se tr. parzialmente soppresso
+  "destinazioneZero": "BERGAMO",  // Destinazione originale, se "
+  "orarioPartenzaZero": 1692179820000,  // Orario partenza originale, se "
+  "orarioArrivoZero": 1692183240000,  // Orario arrivo originale, se "
+  "circolante": true,  // true se il treno è in circolazione
+  "binarioEffettivoArrivoCodice": null,
+  "binarioEffettivoArrivoDescrizione": null,
+  "binarioEffettivoArrivoTipo": null,
+  "binarioProgrammatoArrivoCodice": null,
+  "binarioProgrammatoArrivoDescrizione": null,
+  "binarioEffettivoPartenzaCodice": null,
+  "binarioEffettivoPartenzaDescrizione": null,
+  "binarioEffettivoPartenzaTipo": null,
+  "binarioProgrammatoPartenzaCodice": null,
+  "binarioProgrammatoPartenzaDescrizione": null,
+  "subTitle": "",
+  "esisteCorsaZero": "0",
+  "inStazione": false,  // true se il treno è in sosta presso una fermata
+  "haCambiNumero": false,
+  "nonPartito": false,
+  "provvedimento": 0,  // $\neq 0$ se cancellato
+  "riprogrammazione": null,
+  "orarioPartenza": 1692179820000,  // Orario di partenza programmato
+  "orarioArrivo": 1692183240000,  // Orario di arrivo programmato
+  "stazionePartenza": null,
+  "stazioneArrivo": null,
+  "statoTreno": null,
+  "corrispondenze": null,
+  "servizi": [],
+  "ritardo": -1,  // Ritardo reale, aggiornato ai punti di rilevamento
+  "tipoProdotto": "0",
+  "compOrarioPartenzaZeroEffettivo": "11:56",
+  "compOrarioArrivoZeroEffettivo": "12:54",
+  "compOrarioPartenzaZero": "11:57",
+  "compOrarioArrivoZero": "12:54",
+  "compOrarioArrivo": "12:54",
+  "compOrarioPartenza": "11:57",
+  "compNumeroTreno": "REG 10124",
+  "compOrientamento": [
+    "--",
+    "--",
+    "--",
+    "--",
+    "--",
+    "--",
+    "--",
+    "--",
+    "--"
+  ],
+  "compTipologiaTreno": "regionale",
+  "compClassRitardoTxt": "",
+  "compClassRitardoLine": "regolare_line",
+  "compImgRitardo2": "",
+  "compImgRitardo": "/vt_static/img/legenda/icone_legenda/regolare.png",
+  "compRitardo": [
+    "anticipo 1 min.",
+    "advance 1 min.",
+    "Verfr&#252hung 1 Min.",
+    "avance de 1 min.",
+    "adelanto de 1 min.",
+    "avans 1 min.",
+    "",
+    "",
+    ""
+  ],
+  "compRitardoAndamento": [
+    "con un anticipo di 1 min.",
+    "1 minutes early",
+    "mit einem Vorsprung von 1 Min.",
+    "en avance de 1 min.",
+    "est&aacute; adelantado 1 min.",
+    "cu un avans de 1 min.",
+    "",
+    "",
+    "con un anticipo di 1 min."
+  ],
+  "compInStazionePartenza": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "compInStazioneArrivo": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "compOrarioEffettivoArrivo": "/vt_static/img/legenda/icone_legenda/regolare.png12:53",
+  "compDurata": "0:57",
+  "compImgCambiNumerazione": "&nbsp;&nbsp;",
+  "dataPartenzaTreno": 1692136800000
+}
+\end{minted}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{r|l}
+      Codice & Impresa ferroviaria \\
+      \hline
+      \texttt{1} & Trenitalia (alta velocità) \\
+      \texttt{2} & Trenitalia (regionale) \\
+      \texttt{4} & Trenitalia (intercity) \\
+      \texttt{18} & Tper \\
+      \texttt{63} & Trenord \\
+      \texttt{64} & Österreichische Bundesbahnen\footnote{Ferrovie
+                    federali austriache}
+    \end{tabular}
+    \caption{Codici delle imprese ferroviarie}
+    \label{codice_cliente}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{r|l}
+      Lettera & Tipo di fermata \\
+      \hline
+      \texttt{P} & Origine \\
+      \texttt{F} & Fermata intermedia \\
+      \texttt{A} & Destinazione \\
+      \textit{(altro)} & Soppressa
+    \end{tabular}
+    \caption{Lettere corrispondenti alle tipologie di fermate}
+    \label{tipo_fermata}
+\end{table}
+
+\subsubsection{Avvertenze}
+
+Talvolta, nonostante il treno esista e sia già stato ritornato da
+altri metodi (come \texttt{partenze}), \texttt{andamentoTreno}
+risponde con HTTP 204\footnote{No Content}.  In questo caso, i
+dettagli della corsa non sono disponibili.  Questo fenomeno accade
+spesso con treni cancellati o riprogrammati.  \todo{Marco:
+    Ricollegarsi ai ``caveats'' riscontrati nell'implementazione}
+
+\subsection{Altri metodi}
+
+Di seguito sono brevemente descritti altri metodi non utilizzati nel
+progetto ma che potrebbero essere interessanti per estensioni future.
+
+\begin{itemize}
+    \item
+    \texttt{/soluzioniViaggioNew/\-<codiceStazionePartenza>/\-<codiceStazioneArrivo>/\-<orario>}:
+    trova soluzioni di viaggio tra la stazione di partenza e la
+    stazione di arrivo, anche con cambi.  Per ogni soluzione è
+    presente una \texttt{durata} e una lista di \texttt{vehicles} su
+    cui viaggiare per arrivare a destinazione.
+    \item \texttt{/statistiche/<timestamp>}: mostra il numero di treni
+    circolanti al momento. Il \texttt{timestamp} deve essere quello
+    attuale.
+    \item \texttt{/datimeteo/\-<codiceRegione>}: restituisce i dati
+    meteo delle stazioni principali della regione. Se si passa
+    \texttt{0} come \texttt{codiceRegione}, vengono considerate le
+    principali stazioni italiane.
+\end{itemize}
+
+\section{Metodi dell'API di Trenord}
+\todo{Marco: Documentare metodi API di Trenord}
 
 \end{document}
