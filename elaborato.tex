@@ -429,6 +429,174 @@ alcune incongruenze riscontrate in quelle di Viaggiatreno. \\
 In Appendice \ref{documentazione} sono documentati alcuni metodi
 rilevanti delle due API.
 
+\section{Panorama giuridico-legislativo}
+
+Durante il lavoro di tesi è stato fatto ampio uso delle informazioni
+fornite dalle API del portale Viaggiatreno, senza aver chiesto alcuna
+autorizzazione a Trenitalia o al Gruppo Ferrovie dello Stato Italiane.
+Non è affatto scontato che i dati del trasporto \textit{pubblico} ---
+come gli orari dei treni --- siano \textbf{riproducibili} e
+\textbf{distribuibili} senza licenza.  Nel portale Viaggiatreno,
+infatti, sono riportate le seguenti note legali (enfasi aggiunta):
+
+\begin{quote}
+	\textcquote{ViaggiatrenoToS}{I contenuti, la grafica e le immagini
+        sono soggetti a Copyright. \textbf{Ogni diritto sui contenuti}
+        (a titolo esemplificativo e non esaustivo: l’architettura del
+        servizio, i testi, le immagini grafiche e fotografiche, ecc.)
+        \textbf{è riservato ai sensi della normativa vigente}. I
+        contenuti di ViaggiaTreno non possono, neppure in parte,
+        essere copiati, riprodotti, trasferiti, caricati, pubblicati o
+        distribuiti in qualsiasi modo senza il preventivo consenso
+        scritto della società Trenitalia S.p.A. È possibile scaricare
+        i contenuti nel proprio computer e/o stampare estratti
+        \textbf{unicamente per utilizzo personale} di carattere
+        informativo. \textbf{Qualsiasi forma di link al sito
+            www.ViaggiaTreno.it deve essere preventivamente
+            autorizzata} e non deve recare danno all'immagine e alle
+        attività di Trenitalia S.p.A. È vietato il c.d.\ deep linking
+        ossia l'utilizzo, su siti di soggetti terzi, di parti del
+        Servizio Internet o, comunque, il collegamento diretto alle
+        pagine senza passare per la home page del Servizio
+        Internet. \textbf{L'eventuale inosservanza delle presenti
+            disposizioni}, salvo esplicita autorizzazione scritta,
+        \textbf{sarà perseguita} nelle competenti sedi giudiziarie
+        civili e penali.}
+\end{quote}
+
+Il Gruppo Ferrovie dello Stato Italiane vieta formalmente ai soggetti
+non autorizzati l’utilizzo di ViaggiaTreno per fini diversi dal mero
+uso personale, riservando a sé tutti i diritti sui contenuti.  Se per
+\textit{contenuti} si intendono anche le informazioni sulla
+circolazione ferroviaria, allora queste \textbf{non sono utilizzabili}
+senza il consenso di Trenitalia.  \textbf{Interpretando alla lettera}
+le citate note legali, infatti, un viaggiatore che aiuta un turista a
+Roma Termini comunicandogli l'orario del prossimo treno per Milano
+Centrale sta \textit{distribuendo} senza autorizzazione un
+\textit{contenuto} del Portale a terzi.  Ancora, l'autore di questa
+Tesi di Laurea rischia di essere \textit{perseguito} per la sola
+inclusione --- senza autorizzazione --- di \textit{link} al sito
+\texttt{www.ViaggiaTreno.it}.  Non solo Trenitalia non pubblica i
+dati, ma \textbf{attacca legalmente} chi cerca di reperirli o
+diffonderli.  Può farlo?
+
+\subsection{La vicenda Trenìt}
+
+Trenìt\footnote{https://trenit.app} è un'applicazione per Android e
+iOS che permette di cercare e confrontare soluzioni di viaggio su
+ferro tra due stazioni.  La sua \textbf{semplicità} e \textbf{facilità
+    d'uso} hanno contribuito al suo notevole successo.  Oltre agli
+orari e allo stato attuale dei treni, vengono mostrati i
+\textbf{prezzi} dei biglietti e permette di comparare le offerte
+commerciali delle imprese ferroviare in libero mercato.
+
+Il 19 luglio 2019, Trenìt è costretta a \textbf{sospendere il
+    servizio} \cite{TrenitSospensione, TrenitFQ, TrenitWired} a causa
+di un provvedimento cautelare emesso dal Tribunale di Roma sotto
+ricorso di Trenitalia.
+
+\begin{quote}
+    \textcquote[Nota di Trenìt]{TrenitSospensione}{Purtroppo dobbiamo
+        sospendere temporaneamente il servizio, perché Trenitalia non
+        vuole che pubblichiamo i dati (pubblici) relativi ai suoi
+        treni e quindi ci ha fatto causa, ritenendo che l’uso che
+        facciamo dei suoi dati sia illegittimo in quanto non
+        autorizzato. Noi, invece, siamo convinti che il nostro operato
+        sia pienamente lecito e non arrechi alcun danno agli operatori
+        ferroviari. Al contrario, pensiamo che il nostro uso dei dati
+        pubblici relativi al trasporto ferroviario arrechi un
+        vantaggio agli operatori (visto che promuove i loro servizi).}
+\end{quote}
+
+Trenitalia d'altro canto lamentava, oltre all'uso dei dati senza
+autorizzazione, un \textbf{carico esoso per i propri server} causato
+dallo scraping e una \textbf{comparazione imparziale} delle offerte
+commerciali.  Di seguito è riportato il suo commento a \textit{Wired}.
+
+\begin{quote}
+    \textcquote[Nota di Trenitalia]{TrenitWired}{Nessun ostacolo alla
+        sharing economy.  Trenitalia, come è stato dimostrato in altre
+        occasioni, è aperta alla condivisione delle informazioni, a
+        patto che ciò avvenga rispettando regole certe e ben definite.
+
+        Trenìt! estraeva e diffondeva, senza alcun accordo, dati
+        ottenuti interrogando il sistema di vendita di Trenitalia.
+        Ciò costituisce una violazione della disciplina vigente che
+        vieta a terzi non autorizzati di reimpiegare a scopo di lucro
+        informazioni, soprattutto se di natura commerciale.}
+\end{quote}
+
+Trenitalia \textbf{non si è dimostrata aperta} alla condivisione delle
+informazioni.  I termini di servizio di Viaggiatreno
+\cite{ViaggiatrenoToS} non permettono nessun uso diverso da quello
+strettamente personale.
+
+\begin{quote}
+    \textcquote[Nota di Trenitalia,
+    \textit{cont.}]{TrenitWired}{Inoltre, presentando un incompleto
+        pacchetto di offerte di Trenitalia, l’app non offriva al
+        cliente un confronto equilibrato.  Tema che, in un settore a
+        mercato, è fondamentale per garantire ad ogni viaggiatore la
+        possibilità di scegliere, con consapevolezza, fra tutte le
+        opzioni di viaggio disponibili.}
+\end{quote}
+
+Non sono risultate evidenze di \textbf{distorsioni} del confronto tra
+le offerte di Trenitalia e della sua concorrenza.  È possibile
+rilevare, invece, l'assenza di offerta della concorrenza su
+Viaggiatreno e sull'app di Trenitalia.
+
+\begin{quote}
+    \textcquote[Nota di Trenitalia, \textit{cont.}]{TrenitWired}{I
+        dati relativi alle offerte commerciali di Trenitalia sono
+        stati acquisiti da Trenìt! attraverso continue, perduranti e
+        massive interrogazioni del sistema Trenitalia: ogni giorno
+        circa 800mila richieste, con picchi che hanno superato le
+        14mila richieste ogni 10 minuti.  Sistema di vendita la cui
+        realizzazione è stata sostenuta da Trenitalia grazie a
+        consistenti investimenti.
+
+        La posizione di Trenitalia è stata al momento riconosciuta
+        fondata dal Tribunale di Roma.}
+\end{quote}
+
+È stato riconosciuto in giudizio che \textcquote{TrenitSentenza}{il
+    numero aritmetico degli accessi riscontrati da TRENITALIA si pone
+    poi in logico contrasto con un sistematico download dei dati da
+    parte dei server della società GoBright Media Ltd (\textit{Trenìt,
+        n.d.r.}), la quale non avrebbe bisogno di effettuare un così
+    alto e capillare numero di accessi se procedesse al
+    \textbf{download sistematico} dei dati TRENITALIA sui propri
+    server}.  Inoltre, se Trenìt non esistesse è ragionevole supporre
+che la \textit{domanda di informazione} dovrebbe essere comunque
+soddisfatta da Trenitalia stessa, in quanto si trova in condizione di
+monopolio per l'\textbf{accesso delle informazioni}.
+
+\subsubsection{La sentenza}
+
+Il 5 settembre dello stesso anno, il Tribunale di Roma \textbf{revoca}
+il provvedimento cautelare emesso in precedenza \cite{TrenitSentenza}:
+\textbf{Trenìt può continuare ad operare}.  Secondo il giudice, Trenìt
+ha estratto una \textquote{\textbf{parte non sostanziale}} del
+contenuto della banca dati.  L'art.\ 102 ter LDA\footnote{Legge sul
+    diritto d'autore} recita infatti che
+\textquote{\textit{\textbf{non sono soggette all'autorizzazione} del
+        costitutore della banca dati \textbf{messa per qualsiasi
+            motivo a disposizione del pubblico} le attività di
+        estrazione o reimpiego di \textbf{parti non sostanziali}
+        valutate in termini qualitativi e quantitativi del contenuto
+        della banca dati per qualsivoglia fine effettuate dall'utente
+        legittimo}}.  Trenitalia non ha presentato ulteriori ricorsi.
+
+\subsubsection{Osservazioni}
+
+Carlo Piana, noto avvocato italiano attivo nel campo del software
+libero, ha pubblicato delle osservazioni alcuni punti della sentenza
+nel suo articolo ``\textit{Scraping di dati pubblici per non perdere
+    il treno della concorrenza}'' \cite{TrenitPiana} per
+TechEconomy2030.  \todo{Marco: Spiegare ragioni...}
+
+
 \printbibliography
 
 \addcontentsline{toc}{chapter}{Bibliografia}
@@ -724,8 +892,8 @@ documentabili, in quanto mancano evidenze del loro utilizzo.
 I campi cui nome inizia con ``\texttt{comp}'' sembrano essere rivolti
 alla UI di Viaggiatreno, in quanto i loro valori sono più
 \textit{human-friendly}. Quelli terminanti con ``\texttt{Zero}''
-marcano le informazioni originali -- pertanto obsolenn te -- prima di una
-riprogrammazione (come la soppressione di alcune fermate).
+marcano le informazioni originali --- pertanto obsolete --- prima di
+una riprogrammazione (come la soppressione di alcune fermate).
 
 \subsubsection{Esempio}
 
@@ -987,3 +1155,8 @@ progetto ma che potrebbero essere interessanti per estensioni future.
 \todo{Marco: Documentare metodi API di Trenord}
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
