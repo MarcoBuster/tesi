@@ -44,6 +44,7 @@
 \usepackage[a4paper]{geometry}		% Formato del foglio
 \usepackage[italian]{babel}			% Supporto per l'italiano
 \usepackage[utf8]{inputenc}			% Supporto per UTF-8
+\usepackage{lscape}
 %\usepackage[a-1b]{pdfx}			% File conforme allo standard PDF-A (obbligatorio per la consegna)
 
 % Package per la grafica
@@ -56,6 +57,7 @@
 \usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
 \addbibresource{bibliografia.bib}
 \usepackage[toc]{appendix}
+\usepackage{epigraph}
 
 % Package tipografici
 \usepackage{lmodern,textcomp}		% Latin Modern font
@@ -195,6 +197,7 @@ gestita sia da RFI (1319 km \cite{RfiKm}) che da FER S.r.l.\
 (controllata dalla Regione \cite{FerChiSiamo}, 343 km \cite{FerKm}).
 
 \subsection{Il servizio pubblico e il mercato}
+\label{servizio_pubblico}
 
 La fornitura del servizio di trasporto ferroviario passeggeri è
 costituita da \textbf{offerte a mercato} (treni ad alta velocità) e
@@ -222,6 +225,7 @@ impatto sulla qualità del trasporto ferroviario, sia in termini di
 programmazione che di \textit{performance}.
 
 \subsection{Performance regime}
+\label{performance_regime}
 
 Ogni anno, RFI pubblica il c.d.\ PIR (Prospetto Informativo della
 Rete) per comunicare alle imprese ferroviarie le modalità e le tariffe
@@ -429,13 +433,13 @@ alcune incongruenze riscontrate in quelle di Viaggiatreno. \\
 In Appendice \ref{documentazione} sono documentati alcuni metodi
 rilevanti delle due API.
 
-\section{Panorama giuridico-legislativo}
+\section{Panorama giuridico, politico e legislativo}
 
-Durante il lavoro di tesi è stato fatto ampio uso delle informazioni
+Durante il lavoro di Tesi è stato fatto ampio uso delle informazioni
 fornite dalle API del portale Viaggiatreno, senza aver chiesto alcuna
 autorizzazione a Trenitalia o al Gruppo Ferrovie dello Stato Italiane.
-Non è affatto scontato che i dati del trasporto \textit{pubblico} ---
-come gli orari dei treni --- siano \textbf{riproducibili} e
+Non è però affatto scontato che i dati del trasporto \textit{pubblico}
+--- come gli orari dei treni --- siano \textbf{riproducibili} e
 \textbf{distribuibili} senza licenza.  Nel portale Viaggiatreno,
 infatti, sono riportate le seguenti note legali (enfasi aggiunta):
 
@@ -469,49 +473,48 @@ non autorizzati l’utilizzo di ViaggiaTreno per fini diversi dal mero
 uso personale, riservando a sé tutti i diritti sui contenuti.  Se per
 \textit{contenuti} si intendono anche le informazioni sulla
 circolazione ferroviaria, allora queste \textbf{non sono utilizzabili}
-senza il consenso di Trenitalia.  \textbf{Interpretando alla lettera}
-le citate note legali, infatti, un viaggiatore che aiuta un turista a
-Roma Termini comunicandogli l'orario del prossimo treno per Milano
-Centrale sta \textit{distribuendo} senza autorizzazione un
-\textit{contenuto} del Portale a terzi.  Ancora, l'autore di questa
-Tesi di Laurea rischia di essere \textit{perseguito} per la sola
-inclusione --- senza autorizzazione --- di \textit{link} al sito
-\texttt{www.ViaggiaTreno.it}.  Non solo Trenitalia non pubblica i
-dati, ma \textbf{attacca legalmente} chi cerca di reperirli o
-diffonderli.  Può farlo?
+senza il consenso di Trenitalia.  Non solo i dati non vengono
+pubblicati, ma chi cerca di reperirli o redistribuirli rischia
+\textbf{conseguenze legali}\footnote{Il lavoro di Tesi è in ogni modo
+    tutelato grazie alle eccezioni alle Legge sul diritto d'autore per
+    le attività di ricerca scientifica senza scopi di lucro}.
+Trenitalia può farlo?
 
-\subsection{La vicenda Trenìt}
+\subsection{Il caso Trenìt}
 
 Trenìt\footnote{https://trenit.app} è un'applicazione per Android e
 iOS che permette di cercare e confrontare soluzioni di viaggio su
 ferro tra due stazioni.  La sua \textbf{semplicità} e \textbf{facilità
     d'uso} hanno contribuito al suo notevole successo.  Oltre agli
 orari e allo stato attuale dei treni, vengono mostrati i
-\textbf{prezzi} dei biglietti e permette di comparare le offerte
-commerciali delle imprese ferroviare in libero mercato.
+\textbf{prezzi} dei biglietti rendendo possibile \textbf{comparare} le
+offerte commerciali delle imprese ferroviare.
 
-Il 19 luglio 2019, Trenìt è costretta a \textbf{sospendere il
+Il 19 luglio 2019 Trenìt è stata costretta a \textbf{sospendere il
     servizio} \cite{TrenitSospensione, TrenitFQ, TrenitWired} a causa
 di un provvedimento cautelare emesso dal Tribunale di Roma sotto
 ricorso di Trenitalia.
 
 \begin{quote}
     \textcquote[Nota di Trenìt]{TrenitSospensione}{Purtroppo dobbiamo
-        sospendere temporaneamente il servizio, perché Trenitalia non
-        vuole che pubblichiamo i dati (pubblici) relativi ai suoi
-        treni e quindi ci ha fatto causa, ritenendo che l’uso che
-        facciamo dei suoi dati sia illegittimo in quanto non
-        autorizzato. Noi, invece, siamo convinti che il nostro operato
-        sia pienamente lecito e non arrechi alcun danno agli operatori
-        ferroviari. Al contrario, pensiamo che il nostro uso dei dati
-        pubblici relativi al trasporto ferroviario arrechi un
-        vantaggio agli operatori (visto che promuove i loro servizi).}
+        sospendere temporaneamente il servizio, perché
+        \textbf{Trenitalia non vuole che pubblichiamo i dati}
+        (pubblici) relativi ai suoi treni e quindi ci ha fatto causa,
+        ritenendo che l’uso che facciamo dei suoi dati sia illegittimo
+        in quanto non autorizzato. Noi, invece, siamo convinti che il
+        nostro operato sia pienamente lecito e non arrechi alcun danno
+        agli operatori ferroviari. Al contrario, pensiamo che il
+        nostro uso dei dati pubblici relativi al trasporto ferroviario
+        arrechi un vantaggio agli operatori (visto che promuove i loro
+        servizi).}
 \end{quote}
 
 Trenitalia d'altro canto lamentava, oltre all'uso dei dati senza
 autorizzazione, un \textbf{carico esoso per i propri server} causato
-dallo scraping e una \textbf{comparazione imparziale} delle offerte
-commerciali.  Di seguito è riportato il suo commento a \textit{Wired}.
+dall'attività di \textit{scraping}\footnote{Scaricamento automatizzato
+    di informazioni da interfacce utente} e una \textbf{comparazione
+    imparziale} delle offerte commerciali.  Di seguito è riportato il
+suo commento a \textit{Wired}.
 
 \begin{quote}
     \textcquote[Nota di Trenitalia]{TrenitWired}{Nessun ostacolo alla
@@ -526,10 +529,10 @@ commerciali.  Di seguito è riportato il suo commento a \textit{Wired}.
         informazioni, soprattutto se di natura commerciale.}
 \end{quote}
 
-Trenitalia \textbf{non si è dimostrata aperta} alla condivisione delle
-informazioni.  I termini di servizio di Viaggiatreno
-\cite{ViaggiatrenoToS} non permettono nessun uso diverso da quello
-strettamente personale.
+Trenitalia, almeno in pubblico, \textbf{non si è dimostrata aperta}
+alla condivisione delle informazioni.  I termini di servizio di
+Viaggiatreno \cite{ViaggiatrenoToS} non permettono nessun uso diverso
+da quello strettamente personale.
 
 \begin{quote}
     \textcquote[Nota di Trenitalia,
@@ -541,10 +544,13 @@ strettamente personale.
         opzioni di viaggio disponibili.}
 \end{quote}
 
-Non sono risultate evidenze di \textbf{distorsioni} del confronto tra
-le offerte di Trenitalia e della sua concorrenza.  È possibile
-rilevare, invece, l'assenza di offerta della concorrenza su
-Viaggiatreno e sull'app di Trenitalia.
+In sede di giustizio non sono risultate evidenze di
+\textbf{distorsioni} del confronto tra le offerte di Trenitalia e
+della sua concorrenza.  Si può invece rilevare l'assenza
+dell'\textbf{offerta della concorrenza} su Viaggiatreno e sull'app di
+Trenitalia: a differenza dei servizi di terze parti, le imprese
+ferroviarie non sembrano interessate a proporre una piattaforma unica
+per l'acquisto di biglietti ferroviari.
 
 \begin{quote}
     \textcquote[Nota di Trenitalia, \textit{cont.}]{TrenitWired}{I
@@ -561,16 +567,16 @@ Viaggiatreno e sull'app di Trenitalia.
 \end{quote}
 
 È stato riconosciuto in giudizio che \textcquote{TrenitSentenza}{il
-    numero aritmetico degli accessi riscontrati da TRENITALIA si pone
+    numero aritmetico degli accessi riscontrati da Trenitalia si pone
     poi in logico contrasto con un sistematico download dei dati da
     parte dei server della società GoBright Media Ltd (\textit{Trenìt,
         n.d.r.}), la quale non avrebbe bisogno di effettuare un così
     alto e capillare numero di accessi se procedesse al
-    \textbf{download sistematico} dei dati TRENITALIA sui propri
-    server}.  Inoltre, se Trenìt non esistesse è ragionevole supporre
-che la \textit{domanda di informazione} dovrebbe essere comunque
-soddisfatta da Trenitalia stessa, in quanto si trova in condizione di
-monopolio per l'\textbf{accesso delle informazioni}.
+    \textbf{download sistematico} dei dati Trenitalia sui propri
+    server}.  Se Trenìt non esistesse è ragionevole supporre che la
+\textit{domanda di informazione} sarebbe comunque soddisfatta da
+Trenitalia stessa, trovandosi in condizione di \textbf{monopolio}
+nell'\textbf{accesso delle informazioni}.
 
 \subsubsection{La sentenza}
 
@@ -578,24 +584,303 @@ Il 5 settembre dello stesso anno, il Tribunale di Roma \textbf{revoca}
 il provvedimento cautelare emesso in precedenza \cite{TrenitSentenza}:
 \textbf{Trenìt può continuare ad operare}.  Secondo il giudice, Trenìt
 ha estratto una \textquote{\textbf{parte non sostanziale}} del
-contenuto della banca dati.  L'art.\ 102 ter LDA\footnote{Legge sul
-    diritto d'autore} recita infatti che
-\textquote{\textit{\textbf{non sono soggette all'autorizzazione} del
-        costitutore della banca dati \textbf{messa per qualsiasi
-            motivo a disposizione del pubblico} le attività di
-        estrazione o reimpiego di \textbf{parti non sostanziali}
-        valutate in termini qualitativi e quantitativi del contenuto
-        della banca dati per qualsivoglia fine effettuate dall'utente
-        legittimo}}.  Trenitalia non ha presentato ulteriori ricorsi.
+contenuto della banca dati.  Secondo l'art.\ 102 ter
+LDA\footnote{Legge sul diritto d'autore}, infatti,
+\textquote{\textbf{non sono soggette all'autorizzazione} del
+    costitutore della banca dati \textbf{messa per qualsiasi motivo a
+        disposizione del pubblico} le attività di estrazione o
+    reimpiego di \textbf{parti non sostanziali} valutate in termini
+    qualitativi e quantitativi del contenuto della banca dati per
+    qualsivoglia fine effettuate dall'utente legittimo}.
+
+Trenitalia ad oggi non ha presentato ulteriori ricorsi.
 
 \subsubsection{Osservazioni}
 
 Carlo Piana, noto avvocato italiano attivo nel campo del software
-libero, ha pubblicato delle osservazioni alcuni punti della sentenza
-nel suo articolo ``\textit{Scraping di dati pubblici per non perdere
-    il treno della concorrenza}'' \cite{TrenitPiana} per
-TechEconomy2030.  \todo{Marco: Spiegare ragioni...}
+libero, ha pubblicato delle osservazioni su alcuni punti della
+sentenza nel suo articolo ``\textit{Scraping di dati pubblici per non
+    perdere il treno della concorrenza}'' \cite{TrenitPiana} per
+TechEconomy2030.
 
+Nel 2010 LastMinute e Ryanair sono andati in causa perché la prima
+offriva al pubblico uno \textbf{strumento di comparazione dei prezzi}
+con i dati della seconda.  La sentenza \cite{RyanairSentenza} del
+Tribunale di Milano richiama un concetto interessante della
+legislazione sulla tutela giuridica delle banche dati:
+\textcquote[considerando 47]{Dir9}{\textit{considerando che, al fine
+        di favorire la concorrenza fra i fornitori di prodotti e
+        servizi nel settore del mercato dell'informazione, \textbf{la
+            protezione sulla base del diritto «sui
+            generis»\footnote{Il diritto che tutela giuridicamente il
+                contenuto di una banca dati} non deve essere
+            esercitata in modo tale da favorire gli abusi di posizione
+            dominante}, con particolare riguardo alla creazione e
+        diffusione di nuovi prodotti e servizi a valore aggiunto di
+        ordine intellettuale, documentale, tecnico, economico o
+        commerciale; che, pertanto, le disposizioni della presente
+        direttiva lasciano impregiudicata l'applicazione delle regole
+        di concorrenza, siano esse comunitarie o nazionali}}.  La
+\textbf{posizione dominante} di Trenitalia nel mercato della fornitura
+dei dati della circolazione ferroviaria è quindi probabilmente
+\textbf{incompatibile} con l'esercizio del diritto sui generis.
+
+Secondo Piana, infine, non è scontato che la banca dati in oggetto
+\textit{sia una banca dati} proteggibile tramite il diritto sui
+generis.  Il diritto del costitutore di vietare operazioni di
+estrazione di una parte sostanziale della banca dati è garantito solo
+qualora \textcquote[art.\ 7]{Dir9}{\textit{\textbf{il conseguimento,
+            la verifica o la presentazione di tale contenuto attestino
+            un investimento rilevante} sotto il profilo qualitativo o
+        quantitativo}}.  Si può quindi argomentare che gli
+\textit{investimenti rilevanti} di Ryanair e Trenitalia nella
+creazione delle rispettive piattaforme siano finalizzati all'esercizio
+del \textbf{servizio di prenotazione} e \textbf{assistenza alla
+    clientela} e non alla \textit{presentazione} della banca dati.
+Secondo questa interpretazione \textit{i dati sono un mezzo} e non uno
+scopo, pertanto non può essere vantato diritto sui generis.
+
+\subsection{Ferrovie italiane e Open Data: due binari paralleli?}
+
+È irragionevole \textbf{pretendere} che i dati \textit{pubblici}, di
+imprese \textit{pubbliche}, operatrici di servizio \textit{pubblico}
+con fondi \textit{pubblici} siano
+\textbf{\textit{aperti}}\footnote{Secondo AgID \cite{AgidOpenData}, un
+    \textbf{dato} si dice ``\textbf{aperto}'' quando è rilasciato con
+    una licenza o normativa che ne permetta l'\textbf{utilizzo
+        libero}, è \textbf{accessibile con tecnologie digitali} ed è
+    \textbf{reso disponibile gratuitamente} o a costi marginali}?
+Secondo l'autore di questa Tesi, il Cittadino dovrebbe aver diritto di
+\textbf{accedere liberamente} ai dati della circolazione ferroviaria,
+scegliere l'\textit{app} che ritiene più adatta o svilupparne una
+propria, senza limitazioni o autorizzazioni.  Dovrebbe essere anche
+garantita la libertà di poter analizzare i \textit{dataset} storici
+per misurare e calcolare la \textbf{performance} reale.  Come si può
+iniziare un dialogo sul trasporto pubblico senza l'accesso ai dati?
+
+\subsubsection{Monitoraggio nei contratti di servizio}
+
+Nella totalità dei contratti di servizio esaminati (vedi Sezione
+\ref{servizio_pubblico}) sono presenti accordi di \textbf{verifica} e
+\textbf{monitoraggio} dell'operato delle imprese ferroviarie, che
+devono corrispondere agli Enti committenti \textbf{penali} in base ad
+alcune \textbf{metriche di puntualità} e \textbf{affidabilità}.
+Confrontare le metriche di Enti o imprese diverse è spesso
+\textbf{impossibile}: nonostante le formule RFI della
+\textit{performance regime} (vedi Sezione \ref{performance_regime})
+siano spesso utilizzate come base di partenza, ogni contratto è
+diverso.  L'accesso ai c.d.\ ``\textit{dati elementari di base}'' (le
+rilevazioni grezze) è spesso garantito solo all'Ente committente, non
+al Cittadino.  Le metriche sono spesso pubblicate in \textbf{modalità
+    aggregata}, o non pubblicate affatto.
+
+\paragraph{Lombardia}
+
+\begin{figure}[h] \centering
+    \includegraphics[width=1\textwidth]{images/lombardia_puntualita.png}
+	\caption{Dati ufficiali sulla puntualità dei treni in Lombardia}
+    \label{lombardia_puntualita}
+\end{figure}
+
+\begin{figure}[h] \centering
+    \includegraphics[width=\linewidth]{images/lombardia_affidabilita.png}
+    \caption{Dati ufficiali sulla affidabilità dei treni in Lombardia,
+        raggruppati per gestore dell'infrastruttura}
+    \label{lombardia_affidabilita}
+\end{figure}
+
+Per esempio, Regione Lombardia pubblica sul proprio sito istituzionale
+\cite{LombardiaDati} l'\textbf{indice di puntualità}, inteso come la
+\textquote{\textit{percentuale di corse giunte a destino\footnote{Nel
+            gergo ferroviario, la destinazione finale} entro 5 minuti
+        per media intera giornata\footnote{Escludendo
+            \textquote{\textit{cause di forza maggiore, scioperi e
+                    lavori programmati}}\label{forza_maggiore}}}} e
+l'\textbf{indice di affidabilità}, ovvero il \textquote{\textit{numero
+        medio di corse soppresse al giorno per tutto il percorso o
+        parzialmente\footnote{Vedi la nota
+            \footref{forza_maggiore}}}}.  Per entrambe le metriche i
+dati sono presentati \textbf{aggregati} per mese e per gestore
+dell'infrastruttura (vedi \figurename \ \ref{lombardia_puntualita} e
+\ref{lombardia_affidabilita}), rendendo impossibile confrontare
+direttrici, orari, giorni della settimana o imprese ferroviarie.  Gli
+\textbf{indici} stessi sono \textbf{fuorvianti}: due treni che
+arrivano a destino con 6 e 60 minuti di ritardo sono conteggiati
+ugualmente, mentre le fermate intermedie non vengono considerate.  Il
+\textbf{numero assoluto} di \textit{corse soppresse al giorno} è un
+\textbf{dato poco significativo} senza il numero di corse complessivo.
+Le \textbf{responsabilità tra le parti} delle perturbazioni al
+servizio \textbf{non sono rilevate}, nonostante siano state certamente
+rilevate ai fini di contratto di servizio e \textit{performance
+    regime}.  Infine, i dati \textbf{non sono aggiornati} da più di 11
+mesi e il formato PDF non li rende facilmente analizzabili
+meccanicamente.
+
+\paragraph{Emilia-Romagna}
+Un panorama diverso si presenta in Emilia-Romagna, dove FER (gestore
+dell'infrastruttura) è incaricata di pubblicare in dettaglio le
+\textbf{singole corse} giunte a destino in ritardo o cancellate,
+specificando anche \textbf{responsabilità} e \textbf{motivazioni}
+\cite{FerDati}.  I treni sono raggruppabili per \textbf{tipo di
+    evento} (ritardo o soppressione), \textbf{direttrice} e
+\textbf{rete} (RFI o FER) (vedi \figurename\ \ref{fer_dati}).  I dati
+sono presentati con un'\textbf{interfaccia semplice} e
+\textbf{intuitiva} e sono addirittura esportabili in \textbf{CSV}.
+Regione Emilia-Romagna ha dimostrato che la \textbf{trasparenza} in
+questo campo è possibile, anche se con \textbf{piccole problematiche}:
+inanzitutto, ad oggi i dati sono aggiornati solo fino a
+\textbf{febbraio 2023}.  Sul portale non sono indicate le
+\textbf{fermate intermedie} e i \textbf{treni regolari}: per analisi
+più approfondite tali dati potrebbero risultare utili.
+
+\textbf{Aldo Salani}, responsabile dell'Area Commerciale FER e
+interpellato via posta elettronica durante il lavoro di Tesi,
+rivela\footnote{Enfasi aggiunta} che \textcquote{Salani}{FER non solo
+    ha a disposizione la \textbf{propria banca dati} di
+    programmazione, gestione e contabilizzazione dei dati di
+    circolazione, ma ha anche accesso a quella del gestore nazionale
+    tramite i sistemi dell'impresa ferroviaria che espleta il
+    servizio; ciò consente, attraverso un sistema di \textbf{gestione
+        big data}, di elaborare un cruscotto informatico che gestisce
+    e mostra i dati autonomamente con \textbf{precisione} e
+    \textbf{profondità}, evitando di ricevere prospetti
+    preconfezionati e poco versatili.  Tra l'altro oltre al
+    monitoraggio della puntualità e della regolarità (soppressioni),
+    il cruscotto mostra anche i \textbf{dati della qualità erogata},
+    dati che vengono raccolti da una \textbf{squadra di ispettori} che
+    giornalmente svolge turni sui treni inserendo in tempo reale a
+    sistema elementi quali illuminazione, riscaldamento,
+    condizionamento, pulizia, stato dei servizi igienici,
+    comportamento del personale ecc..}.  Perché le \textbf{altre
+    Regioni} non sono così trasparenti?  \textcquote{Salani}{Intanto
+    il modello FER è attualmente difficilmente applicabile alle altre
+    regioni per il fatto che in questo caso la Regione ha scelto di
+    affidare lo svolgimento della \textbf{gara per il trasporto
+        pubblico} su rotaia e la successiva gestione del relativo
+    contratto di servizio alla \textbf{società in house} FER che è il
+    gestore infrastruttura della rete ferroviaria regionale}.  Salani
+si è dimostrato aperto ai miglioramenti del portale e precisa che
+\textcquote{Salani}{il lasso di tempo, a volte un po' lungo,
+    necessario per la pubblicazione dipende da quando i gestori
+    infrastruttura comunicano il \textbf{``consolidamento''} dei dati
+    i quali possono subire variazioni in seguito a revisioni
+    successive (soprattutto in merito alle cause dei ritardi)}.
+
+\begin{figure}[h] \centering
+    \includegraphics[width=1\textwidth]{images/fer_dati.png}
+	\caption{Dati ufficiali sulla puntualità dei treni in Emilia
+        Romagna}
+    \label{fer_dati}
+\end{figure}
+
+\subsection{Accesso civico generalizzato}
+
+Dopo lunghe battaglie di cittadinanza attiva da parte di gruppi come
+Foia4Italy \cite{SilenziDiStato}, nel 2016 il ``decreto Trasparenza''
+\cite{Dlgs97} introduce il \textbf{Foia}\footnote{Dagli USA,
+    \textit{Freedom of Information Act}} in Italia.  Secondo la
+normativa, \textcquote[art.\ 5]{Dlgs33}{\textit{allo scopo di favorire
+        forme diffuse di controllo sul perseguimento delle funzioni
+        istituzionali e sull'utilizzo delle risorse pubbliche e di
+        promuovere la partecipazione al dibattito pubblico,
+        \textbf{chiunque ha diritto di accedere} ai dati e ai
+        documenti detenuti dalle pubbliche amministrazioni}}.
+L'accesso è regolato presentando un'\textbf{istanza di accesso civico
+    generalizzato}: l'Amministrazione deve tassativamente rispondere
+entro \textbf{30 giorni} con la trasmissione dei documenti richiesti o
+con un diniego adeguatamente documentato.
+
+Durante il lavoro di Tesi sono state inoltrate a fini esplorativi due
+richieste di \textbf{accesso civico generalizzato} per i dati citati
+nei contratti di servizio.
+
+\subsubsection{Ministero delle Infrastrutture e dei Trasporti per
+    Trenitalia}
+
+Il contratto di servizio tra il \textbf{MIT} e \textbf{Trenitalia}
+riguarda principalmente i treni a media e lunga percorrenza sottoposti
+in \textbf{servizio pubblico}, ovvero gli \textit{intercity} e
+\textit{intercity notte}.  L'oggetto principale della richiesta
+riguardava i dati di monitoraggio descritti nell'Allegato 6
+\cite[art.\ 5, comma 1, lettera g]{CdSMIT}, ovvero le rilevazioni in
+formato tabellare \textbf{per ogni singolo treno} di
+\textbf{puntualità}, \textbf{frequentazione}, \textbf{pulizia}, e
+\textbf{tasso di riempimento}.
+
+La risposta del Ministero è stata un \textbf{diniego}, giustificato
+dalla \textcquote{FoiaMIT}{possibilità di un pregiudizio concreto alla
+    tutela [...] degli interessi economici e commerciali} di
+Trenitalia, in qualità di \textbf{soggetto
+    controinteressato}\footnote{La normativa sul Foia \cite{Dlgs33}
+    stabilisce criteri precisi per identificare i soggetti
+    controinteressati e ammette il diniego in caso la pubblicazione
+    dei documenti oggetto dell richiesta possa pregiudicare interessi
+    privati, tra cui interessi economici}.  Di seguito è riportata
+integralmente la motivata opposizione dell'Azienda.
+
+\begin{quote}
+    \textcquote{FoiaMIT}{\textbf{I dati/la documentazione richiesta
+            hanno tutt’oggi carattere di assoluta riservatezza}, in
+        quanto attinenti ad informazioni di natura commerciale,
+        industriale ed economico finanziaria la cui indebita
+        diffusione recherebbe un \textbf{grave e concreto pregiudizio
+            a Trenitalia}, anche per il grado di analiticità in cui
+        gli stessi sono articolati.  Nello specifico, si rappresenta
+        che i dati richiesti, contenuti nelle tabelle dell’Allegato 6
+        del vigente Contratto, rappresentano per la Scrivente un set
+        di \textbf{informazioni commerciali ed economiche molto
+            sensibili} (es.\ percentuali di load factor e carico medio
+        dei treni e dei bus, oltre che il dettaglio dei valori
+        economici relativi ad ogni singolo servizio del C.d.S.) e
+        tenuto conto che il servizio Intercity si svolge in un
+        contesto operativo di media e lunga percorrenza nel quale
+        operano anche altri soggetti, sia nel trasporto ferroviario
+        che in quello bus, la eventuale diffusione delle informazioni
+        richieste potrebbe avere un impatto pregiudizievole per
+        Trenitalia, di cui rischierebbero di essere rese noti
+        strategie, assetti organizzativi e costi, con
+        \textbf{conseguente svantaggio sul piano competitivo}.  In
+        conclusione, per quanto sopra evidenziato, la (Società
+        Trenitalia n.d.r.) ritiene che ricorrano i presupposti
+        espressamente stabiliti dalla disciplina vigente (art.\ 5 bis,
+        comma 2, lett.\ c del D.lgs.\ 33/2013 e s.m.\ e i.) che
+        escludono l’operatività dell’accesso civico, laddove ciò sia
+        giustificato dall’esigenza di ``evitare un pregiudizio
+        concreto alla tutela degli interessi economici e commerciali''
+        del soggetto cui i dati oggetto di accesso si riferiscono.}
+\end{quote}
+
+Riassumendo, secondo Trenitalia la pubblicazione dei dati oggetto di
+richiesta (in particolare gli indici di carico dei convogli e i valori
+economici) comporterebbe un \textbf{svantaggio competitivo} nei
+confronti della concorrenza.  Nonostante la richiesta riguardi i soli
+treni a media e lunga percorrenza in regime di \textbf{servizio
+    pubblico}, Trenitalia non è l'unico operatore in quel mercato e
+altri soggetti potrebbbero sfruttare le informazioni a fini
+commerciali creandosi un ingiusto vantaggio.  Non è nemmeno possibile
+chiedere al Ministero di selezionare i soli dati di performance
+(ritardi e cancellazioni) perché comporterebbe una \textit{ulteriore
+    elaborazione} non ammessa nella normativa Foia.
+
+\subsubsection{Regione Lombardia e Trenitalia}
+
+\todo{Marco: inserire risultato Foia Lombardia}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+convallis et lorem at accumsan. Curabitur varius pellentesque
+tincidunt. Proin tristique finibus dolor, nec vestibulum nisi
+fermentum vel. Aenean quis orci id libero scelerisque commodo vitae at
+libero. Nulla laoreet fringilla erat ac commodo. Curabitur faucibus
+dui non auctor ultricies. Pellentesque ac tortor feugiat, rutrum eros
+vitae, molestie eros. Maecenas dapibus porta viverra. Nullam vitae
+erat felis. Aenean scelerisque vehicula nisl, eu ultrices orci
+pulvinar vel. Morbi tincidunt sed lectus non condimentum. Pellentesque
+urna augue, finibus non neque id, pulvinar mattis massa. Cras congue,
+justo nec egestas mattis, nisi magna bibendum tortor, vitae blandit
+leo ante eget augue. Etiam molestie, dui sit amet sollicitudin
+lacinia, lacus est faucibus quam, vel mollis mi arcu ac
+nunc. Suspendisse gravida vel eros sed aliquet. Vestibulum quis odio
+pretium, interdum magna in, bibendum augue.
 
 \printbibliography
 
@@ -651,8 +936,8 @@ Le API di Viaggiatreno (vedi la Sezione \ref{viaggiatreno}) non
 dispongono di una documentazione ufficiale e non sono conformi alla
 architettura REST o ad altri standard \textit{de facto} \cite{Giunta}.
 Numerosi tentativi sono stati fatti dalla comunità open source
-italiana per documentarle: in particolare ringrazio Stefano (sabas)
-\cite{Sabas}, Luca Grandi \cite{Grandi} e Fabrizio Tarizzo
+italiana per documentarle: in particolare si ringraziano Stefano
+(sabas) \cite{Sabas}, Luca Grandi \cite{Grandi} e Fabrizio Tarizzo
 \cite{Tarizzo} per il loro fondamentale contributo.  I metodi sono
 generalmente accessibili al percorso
 \texttt{/infomobilita/\-resteasy/\-viaggiatreno/\-$M$/\-$P_1$/\-$P_2$/\-$\dots$/\-$P_n$}
@@ -881,7 +1166,7 @@ secondo è un Malpensa Express di Trenord da Milano Nord Cadorna.
 
 Il metodo \texttt{andamentoTreno} fornisce tutte le informazioni su un
 treno e le sue fermate.  L'\texttt{origine} è il codice della stazione
-cui il treno ha origine, \texttt{numero} è il numero del treno e
+da cui il treno parte, \texttt{numero} è il numero del treno e
 \texttt{data} è il timestamp della mezzanotte del giorno di partenza
 del treno, ritornato dal metodo precedente (\ref{trenoAutocomplete}).
 
