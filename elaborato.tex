@@ -119,7 +119,7 @@
 \chapter{Introduzione}
 
 Ad oggi in Italia non esistono Open Data generalizzati sulla
-\textit{reale} performance\todo{AT: i termini inglesi andrebbero in corsivo a meno che non siano accettati in dizionario italiano} del \textbf{trasporto pubblico
+\textit{reale performance} del \textbf{trasporto pubblico
     ferroviario}; l'accesso a tali metriche è ostacolato da
 \textbf{barriere tecnologiche e legali}, spesso ingiustificate.  Le
 poche e frammentate statistiche pubblicamente disponibili su eventi
@@ -230,15 +230,14 @@ programmazione che di \textit{performance}.
 Ogni anno, RFI pubblica il c.d.\ PIR (Prospetto Informativo della
 Rete) per comunicare alle imprese ferroviarie le modalità e le tariffe
 di assegnazione della capacità dell'infrastruttura per l'erogazione
-dei servizi \cite{RfiPir}.  %Nel PIR viene inoltre
-\todo{AT: c'è un salto, forse non andava commentato inizio frase?}
-definito un complesso sistema di \textbf{penali}, calcolate in base a
-metriche ben precise (e spesso richiamate da numerosi contratti di
-servizio) qui di seguito esposte. \\ Nel PIR viene inoltre descritta
-la c.d.\ \textbf{\textit{performance regime}}, un meccanismo di premi
-e penali adottata \textcquote[art.\ 21]{Dlgs112}{\textit{al fine di
-        ridurre al minimo le disfunzioni conseguenti ad eventuali
-        perturbazioni arrecate alla circolazione dei treni}}.
+dei servizi \cite{RfiPir}.  Nel PIR viene inoltre definito un
+complesso sistema di \textbf{penali} calcolate in base a metriche ben
+precise (e spesso richiamate da numerosi contratti di servizio) qui di
+seguito esposte. \\ Nel PIR viene inoltre descritta la c.d.\
+\textbf{\textit{performance regime}}, un meccanismo di premi e penali
+adottata \textcquote[art.\ 21]{Dlgs112}{\textit{al fine di ridurre al
+        minimo le disfunzioni conseguenti ad eventuali perturbazioni
+        arrecate alla circolazione dei treni}}.
 	
 \subsubsection{Metodo di calcolo delle penali}
 
@@ -363,7 +362,7 @@ stabilire se un tratto di binario è occupato o libero.  All'inizio di
 una corsa, un operatore \textit{``battezza''} un tratto occupato
 inserendo il numero di treno corrispondente.  Man mano che il treno
 occupa e libera altri tratti di binario adiacenti, il \textbf{sistema
-    informatico} lo segue.  In questo modo, il gestore
+    informatico} \textit{lo segue}.  In questo modo, il gestore
 dell'infrastruttura conosce sempre la posizione aggiornata di tutti i
 treni sulle proprie linee.
 
@@ -403,15 +402,17 @@ disponibili.
 
 Con Viaggiatreno è possibile trovare le corse di Trenitalia
 (regionali, alta velocità, Intercity e Intercity Notte), Trenord, TPER
-e OBB (Ferrovie Austriache).  Curiosamente, non è possibile cercare i
+e OBB (Ferrovie Austriache).  \textit{Curiosamente}, non è possibile cercare i
 treni di Italo-NTV, concorrente commerciale del gruppo Ferrovie dello
-Stato.\todo{AT: beh, non tanto "curiosamente", in fondo gliene hanno fatte di tutti i colori a Italo (googla un po') pur di farlo fallire, oppure metti il curiosamente in corsivo ;)}
+Stato.
 
+\todo{AT: da qualche parte fare un piccolo excursus su "alla ricerca
+    delle API perdute"? sui tentativi (sia tecnici che legislativi) di
+    estrarre info "sensate" (4-5 stelle Berners-Lee)}
 
-
-\todo{AT: da qualche parte fare un piccolo excursus su "alla ricerca delle API perdute"? sui tentativi (sia tecnici che legislativi) di estrarre info "sensate" (4-5 stelle Berners-Lee)}
-
-\todo{AT: btw da qualche parte farei un microexcursus sulle classificazioni opendata (lo puoi riassumere dal secondo volume di CDT che ti posso mandare, è in fase di review ora)}
+\todo{AT: btw da qualche parte farei un microexcursus sulle
+    classificazioni opendata (lo puoi riassumere dal secondo volume di
+    CDT che ti posso mandare, è in fase di review ora)}
 
 \subsection{Sito web di Trenord}
 
@@ -430,8 +431,8 @@ Similmente a Viaggiatreno, con lo strumento \textit{``Ispeziona
     HTTP} sotto la URL \texttt{https://admin.trenord.it}.  Nonostante
 l'assenza di una documentazione ufficiale, l'interazione con le API
 Trenord è più intuitiva e prevedibile rispetto a quelle di
-Viaggiatreno.  Le risposte sono sempre in JSON e le richieste seguono
-i principi REST di HTTP GET.
+Viaggiatreno.  Le risposte sono sempre in JSON e le richieste
+ricalcano i principi REST di HTTP GET.
 
 Dai portali di Trenord non si trovano corse non operate dall'impresa
 stessa, come i regionali di Trenitalia o l'alta velocità.  Nonostante
@@ -721,11 +722,11 @@ ugualmente, mentre le fermate intermedie non vengono considerate.  Il
 \textbf{numero assoluto} di \textit{corse soppresse al giorno} è un
 \textbf{dato poco significativo} senza il numero di corse complessivo.
 Le \textbf{responsabilità tra le parti} delle perturbazioni al
-servizio \textbf{non sono rilevate}, nonostante siano state certamente
-rilevate ai fini di contratto di servizio e \textit{performance
-    regime}.  Infine, i dati \textbf{non sono aggiornati} da più di 11
-mesi e il formato PDF non li rende facilmente analizzabili
-meccanicamente.
+servizio \textbf{non sono \textit{rivelate}}, nonostante siano
+certamente state \textit{rilevate} ai fini di contratto di servizio e
+\textit{performance regime}.  Infine, i dati \textbf{non sono
+    aggiornati} da più di 11 mesi e il formato PDF non li rende
+facilmente analizzabili meccanicamente.
 
 \paragraph{Emilia-Romagna}
 Un panorama diverso si presenta in Emilia-Romagna, dove FER (gestore
@@ -738,13 +739,11 @@ specificando anche \textbf{responsabilità} e \textbf{motivazioni}
 sono presentati con un'\textbf{interfaccia semplice} e
 \textbf{intuitiva} e sono addirittura esportabili in \textbf{CSV}.
 Regione Emilia-Romagna ha dimostrato che la \textbf{trasparenza} in
-questo campo è possibile, anche se con \textbf{piccole problematiche}:
-inanzitutto, ad oggi i dati sono aggiornati solo fino a
-\textbf{febbraio 2023}.  Sul portale non sono indicate le
+questo campo è possibile, anche se sul portale non sono indicate le
 \textbf{fermate intermedie} e i \textbf{treni regolari}: per analisi
 più approfondite tali dati potrebbero risultare utili.
 
-\textbf{Aldo Salani}\todo{AT: ti ha dato esplicito permesso di citarlo?}, responsabile dell'Area Commerciale FER e
+\textbf{Aldo Salani}, responsabile dell'Area Commerciale FER e
 interpellato via posta elettronica durante il lavoro di Tesi,
 rivela\footnote{Enfasi aggiunta} che \textcquote{Salani}{FER non solo
     ha a disposizione la \textbf{propria banca dati} di
@@ -763,8 +762,8 @@ rivela\footnote{Enfasi aggiunta} che \textcquote{Salani}{FER non solo
     sistema elementi quali illuminazione, riscaldamento,
     condizionamento, pulizia, stato dei servizi igienici,
     comportamento del personale ecc..}.  Perché le \textbf{altre
-    Regioni} non sono così trasparenti?  \textcquote{Salani}{Intanto
-    il modello FER è attualmente difficilmente applicabile alle altre
+    Regioni} non sono così trasparenti?  \textcquote{Salani}{Il
+    modello FER è attualmente difficilmente applicabile alle altre
     regioni per il fatto che in questo caso la Regione ha scelto di
     affidare lo svolgimento della \textbf{gara per il trasporto
         pubblico} su rotaia e la successiva gestione del relativo
@@ -800,17 +799,17 @@ normativa, \textcquote[art.\ 5]{Dlgs33}{\textit{allo scopo di favorire
 L'accesso è regolato presentando un'\textbf{istanza di accesso civico
     generalizzato}: l'Amministrazione deve tassativamente rispondere
 entro \textbf{30 giorni} con la trasmissione dei documenti richiesti o
-con un diniego adeguatamente documentato.
+con un diniego adeguatamente motivato.
 
 Durante il lavoro di Tesi sono state inoltrate a fini esplorativi due
 richieste di \textbf{accesso civico generalizzato} per i dati citati
-nei contratti di servizio.\todo{AT: "illustrati qui di seguito"}
+nei contratti di servizio, illustrati qui di seguito.
 
 \subsubsection{Ministero delle Infrastrutture e dei Trasporti per Trenitalia}
 
 Il contratto di servizio tra il \textbf{MIT} e \textbf{Trenitalia}
-riguarda principalmente i treni a media e lunga percorrenza sottoposti
-in \textbf{servizio pubblico}, ovvero gli \textit{intercity} e
+riguarda principalmente i treni a media e lunga percorrenza in regime
+di \textbf{servizio pubblico}, ovvero gli \textit{intercity} e
 \textit{intercity notte}.  L'oggetto principale della richiesta
 riguardava i dati di monitoraggio descritti nell'Allegato 6
 \cite[art.\ 5, comma 1, lettera g]{CdSMIT}, ovvero le rilevazioni in
