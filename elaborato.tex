@@ -253,7 +253,10 @@ maggiore.  Al fine di calcolo delle penali vengono utilizzati i
 seguenti \textbf{coefficienti} \cite[app.\ 5.C, \textit{``Metodi di
     calcolo''}]{RfiPir}:
 
-\todo{AT: mi sembrano cifre molto basse, riesci a mettere un esempio di calcolo reale? magari paragonandolo al "costo di esercizio" (di un viaggio), per capire se è un deterrente/incentivo sensato}
+\todo{AT: mi sembrano cifre molto basse, riesci a mettere un esempio
+    di calcolo reale? magari paragonandolo al "costo di esercizio" (di
+    un viaggio), per capire se è un deterrente/incentivo sensato \\
+    M: fatto}
 \begin{itemize}
 	\item $P_\text{u}$: penale unitaria pari a 1,00€ al minuto;
 	\item $P_\text{sop}$: penale unitaria per ogni treno soppresso
@@ -325,6 +328,17 @@ Intuitivamente, le cancellazioni di treni per colpa delle imprese
 ferroviarie proprietarie non causano penali nei confronti del gestore
 dell'infrastruttura, ma invertendo le responsabilità sì.
 
+\subsubsection{Esempio di calcolo}
+
+Supponiamo che il \textbf{gestore dell'infrastruttura} causi la
+\textbf{soppressione} di 5 treni ($S_\text{GI}$) di un'impresa
+ferroviaria, con $P_\text{GI} = 1$ (treno totalmente soppresso).
+Assumendo un $C_\text{sop}$ pari a 1, la penale $P_\text{F1}$ da
+corrispondere sarà di
+$$ P_\text{sop} \cdot S_\text{GI} \cdot P_\text{GI} \cdot C_\text{sop}
+= 120\text{€} \cdot 5 \cdot 1 \cdot 1 = 600\text{€}.
+$$
+
 \subsubsection{Flusso economico}
 
 È bene notare come \textcquote{RfiPir}{\textit{il flusso economico
@@ -392,6 +406,12 @@ Il sito web permette numerose operazioni, come:
     (Infomobilità).
 \end{itemize}
 
+Con Viaggiatreno è possibile trovare le corse di Trenitalia
+(regionali, alta velocità, Intercity e Intercity Notte), Trenord, TPER
+e OBB (Ferrovie Austriache).  \textit{Curiosamente}, non è possibile
+cercare i treni di Italo-NTV, concorrente commerciale del gruppo
+Ferrovie dello Stato.
+
 La caratteristica più interessante ai fini del progetto è la
 possibilità di operare anche tramite delle semplici \textbf{API HTTP},
 senza autenticazione o apparenti limiti tecnologici.  Utilizzando lo
@@ -400,19 +420,16 @@ possibile tracciare le richieste invocate dal frontend in JavaScript a
 seguito delle azioni dell'utente e farsi un'idea dei metodi API
 disponibili.
 
-Con Viaggiatreno è possibile trovare le corse di Trenitalia
-(regionali, alta velocità, Intercity e Intercity Notte), Trenord, TPER
-e OBB (Ferrovie Austriache).  \textit{Curiosamente}, non è possibile cercare i
-treni di Italo-NTV, concorrente commerciale del gruppo Ferrovie dello
-Stato.
-
 \todo{AT: da qualche parte fare un piccolo excursus su "alla ricerca
     delle API perdute"? sui tentativi (sia tecnici che legislativi) di
-    estrarre info "sensate" (4-5 stelle Berners-Lee)}
+    estrarre info "sensate" (4-5 stelle Berners-Lee) \\
+    M: ho messo i tentativi della community in Appendice A.2}
 
 \todo{AT: btw da qualche parte farei un microexcursus sulle
     classificazioni opendata (lo puoi riassumere dal secondo volume di
-    CDT che ti posso mandare, è in fase di review ora)}
+    CDT che ti posso mandare, è in fase di review ora) \\
+    M: ho citato la classificazione di Berners-Lee e ho valutato gli
+    ``open data'' che ho analizzato in sezione 1.3.2, va bene?}
 
 \subsection{Sito web di Trenord}
 
@@ -667,6 +684,28 @@ garantita la libertà di poter analizzare i \textit{dataset} storici
 per misurare e calcolare la \textbf{performance} reale.  Come si può
 iniziare un dialogo sul trasporto pubblico senza l'accesso ai dati?
 
+\subsubsection{Classificazione degli Open Data}
+
+Tim Berners-Lee ha proposto \cite{W3LinkedData} uno schema di
+\textbf{classificazione} degli \textit{open data} basato su 5 stelle:
+\begin{itemize}
+    \item $\star$: è disponibile su Internet ed è distribuito con una
+    \textbf{licenza libera};
+    \item $\star\,\star$: è \textbf{\textit{machine-readable}};
+    \item $\star \star \star$: è distribuito in un \textbf{formato non
+        proprietario};
+    \item $\star \star \star\,\star$: usa gli
+    \textbf{URI}\footnote{\textit{Unique Resource Identifier},
+        identificatore univoco di una risorsa} per identificare gli
+    oggetti;
+    \item $\star \star \star \star \star$: \textbf{si collega} ad
+    altri dati per fornire il contesto.
+\end{itemize}
+
+Nella prossima sezione verranno illustrati e valutati alcuni dati
+pubblicati dagli Enti titolari di contratto di servizio con le imprese
+ferroviarie.
+
 \subsubsection{Monitoraggio nei contratti di servizio}
 
 Nella totalità dei contratti di servizio esaminati (vedi Sezione
@@ -681,23 +720,28 @@ siano spesso utilizzate come base di partenza, ogni contratto è
 diverso.  L'accesso ai c.d.\ ``\textit{dati elementari di base}'' (le
 rilevazioni grezze) è spesso garantito solo all'Ente committente, non
 al Cittadino.  Le metriche sono spesso pubblicate in \textbf{modalità
-    aggregata}, o non pubblicate affatto.
-
-
-\todo{AT: citare "citizen science"? in ogni caso qui vale il discorso che gli stakeholders (termine da usare) di questi sistemi sono ANCHE e SOPRATTUTTO i cittadini, dato che parliamo di un servizio "pubblico" (tra virgolette perché temo non lo sia formalmente/legalmente anche se dovrebbe esserlo, verifica)}
+    aggregata}, o non pubblicate affatto.  I Cittadini sono gli
+\textbf{stakeholder principali} del servizio, che in quanto
+\textbf{pubblico} dovrebbe favorire attività di
+\textbf{\textit{citizen science}}\footnote{Con \textit{citizen
+        science}, o \textit{scienza dei cittadini}, si intendono le
+    attività di ricerca scientifica amatoriale portate avanti da
+    cittadini} da parte degli stessi.
 
 \paragraph{Lombardia}
 
 \begin{figure}[h] \centering
     \includegraphics[width=1\textwidth]{images/lombardia_puntualita.png}
-	\caption{Dati ufficiali sulla puntualità dei treni in Lombardia}
+	\caption{Dati ufficiali sulla puntualità dei treni in Lombardia
+        \cite{LombardiaDati}}
     \label{lombardia_puntualita}
-\end{figure}\todo{AT: dichiara sempre la fonte esatta, url o bibref, vale in generale}
+\end{figure}
 
 \begin{figure}[h] \centering
     \includegraphics[width=\linewidth]{images/lombardia_affidabilita.png}
     \caption{Dati ufficiali sulla affidabilità dei treni in Lombardia,
-        raggruppati per gestore dell'infrastruttura}
+        raggruppati per gestore dell'infrastruttura
+        \cite{LombardiaDati}}
     \label{lombardia_affidabilita}
 \end{figure}
 
@@ -726,7 +770,9 @@ servizio \textbf{non sono \textit{rivelate}}, nonostante siano
 certamente state \textit{rilevate} ai fini di contratto di servizio e
 \textit{performance regime}.  Infine, i dati \textbf{non sono
     aggiornati} da più di 11 mesi e il formato PDF non li rende
-facilmente analizzabili meccanicamente.
+facilmente analizzabili meccanicamente: secondo la classificazione
+proposta da Tim Berners-Lee, sono valutati con solo 1 stella
+($\star$).
 
 \paragraph{Emilia-Romagna}
 Un panorama diverso si presenta in Emilia-Romagna, dove FER (gestore
@@ -776,10 +822,14 @@ si è dimostrato aperto ai miglioramenti del portale e precisa che
     i quali possono subire variazioni in seguito a revisioni
     successive (soprattutto in merito alle cause dei ritardi)}.
 
+L'uso di formati liberi e \textit{machine-readable} premia i dati
+messi a disposizione da Regione Emilia-Romagna con 3 stelle
+($\star\,\star\,\star$) secondo la classificazione di Tim Berners-Lee.
+
 \begin{figure}[h] \centering
     \includegraphics[width=1\textwidth]{images/fer_dati.png}
 	\caption{Dati ufficiali sulla puntualità dei treni in Emilia
-        Romagna}
+        Romagna \cite{FerDati}}
     \label{fer_dati}
 \end{figure}
 
@@ -805,7 +855,8 @@ Durante il lavoro di Tesi sono state inoltrate a fini esplorativi due
 richieste di \textbf{accesso civico generalizzato} per i dati citati
 nei contratti di servizio, illustrati qui di seguito.
 
-\subsubsection{Ministero delle Infrastrutture e dei Trasporti per Trenitalia}
+\subsubsection{Ministero delle Infrastrutture e dei Trasporti per
+    Trenitalia}
 
 Il contratto di servizio tra il \textbf{MIT} e \textbf{Trenitalia}
 riguarda principalmente i treni a media e lunga percorrenza in regime
