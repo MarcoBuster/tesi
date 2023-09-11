@@ -51,6 +51,7 @@
 \usepackage{graphicx}				% Funzioni avanzate per le immagini
 \usepackage{hologo}					% Bibtex logo with \hologo{BibTeX}
 \usepackage{enumitem}
+\usepackage{array}
 
 % Citazioni e bibliografia
 \usepackage[style=italian]{csquotes}
@@ -897,7 +898,7 @@ pretium, interdum magna in, bibendum augue.
 
 In questo capitolo dell'elaborato è descritta la \textbf{parte
     implementativa} del lavoro di Tesi.  L'obiettivo è stato creare un
-\textbf{software} per \textbf{scaricare} in modo programmatico i dati
+\textbf{software} per \textbf{scaricare} programmaticamente i dati
 della circolazione ferroviaria, \textbf{convertirli in Open Data} e
 \textbf{analizzarli} proponendo statistiche descrittive e
 visualizzazioni.
@@ -922,7 +923,8 @@ visualizzazioni.
         {\textbf{\textit{Extractor}}};
 
         \node[rect] (pickle) [above right=17.5mm and 10cm of
-        extractor.west, anchor=west] {\texttt{.pickle} incrementali};
+        extractor.west, anchor=west] {File \texttt{.pickle}
+            incrementali};
 
         n \node[bigrect] (analyzer) [below=20mm of extractor]
         {\textbf{\textit{Analyzer}}}; \node[rect] (csv) [above
@@ -976,10 +978,10 @@ composto da tre componenti.
 
 La \textbf{modularizzazione} permette di sostituire facilmente
 l'\textit{extractor} e l'\textit{analyzer} in modo da supportare più
-formati e analisi.  Si ricorda che lo scopo principale del progetto
-non è calcolare statistiche o generare visualizzazioni, ma fornire gli
-strumenti per permettere a chiunque di farlo: \textit{bring your own
-    format \& analyzer}.
+formati e analisi.  Si ricordi infatti che lo scopo principale del
+progetto non è calcolare statistiche o generare visualizzazioni, ma
+fornire gli strumenti per permettere a chiunque di farlo:
+\textit{bring your own format \& analyzer}.
 
 L'unica \textbf{interfaccia utente} supportata è
 CLI\footnote{\textit{Command Line Interface}, interfaccia a riga di
@@ -1164,7 +1166,7 @@ Ciò si verifica quasi sempre, ma si possono trovare:
 
 Alcune stazioni non si possono trovare tramite \texttt{cercaStazione}
 (e con l'interfaccia web di Viaggiatreno) ma sono comunque presenti
-nella lista delle fermate dei treni che fermano.  Un esempio è Arcene
+nella lista delle fermate dei treni che sostano.  Un esempio è Arcene
 (\texttt{S01608}), introvabile tramite la ricerca ma solo dalla lista
 delle fermate di un treno sulla tratta Treviglio $\leftrightarrow$
 Bergamo.  Infine, il metodo \texttt{elencoStazioni} (che dovrebbe
@@ -1192,10 +1194,10 @@ Alcuni ``treni'' ritornati dall'API di Viaggiatreno ed attribuiti a
 Trenord non sono \textit{corse} realmente esistenti che effettuano
 servizio viaggiatori.  Si possono \textit{disambugare} le corse
 fittizie da quelle reali \textit{chiedendo} informazioni a Trenord
-tramite la sua API.  Se per Trenord la corsa non esiste allora si deve
-escludere dalle analisi.  I dati ritornati dalla API di Viaggiatreno
-vengono quindi integrati con quelli dell'API di Trenord, prediligendo
-la seconda in caso di conflitti.
+tramite la sua API\@.  Se per Trenord la corsa non esiste allora la si
+deve escludere dalle analisi.  I dati ritornati dalla API di
+Viaggiatreno vengono quindi integrati con quelli dell'API di Trenord,
+prediligendo la seconda in caso di conflitti.
 
 Come già detto (vedi Appendice \ref{terminologia}), un treno è
 identificato univocamente anche dalla \textit{data di partenza}, in
@@ -1255,7 +1257,7 @@ salvare le corse già viste.  Si noti che una corsa non ancora arrivata
 a destinazione deve essere ricontrollata successivamente per poter
 salvare i dati delle fermate non ancora superate.
 
-\subsubsection{Algoritmo}
+\subsubsection{Descrizione ad alto livello}
 
 \begin{algorithm}
     \caption{Scraping incrementale di tutti i treni}
@@ -1271,18 +1273,18 @@ salvare i dati delle fermate non ancora superate.
         \EndFor
 
         \State \phantom{i like trains}
-        \State $T^* \gets \varnothing$ \Comment{Insieme dei treni
-            arrivati definitivamente}
-        \State $T \gets \varnothing$ \Comment{Insieme dei treni non
-            ancora arrivati}
+        \State $T \gets \varnothing$
+        \Comment{Insieme dei treni non ancora arrivati}
+        \State $T^* \gets \varnothing$
+        \Comment{Insieme dei treni arrivati definitivamente}
         \While{\textbf{true}}
             \LComment{Controlla lo stato dei treni non ancora arrivati
                 a destino}
             \For{$t \in T$}
-                \State $t \gets $ \Call{fetch}{t}
+                \State $t \gets $ \Call{fetch}{$t$}
                 \If{\Call{arrived}{$t$}}
-                    \State $T^* = T^* \cup \{t\}$
-                    \State $T = T \setminus \{t\}$
+                    \State $T^* \gets T^* \cup \{t\}$
+                    \State $T \gets T \setminus \{t\}$
                 \EndIf
             \EndFor
             \State \phantom{https://youtu.be/hHkKJfcBXcw}
@@ -1298,10 +1300,10 @@ salvare i dati delle fermate non ancora superate.
                     \State \phantom{ }
                     \State $t \gets $ \Call{fetch}{$t$}
                     \If{\Call{arrived}{$t$}}
-                        \State $T^* = T^* \cup \{t\}$
+                        \State $T^* \gets T^* \cup \{t\}$
                         \Comment{Se arrivato, salva definitivamente in $T^*$}
                     \Else
-                        \State $T = T \cup \{t\}$
+                        \State $T \gets T \cup \{t\}$
                         \Comment{Altrimenti, ricontrolla più tardi}
                     \EndIf
                 \EndFor
@@ -1345,12 +1347,12 @@ API esoso e ingiustificato.
 L'algoritmo descritto precedentemente necessita di alcune accortezze
 per essere implementato.  Le operazioni più comuni da
 \textbf{ottimizzare} sono l'inserimento, la rimozione, l'aggiornamento
-e il controllo dell'appartenenza degli elementi degli insiemi $T$ e $T^*$.
-La \textbf{struttura dati} scelta è un \textbf{hashset}, implementato
-in Python con un \textit{dizionario chiave-valore}.  La chiave del
-dizionario è l'\textit{hash} del treno mentre il valore è l'istanza di
-\texttt{Train} corrispondente.  L'hash è calcolato dalla tripla
-identificativa
+e il controllo dell'appartenenza degli elementi degli insiemi $T$ e
+$T^*$.  La \textbf{struttura dati} scelta è un \textbf{hashset},
+implementato in Python con un \textit{dizionario chiave-valore}.  La
+chiave del dizionario è l'\textit{hash} del treno mentre il valore è
+l'istanza di \texttt{Train} corrispondente.  L'hash è calcolato dalla
+tripla identificativa
 $(\textrm{Numero}, \, \textrm{Origine}, \, \textrm{Data})$
 implementando l'API \texttt{\_\_hash\_\_} nelle classi \texttt{Train}
 e \texttt{Station}.  La chiave hash \textbf{rimane costante} per la
@@ -1364,7 +1366,9 @@ codice ogni ora.  La continuità e la persistenza sono ottenute grazie
 alla \textbf{serializzazione} e \textbf{deserializzazione} iniziale e
 finale dei dizionari \texttt{station\_cache} ($S$),
 \texttt{fetched\_trains} ($T^*$) e \texttt{unfetched\_trains} ($T$)
-tramite la libreria \texttt{pickle}.
+tramite la libreria \texttt{pickle}.  Ogni notte alle 04:00 gli ultimi
+due file vengono \textit{ruotati} e archiviati per la fase
+successiva.
 
 Il programma utilizza Sentry\footnote{https://sentry.io} per il
 monitoraggio, \textit{logging} e \textit{tracing} degli
@@ -1376,7 +1380,7 @@ incongruenze nei dati.
 
 Ad ogni \textit{commit} git sul branch \textit{master}, una
 \textit{GitHub Action} prepara e pubblica l'immagine \textbf{Docker}
-del progetto.  In questo modo \textit{chiunque} abbia Docker
+del progetto.  In questo modo, \textit{chiunque} abbia Docker
 installato può avviare lo scraper con solo il seguente comando.
 
 \begin{minted}{bash}
@@ -1385,6 +1389,276 @@ $ docker run \
     ghcr.io/marcobuster/railway-opendata:latest \
     scraper
 \end{minted}
+
+\section{Extractor}
+
+Come detto, ogni notte lo scraper produce dei file pickle serializzati
+con tutte le informazioni dei treni della giornata.  L'obiettivo
+dell'extractor è \textbf{ripresentare} quanto prodotto nella fase
+precedente in un formato più accessibile e prono all'analisi, anche
+con linguaggi diversi da Python.  Sono stati implementati due
+extractor: uno per i \textbf{treni} e uno per le \textbf{stazioni}.
+
+\subsection{Station extractor}
+
+I dati relativi alle stazioni, salvati dallo scraper nel file
+\texttt{station.pickle}, sono convertibili dal modulo extractor in un
+file CSV\footnote{\textit{Comma-separated values}, valori separati da
+    virgola} o GeoJSON\footnote{JSON con informazioni sulla posizione
+    geografica degli elementi.  Disponibile sono per le stazioni con
+    informazioni sulla posizione}.  Ogni riga del file corrisponde una
+stazione.  I campi esportati sono descritti nella \tablename\
+\ref{table:station_fields}.
+
+\begin{table}[h]
+    \small
+    \begin{tabular}{m{2cm} || m{1.7cm} | m{3cm} | m{6cm}}
+      \textbf{Campo} & \textbf{Tipo} & \textbf{Descrizione} & \textbf{Note} \\
+      \hline \texttt{code} & Stringa & Codice stazione & Controintuitivamente,
+                                                         questo campo non è
+                                                         univoco. Una
+                                                         stazione può avere
+                                                         più codici. \\
+      \hline \texttt{region} & Intero & Codice regione & Se zero,
+                                                         sconosciuto.
+                                                         Utilizzato nelle
+                                                         chiamate API.\\
+      \hline \texttt{long\_name} & Stringa & Nome lungo & \\
+      \hline \texttt{short\_name} & Stringa & Nome breve & Può essere nullo.
+      \\ \hline \texttt{latitude} & Virgola mobile & Latitudine & Può essere
+                                                                  nullo. \\
+      \hline \texttt{longitude} & Virgola mobile & Longitudine & Può essere
+                                                                 nullo.
+    \end{tabular}
+    \caption{Campi presenti nel CSV delle stazioni}
+    \label{table:station_fields}
+\end{table}
+
+\subsection{Train extractor}
+
+Analogamente, i dati relativi ai treni salvati dallo scraper nei file
+giornalieri \texttt{fetched\-.pickle} sono convertibili dal modulo
+extractor in un file CSV.\ \ Ogni riga del file corrisponde a una
+\textit{fermata} e non a un treno: essendo il loro numero variabile
+non è possibile disporle in colonne.  I campi esportati sono descritti
+nella \tablename\ \ref{table:train_fields}.
+
+\begin{table}[p]
+    \small
+    \begin{tabular}{m{3.5cm} || m{1.7cm} | m{5.3cm} | m{3.5cm}}
+      \textbf{Campo} & \textbf{Tipo} & \textbf{Descrizione} & \textbf{Note} \\
+      \hline \texttt{train\_hash} & MD5 hash & Identificatore univoco del
+                                               treno & \\
+      \hline \texttt{number} & Intero & Numero di treno & Non è un
+                                                          identificatore
+                                                          univoco. \\
+      \hline \texttt{day} & Data & Data di partenza & \\
+      \hline \texttt{origin} & Stringa & Codice della stz.\ di
+                                         partenza & \\
+      \hline \texttt{category} & Stringa & Categoria & \\
+      \hline \texttt{destination} & Stringa & Codice della stz.\ di
+                                              destinazione & \\
+      \hline \texttt{client\_code} & Numero & Impresa ferroviaria & Vedi
+                                                                    \tablename
+                                                                    \ \ref{codice_cliente}.
+      \\ \hline \texttt{phantom} & Booleano & \textit{Vero} se le
+                                              informazioni sul treno sono
+                                              state reperite solo
+                                              parzialmente & I treni con
+                                                             questa flag
+                                                             asserita
+                                                             devono
+                                                             essere
+                                                             ignorati. \\
+
+      \hline \texttt{trenord\_phantom} & Booleano & Come
+                                                    \texttt{\_phantom},
+                                                    ma riferito alle API
+                                                    di Trenord
+                                                            & I treni
+                                                              con
+                                                              questa
+                                                              flag
+                                                              asserita
+                                                              devono
+                                                              essere
+                                                              ignorati. \\
+      \hline \texttt{cancelled} & Booleano & \textit{Vero} se il treno 
+                                             è marcato come cancellato \\
+      \hline \texttt{stop\_number} & Intero & Numero progressivo della
+                                              fermata (da 0) & \\
+      \hline \texttt{stop\_station\_code} & Stringa & Codice della
+                                                      stazione della
+                                                      fermata & \\
+      \hline \texttt{stop\_type} & Carattere & Tipo di fermata
+                                                            & Può essere
+                                                              \textit{origine}
+                                                              (\texttt{P}),
+                                                              \textit{intermedia}
+                                                              (\texttt{F}),
+                                                              \textit{destinazione}
+                                                              (\texttt{A}) o
+                                                              \textit{cancellata}
+                                                              (\texttt{C}).
+      \\
+      \hline \texttt{platform} & Stringa & Binario della fermata & Può
+                                                                   essere
+                                                                   nullo. \\
+      \hline \texttt{arrival\_expected} & ISO 8601 & Orario di arrivo
+                                                     programmato & Può
+                                                                   essere
+                                                                   nullo. \\
+      \hline \texttt{arrival\_actual} & ISO 8601 & Orario di arrivo
+                                                   effettivo & Può
+                                                               essere
+                                                               nullo. \\
+      \hline \texttt{arrival\_delay} & Intero & Ritardo di arrivo &
+                                                                    Può
+                                                                    essere
+                                                                    nullo
+      \\
+      \hline \texttt{departure\_expected} & ISO 8601 & Orario di
+                                                       partenza
+                                                       programmato &
+                                                                     Può
+                                                                     essere
+                                                                     nullo. \\
+      \hline \texttt{departure\_actual} & ISO 8601 & Orario di
+                                                     partenza
+                                                     effettivo & Può
+                                                                 essere
+                                                                 nullo. \\
+      \hline \texttt{departure\_delay} & ISO 8601 & Ritardo di
+                                                    partenza & Può
+                                                               essere
+                                                               nullo. \\
+      \hline \texttt{crowding} & Intero & Percentuale di affollamento
+                                          della corsa & Solo per i
+                                                        treni Trenord.
+    \end{tabular}
+    \caption{Campi presenti nel CSV dei treni}
+    \label{table:train_fields}
+\end{table}
+
+\section{Analyzer}
+
+L'ultimo modulo del progetto è l'analizzatore.  Il suo scopo è esporre
+un'interfaccia utilizzabile anche da un utente non esperto di analisi
+dati per generare alcune \textbf{statistiche descrittive},
+\textbf{grafici} e \textbf{visualizzazioni}.  Per funzionare necessita
+di un file CSV delle stazioni e \textit{almeno un} file CSV dei treni,
+entrambi generati con lo strumento precedente.  Con il modulo è
+possibile \textbf{filtrare} per \textit{range di date},
+\textit{imprese ferroviarie} e \textit{linee ferroviarie} oltre che
+\textbf{raggruppare} per \textit{treno}, \textit{impresa ferroviaria}
+o \textit{giorno della settimana}.  Le \textbf{statistiche}
+disponibili sono \textit{describe}, \textit{delay\_boxplot},
+\textit{day\_train\_count}, \textit{trajectories\_map},
+\textit{detect\_lines} e \textit{timetable}.
+
+L'alto numero di opzioni e personalizzazione favorisce la
+\textbf{riproducibilità dei risultati} a parità di dati.
+
+Per la manipolazione dei dati è stato utilizzata la libreria Python
+\texttt{pandas}.\ \ \texttt{matplotlib} e \texttt{seaborn} sono invece
+state utilizzate per il \textit{rendering} dei grafici.  Il modulo
+supporta il caricamento di CSV multipli per i dati dei treni su più
+giorni.  Al fine di aumentare le prestazioni, il caricamento dei file
+è \textbf{parallelizzato} su processi multipli.
+
+\subsection{Linee ferroviarie}
+
+Un'analisi interessante sarebbe riuscire a qualificare affermazioni
+come \textit{``i treni sulla mia linea sono spesso in ritardo''} in
+\textit{query} sui dati raccolti.  È quindi necessario
+\textbf{definire precisamente} il concetto di \textit{linea}.
+wikiRAIL definisce una \textit{linea ferroviaria} come
+\textcquote{WRLinea}{l'infrastruttura necessaria e idonea a far
+    viaggiare un treno o altro convoglio ferroviario tra due località
+    di servizio in un determinato momento o periodo di tempo}.  La
+definizione non è molto interessante in quanto è riferita
+all'\textit{infrastruttura} e non al servizio commerciale.  Nemmeno
+quella di \textit{direttrice} aiuta: \textcquote{WRDirettrice}{linea
+    ferroviaria avente particolari caratteristiche di importanza per
+    il volume dei traffici e le relazioni di trasporto che su di essa
+    si svolgono, congiungendo fra loro centri o Nodi (V.) principali
+    della Rete}.  Come si possono individuare tali \textit{linee
+    aventi particolari caratteristiche di importanza}?  Anche se può
+risultare semplice nominare alcune direttrici (Milano
+$\leftrightarrow$ Roma, Bergamo $\leftrightarrow$ Brescia), è
+difficile elencarle tutte senza \textbf{analizzare tutti i contratti
+    di servizio} tra gli Enti e le imprese ferroviarie.
+
+Per proseguire con le analisi è quindi necessario \textbf{ridefinire
+    il concetto} in modo qualitativo.  Ai soli fini del progetto, due
+treni $t_1$ e $t_2$ si considerano appartenenti alla stessa
+\textbf{\textit{linea ferroviaria}} se e solo se tutte le seguenti
+condizioni sono verificate:
+\begin{itemize}
+    \item $t_1$ e $t_2$ sono della stessa \textbf{impresa
+        ferroviaria};
+    \item $t_1$ e $t_2$ hanno stessa \textbf{origine};
+    \item $t_1$ e $t_2$ hanno stessa \textbf{destinazione};
+    \item $F_1 = F_2$, con $F_1$ e $F_2$ gli insiemi delle fermate di
+    $t_1$ e $t_2$.
+\end{itemize}
+
+Per motivi di \textit{performance} è possibile \textbf{rilassare}
+l'ultima condizione confrontando solo il \textit{numero} delle
+fermate\footnote{Con la \textit{definizione rilassata} i risultati
+    potrebbero risultare imprecisi, in quanto esistono imprese
+    ferroviarie che collegano due città con \textit{percorsi} (e
+    quindi direttrici) differenti.  Se due percorsi diversi tra due
+    stesse città effettuati dalla medesima impresa ferroviaria hanno
+    lo stesso numero di fermate, potrebbe verificarsi una
+    \textit{collisione}. Per questi motivi, non è stata utilizzata.}.
+L'individuazione delle linee è implementata associando ad ogni treno
+un attributo univoco \texttt{line} dato dalla combinazione degli
+attributi citati sopra.  La \textit{statistica} speciale
+\texttt{detect\-\_lines} genera una pagina HTML mostrante una
+\textbf{lista di tutte le linee rilevate} con associato per ognuna
+l'identificatore univoco.
+
+\subsection{Filtraggio}
+
+Come citato in precedenza, il modulo offre la possibilità di filtrare
+i dati secondo diversi criteri, illustrati di seguito.
+
+Il filtro per \textbf{\textit{range} di date} è implementato con gli
+argomenti \texttt{--start\--date} e \texttt{--end\--date}.  Grazie
+all'uso della libreria
+\texttt{dateparser}\footnote{https://dateparser.readthedocs.io/en/latest/}
+è possibile specificare a propria discrezione date in formato
+\textit{meccanico} (come ``\textit{2023\--09\--08}'') ma anche
+\textit{umano} (``\textit{ieri}'', ``\textit{un mese e un giorno
+    fa}'', \dots).
+
+Si possono filtrare i treni anche per \textbf{imprese ferroviarie}:
+l'argomento \texttt{--railway\-companies} accetta una lista (separata
+da virgole) di imprese ferroviarie.  Gli elementi dell'elenco
+selezionabili i seguenti: \texttt{TRENITALIA\_\-AV},
+\texttt{TRENITALIA\_\-REG}, \texttt{TRENITALIA\_\-IC}, \texttt{TPER},
+\texttt{TRENORD}, \texttt{OBB} e \texttt{OTHER}.
+
+L'ultimo filtro, \texttt{--railway\--lines}, è analogo al precedente e
+permette di filtrare le \textbf{linee ferroviarie}.  Gli
+identificativi delle linee, separati da virgola, si possono calcolare
+con la già citata statistica \texttt{detect\-\_lines}.
+
+\subsection{Raggruppamento e aggregazione}
+
+Oltre che filtrare, il modulo permette di \textbf{raggruppare} per
+treno, impresa ferroviaria e giorno della settimana ed eventualmente
+\textbf{riaggregare} con le funzioni \textit{media} o \textit{ultimo}.
+Per esempio, è possibile raggruppare per impresa ferroviaria le
+rilevazioni di un mese e calcolare il ritardo medio.  Oppure,
+raggruppando per \textit{treno} e aggregando per \textit{ultimo} si
+possono avere statistiche sulle ultime fermate di ogni treno.
+
+I parametri da linea di comando sono \texttt{--group\--by} e
+\texttt{--agg\--func}.
+
+% -----------------------------------------------------------------
 
 \printbibliography
 
