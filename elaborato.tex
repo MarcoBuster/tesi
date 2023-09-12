@@ -355,7 +355,7 @@ di puntualità rispetto all'anno precedente \cite[app.\ 5C, tabella
 dell'anno in esame \cite[app.\ 5C, tabella 5b]{RfiPir}.  Quest'ultimo
 è definito come il rapporto tra il numero di treni giunti a destino
 entro una certa soglia (5' per i treni passeggeri, 30' per i merci) e
-il numero totale dei treni circolanti della stessa IF.  Nell'indice
+il numero totale dei treni circolanti della stessa IF\@.  Nell'indice
 sono comunque considerati \textit{puntuali} i treni giunti a destino
 oltre soglia a causa del GI, di altra IF o eventi di forza maggiore.
 
@@ -442,7 +442,7 @@ stessa, come i regionali di Trenitalia o l'alta velocità.  Nonostante
 ciò, le API Trenord si sono rilevate utili per verificare e correggere
 alcune incongruenze riscontrate in quelle di Viaggiatreno. \\
 
-In Appendice \ref{documentazione} sono documentati alcuni metodi
+In Appendice~\ref{documentazione} sono documentati alcuni metodi
 rilevanti delle due API.
 
 \section{Panorama giuridico, politico e legislativo}
@@ -713,8 +713,8 @@ l'\textbf{indice di affidabilità}, ovvero il \textquote{\textit{numero
         parzialmente\footnote{Vedi la nota
             \footref{forza_maggiore}}}}.  Per entrambe le metriche i
 dati sono presentati \textbf{aggregati} per mese e per gestore
-dell'infrastruttura (vedi \figurename \ \ref{lombardia_puntualita} e
-\ref{lombardia_affidabilita}), rendendo impossibile confrontare
+dell'infrastruttura (vedi \figurename~\ref{lombardia_puntualita}
+e~\ref{lombardia_affidabilita}), rendendo impossibile confrontare
 direttrici, orari, giorni della settimana o imprese ferroviarie.  Gli
 \textbf{indici} stessi sono \textbf{fuorvianti}: due treni che
 arrivano a destino con 6 e 60 minuti di ritardo sono conteggiati
@@ -735,7 +735,7 @@ dell'infrastruttura) è incaricata di pubblicare in dettaglio le
 specificando anche \textbf{responsabilità} e \textbf{motivazioni}
 \cite{FerDati}.  I treni sono raggruppabili per \textbf{tipo di
     evento} (ritardo o soppressione), \textbf{direttrice} e
-\textbf{rete} (RFI o FER) (vedi \figurename\ \ref{fer_dati}).  I dati
+\textbf{rete} (RFI o FER) (vedi \figurename~\ref{fer_dati}).  I dati
 sono presentati con un'\textbf{interfaccia semplice} e
 \textbf{intuitiva} e sono addirittura esportabili in \textbf{CSV}.
 Regione Emilia-Romagna ha dimostrato che la \textbf{trasparenza} in
@@ -932,7 +932,7 @@ visualizzazioni.
             \texttt{.csv} giornalieri};
     
         \node[rect] (results) [below right=12.5mm and 10cm of
-        analyzer.west] {Statistiche, visualizzazioni, ...};
+        analyzer.west] {Statistiche, visualizzazioni, \dots};
 
         \draw[red, <-, thick] (scraper.150) to [bend left=90,
         looseness=1] node[red, sloped, midway, fill=white] {Ogni ora}
@@ -963,7 +963,7 @@ visualizzazioni.
     \caption{Schema architetturale dei moduli software}
 \end{figure}
 
-Da come si evince in \figurename\ \ref{architettura}, il software è
+Da come si evince in \figurename~\ref{architettura}, il software è
 composto da tre componenti.
 \begin{itemize}
     \item \textbf{\textit{Scraper}}: script automatico che
@@ -1114,12 +1114,12 @@ di partenza.  Di conseguenza, i campi indicati con $^*$ possono essere
 nulli.
 
 I metodi \texttt{departures()} e \texttt{arrivals()} di
-\texttt{Station} (vedi Appendice \ref{partenzeArrivi}) ritornano degli
+\texttt{Station} (vedi Appendice~\ref{partenzeArrivi}) ritornano degli
 oggetti \texttt{Train} parzialmente inizializzati.  Chiamando il
 metodo \texttt{fetch()} su di essi, viene letta tra le altre la
-risposta API di \texttt{andamentoTreno} (vedi Appendice
-\ref{andamentoTreno}) e sono quindi istanziati gli attributi e oggetti
-relativi a fermate, stazioni e tempi tramite metodi come
+risposta API di \texttt{andamentoTreno} (vedi
+Appendice~\ref{andamentoTreno}) e sono quindi istanziati gli attributi
+e oggetti relativi a fermate, stazioni e tempi tramite metodi come
 \texttt{\_from\_raw\_data()}.  L'\textbf{approccio \textit{top-down}}
 nell'inizializzazione permette di minimizzare il numero di richieste
 API e delegare opportunamente le responsabilità di decodifica e
@@ -1149,7 +1149,7 @@ in seguito.
 \subsubsection{Stazioni}
 
 Osservando le risposte API del metodo \texttt{cercaStazione} di
-Viaggiatreno (vedi Appendice \ref{cercaStazione}) si può supporre che
+Viaggiatreno (vedi Appendice~\ref{cercaStazione}) si può supporre che
 \textit{tutte e sole} le stazioni italiane abbiano un \textbf{codice
     identificativo univoco} e almeno un \textbf{nome}, lungo o breve.
 Ciò si verifica quasi sempre, ma si possono trovare:
@@ -1170,10 +1170,10 @@ nella lista delle fermate dei treni che sostano.  Un esempio è Arcene
 (\texttt{S01608}), introvabile tramite la ricerca ma solo dalla lista
 delle fermate di un treno sulla tratta Treviglio $\leftrightarrow$
 Bergamo.  Infine, il metodo \texttt{elencoStazioni} (che dovrebbe
-mostrare tutte le stazioni di una regione, vedi Appendice
-\ref{elencoStazioni}) può \textit{piazzare} una stazione in più
-regioni differenti, anche se ciò non ha naturalmente riscontro con la
-realtà.
+mostrare tutte le stazioni di una regione, vedi
+Appendice~\ref{elencoStazioni}) può \textit{piazzare} una stazione in
+più regioni differenti, anche se ciò non ha naturalmente riscontro con
+la realtà.
 
 Per facilitare le successive analisi, le stazioni con \textit{forti
     problematiche} (come la mancanza di un nome) hanno l'attributo
@@ -1184,7 +1184,7 @@ Per facilitare le successive analisi, le stazioni con \textit{forti
 Durante il funzionamento normale del programma, i treni sono prima
 recuperati dalle \textit{partenze} di una stazione e solo
 successivamente viene interrogato il metodo \texttt{andamentoTreno}
-(vedi Appendice \ref{andamentoTreno}).  Talvolta, specialmente in caso
+(vedi Appendice~\ref{andamentoTreno}).  Talvolta, specialmente in caso
 di treni parzialmente o totalmente cancellati, l'API ritorna codici di
 errore come HTTP 204 (No Content) o HTTP 404 (Not Found).  In questi
 casi nessuna ulteriore informazione può essere reperita, nemmeno la
@@ -1199,7 +1199,7 @@ deve escludere dalle analisi.  I dati ritornati dalla API di
 Viaggiatreno vengono quindi integrati con quelli dell'API di Trenord,
 prediligendo la seconda in caso di conflitti.
 
-Come già detto (vedi Appendice \ref{terminologia}), un treno è
+Come già detto (vedi Appendice~\ref{terminologia}), un treno è
 identificato univocamente anche dalla \textit{data di partenza}, in
 quanto quest'ultima può essere di complicata determinazione se la
 corsa si sviluppa in più giornate.  Trenord rappresenta gli orari con
@@ -1367,8 +1367,7 @@ alla \textbf{serializzazione} e \textbf{deserializzazione} iniziale e
 finale dei dizionari \texttt{station\_cache} ($S$),
 \texttt{fetched\_trains} ($T^*$) e \texttt{unfetched\_trains} ($T$)
 tramite la libreria \texttt{pickle}.  Ogni notte alle 04:00 gli ultimi
-due file vengono \textit{ruotati} e archiviati per la fase
-successiva.
+due file vengono \textit{ruotati} e archiviati per la fase successiva.
 
 Il programma utilizza Sentry\footnote{https://sentry.io} per il
 monitoraggio, \textit{logging} e \textit{tracing} degli
@@ -1710,7 +1709,7 @@ soppresse.  Un treno avente alcune fermate sorppresse è detto
 
 \section{API di Viaggiatreno}
 
-Le API di Viaggiatreno (vedi la Sezione \ref{viaggiatreno}) non
+Le API di Viaggiatreno (vedi la Sezione~\ref{viaggiatreno}) non
 dispongono di una documentazione ufficiale e non sono conformi alla
 architettura REST o ad altri standard \textit{de facto} \cite{Giunta}.
 Numerosi tentativi sono stati fatti dalla comunità open source
@@ -1734,7 +1733,7 @@ nome ``lungo'' e uno ``breve'' e il nome della città in cui si trova.
 \subsubsection{Esempio}
 
 $\Rsh$ \texttt{/cercaStazione/MILANO}
-\begin{minted}{js}
+\begin{minted}[fontsize=\footnotesize]{js}
 [
   {
     "nomeLungo": "MILANO CENTRALE", // nome lungo
@@ -1803,7 +1802,7 @@ $\Rsh$ \texttt{/regione/S01700} \hfill (Milano Centrale)
 
 \subsubsection{Avvertenze}
 
-Osservando la Tabella \ref{regioni} si può notare che le stazioni
+Osservando la Tabella~\ref{regioni} si può notare che le stazioni
 della regione Trentino-Alto Adige assumono 3 codice regione
 differenti, senza nessun pattern apparente.  Non tutte le stazioni
 sono riconosciute, specialmente quelle in gestione a Ferrovienord.  In
@@ -1824,7 +1823,7 @@ la latitudine e longitudine.
 \subsubsection{Esempio}
 
 $\Rsh$ \texttt{/elencoStazioni/3} \hfill (Piemonte)
-\begin{minted}{js}
+\begin{minted}[fontsize=\footnotesize]{js}
 [
  {
     "codReg": 3,  // Codice regione
@@ -1966,7 +1965,7 @@ una riprogrammazione (come la soppressione di alcune fermate).
 $\Rsh$ \texttt{/andamentoTreno/S01717/10124/1692136800000} \hfill (REG
 10124 da Brescia)
 
-\begin{minted}[texcomments=true]{js}
+\begin{minted}[texcomments=true, fontsize=\footnotesize]{js}
 {
   "tipoTreno": "PG",
   "orientamento": null,
@@ -2193,8 +2192,7 @@ Talvolta, nonostante il treno esista e sia già stato ritornato da
 altri metodi (come \texttt{partenze}), \texttt{andamentoTreno}
 risponde con HTTP 204\footnote{No Content}.  In questo caso, i
 dettagli della corsa non sono disponibili.  Questo fenomeno accade
-spesso con treni cancellati o riprogrammati.  \todo{Marco:
-    Ricollegarsi ai ``caveats'' riscontrati nell'implementazione}
+spesso con treni cancellati o riprogrammati.
 
 \subsection{Altri metodi}
 
@@ -2217,8 +2215,145 @@ progetto ma che potrebbero essere interessanti per estensioni future.
     principali stazioni italiane.
 \end{itemize}
 
-\section{Metodi dell'API di Trenord}
-\todo{Marco: Documentare metodi API di Trenord}
+\section{API di Trenord}
+
+Come quelle di Viaggiatreno, le API di Trenord non sono ufficiali e
+non dispongono di documentazione ufficiale.  I metodi sono accessibili
+al percorso
+\texttt{/\-store-management-api/\-mia/\-$M$/\-$P_1$/\-$P_2$/\-\dots/\-$P_n$}
+dove $M$ è il nome del metodo e $P_1, P_2, \dots, P_n$ i suoi
+parametri.  L'API risponde sempre in formato JSON\@.  Gli unici dati
+ritornati sono relativi a treni e stazioni operate da Trenord.
+
+\subsection{\texttt{/train/<numero>?date=<YYYY-mm-dd>}}
+
+L'unico metodo utilizzato dal progetto è \texttt{/train} che,
+similmente a~\ref{andamentoTreno}, fornisce tutte le informazioni su
+un treno e le sue fermate.  Gli unici parametri richiesti sono il
+\texttt{numero} del treno e la data di partenza.  Si noti che
+nonostante la data sia un campo libero non è possibile accedere agli
+orari di arrivo effettivi per le corse concluse in giornate differenti
+dall'odierna.
+
+\subsubsection{Esempio}
+$\Rsh$ \texttt{/train/2934?date=2023-09-12} \hfill (MXP 2934 per
+Malpensa Aeroporto)
+\begin{minted}[fontsize=\footnotesize]{javascript}
+[
+  {
+    "services": [],
+    "date": "20230912",
+    "dep_time": "09:55:00",
+    "dep_station": {
+      "station_id": "S01700",
+      "station_ori_name": "MILANO CENTRALE"
+    },
+    "arr_time": "10:52:00",
+    "arr_station": {
+      "station_id": "S01146",
+      "station_ori_name": "MALPENSA AEROPORTO T2"
+    },
+    "duration": "00:57:00",
+    "journey_list": [
+      {
+        "train": {
+          "CodiceTrasporto1": "102934",
+          "train_category": "MXP",  // Categoria treno
+          "train_operator": "TRENORD",
+          "direction": "Malpensa Aeroporto T2",
+          "affollamento_stimato": 41,  // Indice di affollamento. Vedi sotto.
+          "label_affollamento_stimato": "mild_crowded",
+          "crowding": {  // Indice di affollamento. Vedi sotto.
+            "percentage": 41,
+            "level": "MODERATE",
+            "source": "ESTIMATED"
+          },
+          "estimated_available_seats": 59,
+          "delay": -1,
+          "status": "V",
+          "bicycle": false,
+          "handicap": true,
+          "class_1": false,
+          "class_2": false,
+          "class_1_and_2": true,
+          "mxp": true,
+          "mxp_special": false,
+          "direttrice": "D029",
+          "date": "20230912",
+          "mir_origin": "S01700",  // Stazione di origine
+          "mir_destination": "S01146",  // stazione di destinazione
+          "hafas_origin": "MILANO CENTRALE",
+          "hafas_destination": "Malpensa Aeroporto T2",
+          "actual_time": "2023-09-12T08:39:35.000Z",   // Orario ultimo rilevamento
+          "actual_station": "SACCONAGO",  // Stazione ultimo rilevamento
+          "actual_station_mir": "S01754",
+          "pass_id": 4,
+          "schedule": [
+            "2023-08-29",
+            "2023-08-30",
+            // ...
+            "2023-12-08",
+            "2023-12-09"
+          ],
+          "line": "MXP2",
+          "train_id": "2934",
+          "train_name": "2934",
+          "has_live_info": true
+        },
+        "pass_list": [   // Lista delle fermate
+          // ...
+          {
+            "arr_time": "10:04:00",  // Orario di arrivo programmato
+            "dep_time": "10:05:00",  // Orario di partenza programmato
+            "station": {
+              "station_id": "S01645",  // Codice dellla stazione della fermata
+              "station_ori_name": "MILANO PORTA GARIBALDI"  // Nome fermata
+            },
+            "type": "F",  // Tipo di fermata
+            "is_journey": true,
+            "actual_data": {  // Dati effettivi
+              "actual_station_mir": "S01645",
+              "actual_station_name": "MILANO PORTA GARIBALDI",
+              "actual_train_id": "102934",
+              "actual_type": "F",
+              "dep_actual_time": "10:06:00",  // Orario di partenza effettivo
+              "arr_delay_actual": -1,  // Ritardo in arrivo effettivo
+              "arr_actual_time": "10:03:00",  // Orario di arrivo effettivo
+              "dep_delay_actual": 1  // Ritardo in partenza effetivo
+            },
+            "cancelled": false,
+            "pass_count": 4,
+            "date": "20230912"
+          },
+          // ...
+        ],
+        "journey_type": "train"
+      }
+    ],
+    "delay": -1,  // Ritardo
+    "delay_defined": true,
+    "walk": false,
+    "bicycle": false,
+    "handicap": true,
+    "class_1": false,
+    "class_2": false,
+    "class_1_and_2": true,
+    "mxp": true,
+    "mxp_special": false,
+    "cancelled": false
+  }
+]
+\end{minted}
+
+\subsubsection{Indice di affollamento}
+
+Dalla pandemia di COVID-19, Trenord ha implementato nell'app mobile un
+meccanismo di \textit{geofence} per \textbf{stimare} l'affollamento
+dei treni.  La posizione dei viaggiatori viene trasmessa anonimanente
+ai sistemi di Trenord che quindi generano delle stime.  È bene quindi
+sottolineare che i dati sono approssimativi e potrebbero non fornire
+una visione accurata: si possono trovare anche valori negativi o
+superiori a 100.
 
 \end{document}
 
