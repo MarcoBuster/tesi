@@ -52,6 +52,8 @@
 \usepackage{hologo}					% Bibtex logo with \hologo{BibTeX}
 \usepackage{enumitem}
 \usepackage{array}
+\usepackage{caption, subcaption}
+\usepackage{rotating}
 
 % Citazioni e bibliografia
 \usepackage[style=italian]{csquotes}
@@ -59,6 +61,7 @@
 \addbibresource{bibliografia.bib}
 \usepackage[toc]{appendix}
 \usepackage{epigraph}
+\DeclareFieldFormat{postnote}{#1}
 
 % Package tipografici
 \usepackage{lmodern,textcomp}		% Latin Modern font
@@ -75,7 +78,7 @@
 
 % Package tikz
 \usepackage{lib/tikz-uml}
-\usetikzlibrary{shapes.symbols, positioning}
+\usetikzlibrary{shapes.symbols, positioning, calligraphy}
 
 % Sistema note a pié di pagina nelle tabelle
 \usepackage{footnote}
@@ -445,8 +448,7 @@ disponibili.
 
 \subsection{Sito web di Trenord}
 
-\begin{figure}[h]
-	\centering
+\begin{figure}[h] \centering
     \includegraphics[width=1\textwidth]{images/trenord_api.png}
 	\caption{Dettagli di una corsa sul portale web di Trenord}
 \end{figure}
@@ -966,9 +968,7 @@ visualizzazioni.
 
 
 \section{Architettura del software}
-\begin{figure}[h]
-    \centering
-    \label{architettura}
+\begin{figure}[h] \centering
     \begin{tikzpicture}[ round/.style={circle, draw=gray, minimum
             size=10mm}, rect/.style={tape, draw=gray, minimum
             size=7mm, minimum height=10mm}, bigrect/.style={rectangle,
@@ -1022,10 +1022,11 @@ visualizzazioni.
         node[black, midway, fill=white] {genera};
     \end{tikzpicture}
     \caption{Schema architetturale dei moduli software}
+    \label{figure:architettura}
 \end{figure}
 
-Da come si evince in \figurename~\ref{architettura}, il software è
-composto da tre componenti.
+Da come si evince in \figurename~\ref{figure:architettura}, il
+software è composto da tre componenti.
 \begin{itemize}
     \item \textbf{\textit{Scraper}}: script automatico che
     incrementalmente scarica e preserva lo stato corrente della
@@ -1323,8 +1324,8 @@ salvare i dati delle fermate non ancora superate.
 \begin{algorithm}
     \caption{Scraping incrementale di tutti i treni}
     \label{scraper_alg}
-    \begin{algorithmic}[1]
-        \Require{Insieme $R$ delle regioni italiane}
+    \begin{algorithmic}[1] \Require{Insieme $R$ delle regioni
+            italiane}
         
         \LComment{Reperisci tutte le stazioni da tutte le regioni}
         \State $S \gets \varnothing$
@@ -1470,8 +1471,7 @@ file CSV\footnote{\textit{Comma-separated values}, valori separati da
 stazione.  I campi esportati sono descritti nella \tablename\
 \ref{table:station_fields}.
 
-\begin{table}[h]
-    \small
+\begin{table}[h] \small
     \begin{tabular}{m{2cm} || m{1.7cm} | m{3cm} | m{6cm}}
       \textbf{Campo} & \textbf{Tipo} & \textbf{Descrizione} & \textbf{Note} \\
       \hline \texttt{code} & Stringa & Codice stazione & Controintuitivamente,
@@ -1503,8 +1503,7 @@ extractor in un file CSV.\ \ Ogni riga del file corrisponde a una
 non è possibile disporle in colonne.  I campi esportati sono descritti
 nella \tablename\ \ref{table:train_fields}.
 
-\begin{table}[p]
-    \small
+\begin{table}[p] \small
     \begin{tabular}{m{3.5cm} || m{1.7cm} | m{5.3cm} | m{3.5cm}}
       \textbf{Campo} & \textbf{Tipo} & \textbf{Descrizione} & \textbf{Note} \\
       \hline \texttt{train\_hash} & MD5 hash & Identificatore univoco del
@@ -1601,6 +1600,7 @@ nella \tablename\ \ref{table:train_fields}.
 \end{table}
 
 \section{Analyzer}
+\label{analyzer}
 
 L'ultimo modulo del progetto è l'analizzatore.  Il suo scopo è esporre
 un'interfaccia utilizzabile anche da un utente non esperto di analisi
@@ -1627,6 +1627,7 @@ giorni.  Al fine di aumentare le prestazioni, il caricamento dei file
 è \textbf{parallelizzato} su processi multipli.
 
 \subsection{Linee ferroviarie}
+\label{linee_ferroviarie}
 
 Un'analisi interessante sarebbe riuscire a qualificare affermazioni
 come \textit{``i treni sulla mia linea sono spesso in ritardo''} in
@@ -1717,6 +1718,509 @@ possono avere statistiche sulle ultime fermate di ogni treno.
 
 I parametri da linea di comando sono \texttt{--group\--by} e
 \texttt{--agg\--func}.
+
+\chapter{Analisi e risultati}
+\todo{Sistema link bibliografia}
+
+In questo capitolo verranno commentati alcuni \textbf{risultati} e
+\textbf{visualizzazioni} rilevanti.  Tutti e i soli \textbf{dati
+    grezzi} utilizzati sono stati raccolti dal software descritto nel
+capitolo precedente: le prossime sono le \textbf{prime analisi
+    indipendenti} sulla \textit{reale performance} della circolazione
+ferroviaria italiani.  L'autore auspica che possano essere di
+\textbf{ispirazione} per ulteriore ricerca più approfondita e
+iniziative di \textit{citizen science} mirate al \textbf{controllo
+    dell'operato} delle imprese ferroviarie e delle Pubbliche
+Amministrazioni.
+
+Grazie all'\textbf{ampia disponibilità} di dati accumulati è possibile
+trarre conclusioni significative.  Ove non diversamente specificato,
+le prossime analisi si intendono realizzate dai dati raccolti dallo
+scraper tra il \textbf{1° marzo 2023} il \textbf{31 agosto 2023}.
+
+\section{Statistiche predefinite}
+
+Il modulo \textit{analyzer} (vedi Sezione~\ref{analyzer}) offre alcune
+\textbf{visualizzazioni predefinite} descritte in seguito.  Uno dei
+requisiti progettuali del modulo è la \textbf{completa
+    parametrizzazione} dei risultati: questo favorisce la
+\textbf{riproducibilità} ma rende difficile prevedere analisi più
+complesse e specifiche: per questo motivo ulteriori risultati sono
+discussi nella sezione successiva.
+
+\subsection{\texttt{describe}}
+
+Con il parametro \texttt{--stat describe} l'\textit{analyzer} mostra
+l'output del metodo
+\texttt{describe()}\footnote{\href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html}{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html}}
+del DataFrame \texttt{pandas} considerato (al netto quindi di filtri,
+raggruppamenti e riaggregazioni).
+
+% \begin{minted}[fontsize=\small]{bash}
+% $ python main.py analyze \
+%     --start-date '2023-04-01' \
+%     --end-date '2023-08-31' \
+%     --stat describe \
+%     'data/stations.csv' \
+%     'data/2023-0{4,5,6,7,8}-??/trains.csv'
+% \end{minted}
+
+% https://paste.studentiunimi.it/paste/6aowvjOF#Pj-GUSbCCy5D9exYMMrkRoFueW0HyKmbhTX5sKrjCD+
+\begin{table}[h]
+    \begin{tabular}{r|ccc}
+      \textbf{Statistica} & \textbf{Rit.\@ arrivo} (min) & \textbf{Rit.\@ partenza} (min) & \textbf{Affollamento} (\%)
+      \\ \hline Conteggio & $9.98 \cdot 10^6$ & $1.12 \cdot 10^7$  & $2.62 \cdot 10^6$
+      \\ Media & $2.81$ & $3.99$ & $2.32$
+      \\ Dev.\@ Std.\@ & $8.13$ & $7.37$ & $5.34$
+      \\ 1° quartile & 0.00 & 1.00 & 10.83
+      \\ 2° quartile & 1.00 & 2.00 & 19.00
+      \\ 3° quartile & 3.50 & 4.50 & 31.00 
+    \end{tabular}
+    \caption{Statistiche descrittive dei treni italiani dal 31/03/2023
+        al 31/08/2023}
+    \label{table:describe}
+\end{table}
+
+Dai dati presentati in \tablename~\ref{table:describe} emergono alcuni
+aspetti interessanti.  Si può inanzitutto notare che il
+\textbf{ritardo in arrivo} è generalmente minore del \textbf{ritardo
+    in partenza}: nel 76\% delle fermate considerate il treno riesce a
+\textbf{recuperare ritardo} e nell'89\% non lo accumula ulteriormente
+(vedi \figurename~\ref{figure:delay_var}).  Questo effetto è
+probabilmente amplificato dal fatto che ad un treno è concesso di
+\textbf{arrivare in anticipo} ma non di partire prima dell'orario
+programmato.
+
+L'\textbf{affollamento}\footnote{Si ricorda che i dati
+    sull'affollamento sono disponibili solo per i treni Trenord}
+rilevato è tendenzialmente basso: la probabilità che questo sia sopra
+l'80\% è solo dell'1.83\%~\cite[B]{StatJup}.  Il dato è da prendere
+con adeguata \textbf{diffidenza} in quanto è fornito in conflitto di
+interesse da Trenord stessa, i metodi di calcolo non sono noti e il
+risultato non è facilmente verificabile.
+
+\begin{figure}[h] \centering
+    \includegraphics[width=0.5\textwidth]{images/delay_var.pdf}
+    \captionof{figure}{Variazione del ritardo tra l'arrivo e la
+        partenza in una fermata~\protect{\cite[A]{StatJup}}}
+    \label{figure:delay_var}
+\end{figure}
+
+\subsection{\texttt{delay\_boxplot}}
+
+Il parametro \texttt{--stat delay\_\-boxplot} permette di visualizzare
+un boxplot dei dati sui \textbf{ritardi} in arrivo e partenza del
+campione selezionato.
+
+Un \textit{boxplot} (o \textit{diagramma a scatola e baffi}) è un
+\textbf{rappresentazione grafica} delle statistiche principali di un
+campione (vedi \figurename~\ref{figure:boxplot}).  I bordi della
+\textit{scatola} rappresentano il 1° e il 3° quartile, mentre i
+\textit{baffi} il valore minimo e massimo.  Gli \textit{outliers} sono
+valori anomali molto distanti dagli altri; considerata la loro
+quantità nei dati considerati, sono stati nascosti per aumentare la
+comprensione.
+
+\begin{figure}[h] \centering
+    \begin{tikzpicture}[scale=0.9]
+
+        \draw (-1,0) rectangle (3,1); % box
+
+        % frecce + label
+        \draw[<-] (-1, -0.1) -- (-1, -0.4) node[anchor=north] {1°
+            quartile}; \draw[<-] (3, -0.1) -- (3, -0.4)
+        node[anchor=north] {3° quartile};
+
+        \draw (-2.5, 0.25) -- (-2.5, 0.75) node[anchor=south]
+        {minimo}; % baffo sinistro
+        \draw (-1, 0.5) -- (-2.5, 0.5); % linea sinistra
+
+        \draw[line width=0.4mm] (2.5, 0) -- (2.5, 1) ; % mediana
+
+        \draw[<-] (2.5, 1.1) -- (2.5, 1.4) node[anchor=south]
+        {mediana};
+
+        \draw (3, 0.5) -- (6, 0.5); % linea destra
+        \draw (6, 0.25) -- (6, 0.75) node[anchor=south]
+        {massimo}; % baffo destro
+
+        % outliers sinistri
+        \draw (-6.5, 0.5) circle (0.5mm); \draw (-5.4, 0.5) circle
+        (0.5mm); \draw [decorate,decoration={calligraphic brace}]
+        (-6.6, 0.7) -- (-5.3, 0.7) node [pos=0.5,above=0.5mm]
+        {\textit{outliers}};
+
+        % outliers destri
+        \draw (8.0, 0.5) circle (0.5mm); \draw (9.5, 0.5) circle
+        (0.5mm); \draw [decorate,decoration={calligraphic brace}]
+        (7.9, 0.7) -- (9.6, 0.7) node [pos=0.5,above=0.5mm]
+        {\textit{outliers}};
+
+    \end{tikzpicture}
+    \caption{Struttura di un boxplot}
+    \label{figure:boxplot}
+\end{figure}
+
+Come già detto, il modulo supporta il \textbf{raggruppamento}.  La
+\figurename~\ref{figure:delay_box_rc} è il risultato dell'invocazione
+del modulo raggruppando i dati per \textbf{impresa ferroviaria}.
+Appare evidente che i \textbf{treni a lunga percorrenza} (alta
+velocità e intercity) sono generalmente \textbf{più in ritardo} dei
+regionali (Trenitalia, Trenord e Tper).  La \textbf{durata maggiore}
+dei primi può spiegare il fenomeno; si può considerare \textit{meno
+    rilevante} un ritardo di pochi minuti su un \textbf{viaggio lungo}
+(nonostante il disagio per il viaggiatore, specialmente in caso di
+coincidenze, sia lo stesso).
+
+Tra le tre \textbf{imprese ferroviarie regionali} considerate è lecito
+affermare che nel periodo considerato la \textbf{\textit{performance}
+    peggiore} --- in termini di \textbf{ritardo mediano} --- è
+attribuibile a \textbf{Trenord} (1.5 minuti in arrivo e 2.5 minuti in
+partenza), quasi a parimerito con \textbf{Tper} (1.5 min e 2.0
+min).\@~\textbf{Trenitalia} (1.0 min e 2.0 min) ha il ritardo mediano
+più contenuto, anche se di poco~\cite[C]{StatJup}.  Analisi successive
+tenteranno di confermare o sfatare queste conclusioni preliminari.
+
+In \figurename~\ref{figure:delay_box_wd} è mostrata la stessa
+visualizzazione raggruppando per \textbf{giorno della settimana}.  Dal
+grafico è possibile notare un \textbf{leggero andamento crescente} con
+da lunedì e venerdì e una \textbf{discesa} nel weekend, sabato e
+domenica.  Le differenze tra giorni feriali e fine settimana potrebbe
+essere dovuta al diverso \textbf{numero di treni circolanti}: i dati
+successivamente suggeriranno \textbf{correlazione} tra ritardo e
+numero di treni.  I maggiori ritardi del \textbf{venerdì} potrebbero
+essere dovuti alla maggiore frequenza di \textbf{scioperi}.
+
+\begin{figure}[p] \centering
+    \subfloat[raggruppati per impresa ferroviaria]{
+        \includegraphics[width=0.95\textwidth]{images/delay_box_rc.pdf}
+        \label{figure:delay_box_rc}
+    } \vspace{5mm}
+    \subfloat[raggruppati per giorno della settimana]{
+        \includegraphics[width=0.95\textwidth]{images/delay_box_wd.pdf}
+        \label{figure:delay_box_wd}
+    }
+    \caption{Boxplot dei ritardi dei treni italiani}
+\end{figure}
+
+\subsection{\texttt{day\_train\_count}}
+
+Un'altra statistica interessante è l'andamento del \textbf{numero di
+    treni circolanti} nel corso delle giornate.  Con il parametro
+\texttt{--stat day\_\-\_train\_\-count} è possibile visualizzare il
+numero di treni circolati per ogni giornata considerata.
+
+La \figurename~\ref{figure:day_train_count} è il risultato
+dell'invocazione sui dati del mese \textbf{aprile 2023} senza
+ulteriori raggruppamenti.  Si osservi come il numero di treni
+\textbf{varia notevolmente} tra le giornate: in media hanno viaggiato
+7697 treni al giorno, con un mediana di 8833 treni e un massimo di
+9141 \cite[D]{StatJup}.  La \textbf{giornata peggiore} è stata
+domenica 30 aprile 2023, con soli 2773 treni circolati a causa di uno
+sciopero nazionale.  Raggruppando per \textbf{impresa ferroviaria}
+(vedi \figurename~\ref{figure:day_train_count_rc}) si può inoltre
+osservare l'\textbf{elevato numero} di corse effettuate da Trenitalia
+(regionale) e Trenord rispetto alle altre imprese ferroviarie.  La
+citata diminuzione di traffico nel fine settimana è meno accentuata
+per i \textbf{treni a lunga percorrenza}, i quali mantengono il
+servizio anche secondo logiche di mercato.
+
+\subsection{\texttt{detect\_lines}}
+
+\begin{figure}[h]
+    \includegraphics[width=1\textwidth]{images/detect_lines.pdf}
+    \caption{Linee ferroviarie rilevate nel mese di giugno 2023}
+    \label{figure:detect_lines}
+\end{figure}
+
+
+\begin{figure}[p] \centering
+    \subfloat[raggruppati per ogni giornata nel mese di aprile 2023]{
+        \includegraphics[width=0.95\textwidth]{images/day_train_count.pdf}
+        \label{figure:day_train_count}
+    } \vspace{5mm}
+    \subfloat[raggruppati per impresa ferroviaria, da lunedì
+    08/05/2023 a domenica 14/05/2023]{
+        \includegraphics[width=0.95\textwidth]{images/day_train_count_rc.pdf}
+        \label{figure:day_train_count_rc}
+    }
+    \caption{Numero di treni circolanti}
+\end{figure}
+
+Precedentemente (vedi Sezione \ref{linee_ferroviarie}) è stata
+proposta una definizione puntuale di \textbf{linea ferroviaria}.
+Riassumendo, due treni $t_1$ e $t_2$ appartengono alla stessa
+\textit{linea} se e solo se sono operati dalla stessa impresa
+ferroviaria e hanno eguale \textit{insieme delle fermate}.
+L'\textit{analyzer} assegna ad ogni linea un \textbf{identificatore
+    univoco}, prodotto delle proprietà di cui sopra e utilizzabile
+successivamente per filtrare o raggruppare i dati.  Il parametro
+\texttt{--stat detect\_\-lines} genera e apre una pagina HTML
+contenente una tabella di tutte le linee rilevate (vedi
+\figurename~\ref{figure:detect_lines}).  Le colonne della tabella
+% (\textit{identificativo linea}, \textit{stazione A},
+% \textit{stazione B}, \textit{numero di treni} e \textit{numero di
+% fermate})
+possono essere utilizzate come \textbf{criterio di ordinamento} e
+filtrate tramite la \textbf{barra di ricerca}.
+
+\subsection{\texttt{timetable}}
+
+\begin{figure}[p] \centering
+    \subfloat[visualizzazione della giornata]{
+        \includegraphics[width=0.95\textwidth]{images/timetable.pdf}
+        \label{figure:timetable_uncollapse}
+    } \vspace{5mm}
+    \subfloat[visualizzazione delle durate]{
+        \includegraphics[width=0.95\textwidth]{images/timetable_collapse.pdf}
+        \label{figure:timetable_collapse}
+    }
+    \caption{\textit{Orario grafico} della linea Verona Porta Nuova
+        $\leftrightarrow$ Milano Centrale, del 12/05/2023}
+    \label{figure:timetable}
+\end{figure}
+
+RFI mette a disposizione al proprio personale autorizzato e alle
+imprese ferroviarie la c.d.\@ ``PIC'' (Piattaforma Integrata
+Circolazione).  Tra gli innumerevoli servizi offerti \cite{RfiPic}
+(come ASTROIF, per le comunicazioni tra IF e GI e ExtraPMdA, per i
+servizi di manutenzione dei treni) è presente il c.d.\@
+``\textbf{orario grafico}'', un complesso grafico avente come ascissa
+il \textbf{tempo} e ordinata le \textbf{località} di una direttrice.
+I \textbf{treni in circolazione} sono rappresentati da delle linee
+colorate che collegano i punti sul piano; le \textbf{interruzioni di
+    linea} sono graficate con rettangoli rossi.  Il
+DCO\footnote{Dirigente Centrale Operativo, detto informalmente
+    \textit{capostazione}} utilizza costantemente le tracce orario per
+coordinare la circolazione e avere una rilevante visione d'insieme.
+Essendo la piattaforma inaccessibile pubblicamente, non è possibile
+allegare immagini o ulteriore documentazione alla presente
+descrizione.  Il parametro \texttt{--stat timetable} cerca di
+\textbf{emulare} le tracce orario RFI: selezionata una linea e i dati
+di una giornata, l'applicativo \textit{traccia} su un piano i percorsi
+di tutti i treni circolati.  Le \figurename~\ref{figure:timetable} è
+il prodotto del programma sui dati del 12 maggio 2023 della
+\textit{linea} regionale Verona Porta Nuova $\leftrightarrow$ Milano
+Centrale, operata da Trenord.
+
+Il primo grafico (\figurename~\ref{figure:timetable_uncollapse}) è
+progettato sulla precedente descrizione dell'orario grafico di RFI.
+L'ascissa rappresenta l'\textbf{orario} nella giornata, l'ordinata le
+\textbf{località}.  Ogni linea colorata (\textit{traccia}) è una
+\textbf{corsa} avente origine a Milano Centrale o a Verona P.N\@.  I
+punti rappresentano l'\textbf{orario effettivo di arrivo} e
+\textbf{partenza} del treno nella fermata intermedia corrispondente;
+in caso di ritardo in partenza, essi non saranno sovrapposti.  Nella
+visualizzazione in oggetto è possibile osservare il noto \textit{buco}
+di circolazione ferroviaria tra le 10:00 e le 12:00.
+
+Ancora più interessante è la seconda visualizzazione
+(\figurename~\ref{figure:timetable_collapse}) ottenuta con l'aggiunta
+del parametro \texttt{--timetable-\-collapse}.  Come il nome
+suggerisce, le tracce sono \textit{collassate} in modo che partano da
+$t = 0$: l'ascissa ora rappresenta le \textbf{durate}, non più gli
+orari.  Le due grosse tracce nere sono gli \textbf{orari programmati}
+delle corse sulla linea; il resto delle tracce tratteggiate sono le
+\textbf{corse effettive}.  Lo \textbf{scostamento} tra le due
+tipologie rappresenta il \textbf{ritardo}, che come nella realtà può
+variare durante la corsa.  Ad esempio, i treni arancione e oro
+terminanti in alto a destra risultano aver accumulato \textbf{notevole
+    ritardo} (tra 30 e 45 minuti): seguendo la loro \textit{traccia} a
+ritroso si può immeditamente constatare le località ove tale ritardo
+si è generato e il successivo \textbf{progressivo deterioramento},
+probabilmente dovuto alla perdita di precedenze nella circolazione.
+% Al contrario, la tendenza dei treni con modesti ritardi è di il
+% \textbf{recupero} tra una fermata e l'altra.
+
+\subsection{\texttt{trajectories\_map}}
+
+L'ultima visualizzazione predefinita proposta è di diverso formato
+rispetto alle precedenti.  Con il parametro \texttt{--stat
+    trajectories\_\-map} verrà generata in formato HTML una
+\textbf{mappa interattiva} inspirata da servizi come
+\textit{FlightRadar24}\footnote{\href{https://flightradar24.com}{https://flightradar24}
+    è un portale web che consente di tracciare in tempo reale la
+    posizione degli aerei per mezzo della propria rete ATS-B}.  Ogni
+elemento della mappa ha un \textbf{significato ben definito},
+descritto di seguito.  Il \textit{layer} base è fornito da
+\textit{OpenStreetMap}\footnote{\href{https://openstreetmap.org}{https://openstreetmap.org}}
+e la sua visualizzazione dalla libreria JavaScript
+\textit{Leaflet}\footnote{\href{https://leafletjs.com/}{https://leafletjs.com/}}
+interfacciata da Python con il \textit{wrapper}\footnote{Dall'inglese,
+    \textit{involucro}.  In informatica, un componente che fornisce
+    un'interfaccia a livello superiore di un altro}
+\texttt{folium}\footnote{\href{https://python-visualization.github.io/folium/latest/}{https://python-visualization.github.io/folium/latest/}}.
+
+\begin{sidewaysfigure}[p] \centering
+    \includegraphics[width=1\textwidth]{images/trajectories_map.png}
+    \caption{Dettaglio della mappa interattiva generata con i dati del
+        09/05/2023}
+\end{sidewaysfigure}
+
+La mappa è \textbf{temporizzata}: con l'ausilio del selettore presente
+in basso a sinistra è possibile \textit{avviare o fermare} il tempo,
+\textit{scorrere} avanti e indietro e \textit{saltare} a un punto
+specifico.  Il \textbf{contatore FPS}\footnote{\textit{Frames Per
+        Second}, fotogrammi al secondo} permette di regolare la
+\textit{velocità} dello scorrimento automatico del tempo.  In alto a
+destra lo schermo è presente una \textbf{legenda} e un \textbf{grafico
+    interattivo}, quest'ultimo con il \textbf{numero di treni
+    circolati} il \textbf{ritardo medio di arrivo}.  L'\textbf{area
+    grigia} in esso indica il periodo di tempo già visualizzato.
+Spostando il cursore nell'area del grafico viene mostrato il
+\textbf{valore puntuale}.  Nella mappa sono mostrate le
+\textbf{tracce} dei treni in circolazione nell'istante considerato.
+Ogni treno è rappresentato con una \textbf{\textit{testa}} e una
+\textbf{linea colorata}: il colore e il simbolo della prima indicano
+l'\textbf{impresa ferroviaria} e la \textbf{categoria} del treno, come
+da legenda.  Il colore della linea rappresenta il \textbf{ritardo} e
+il suo spessore l'\textbf{affollamento}\footnote{Dato presente solo
+    per i treni Trenord}; essa connette la \textbf{fermata precedente}
+con la successiva.  Spostando il cursore su una traccia vengono
+mostrate le \textbf{informazioni sul treno} (come il numero e la
+categoria) e \textbf{sulle fermate}.
+
+La visualizzazione trasmette \textbf{a colpo d'occhio} l'andamento dei
+treni, in particolare in corrispondenza dei punti nevralgici dei
+grandi nodi ferroviari.  Il programma supporta i \textbf{filtri} già
+precedentemente descritti, ma non raggruppamenti o aggregazioni.  A
+causa dell'enorme quantità di informazioni i file HTML generati
+possono essere di \textbf{notevoli dimensioni}, nell'ordine di
+centinaia di megabyte.
+
+\section{Sulla difficoltà nella scelta dei titoli}
+
+Lo scopo di questa sezione è dimostrare tramite ulteriori analisi
+approfondite le \textbf{forti potenzialità} dei dati raccoglibili con
+lo strumento.  Si possono infatti progettare e calcolare nuovi
+indicatori per meglio descrivere la \textit{reale} situazione attuale.
+Ad esempio, è possibile pesare maggiormente le perturbazioni avvenute
+in \textbf{ora di punta} secondo i tipici \textbf{flussi pendolari}
+(trasferimento da piccola città a grande città la mattina e ritorno la
+sera) oppure \textit{abbonare} i ritardi di pochi minuti nei viaggi a
+\textbf{lunga percorrenza}.
+
+È importante riconoscere che qualsiasi analisi può essere soggetta a
+\textit{bias}, ma questi possono offrire una \textbf{diversa
+    prospettiva} che contribuisce alla comprensione complessiva della
+situazione.  Tra l'altro, neppure le \textbf{metriche ufficiali} ne
+sono immuni: perché, ad esempio, l'indice di puntualità è spesso
+calcolato come ``\textit{la percentuale di treni giunti a destino
+    entro cinque minuti}''?  Perché non \textit{tre} o \textit{sette}?
+Perché non sono contate le fermate intermedie?  Perché l'\textit{alta
+    temperatura} estiva può essere considerata una \textit{causa di
+    forza maggiore} e quindi esclusa?  Il trasporto pubblico si può
+forse fermare se \textit{in estate fa caldo}?  L'autore non pretende
+di stabilire in modo definitivo metriche e parametri, ma piuttosto
+offre a chiunque la possibilità di trarre \textbf{le proprie
+    conclusioni} scaricando i dati con lo strumento.
+
+\subsection{Ritardo come variabile aleatoria}
+
+\begin{figure}[p] \centering
+    \subfloat[funzione di massa di
+    probabilità~\protect{\cite[E]{StatJup}}]{
+        \includegraphics[width=0.95\textwidth]{images/delay_hist.pdf}
+        \label{figure:delay_hist}
+    } \vspace{5mm}
+    \subfloat[funzione di ripartizione~\protect{\cite[F]{StatJup}}]{
+        \includegraphics[width=0.95\textwidth]{images/delay_hist_acc.pdf}
+        \label{figure:delay_hist_acc}
+    }
+    \caption{Distribuzione statistica dei ritardi dei treni italiani}
+    \label{figure:timetable}
+\end{figure}
+
+In statistica, data una variabile aleatoria $X$ e una sua
+specificazione $x$, si definisce una \textbf{funzione di massa di
+    probabilità} $p_X(x)$ e una \textbf{funzione di ripartizione}
+$F_X(x)$ rappresentanti rispettivamente la probabilità di una
+particolare specificazione $P(X = x)$ o di $P(X \leq x)$.  Applicando
+tali nozioni al dominio considerato, $X$ è la variabile aleatoria dei
+ritardi, $p_X(x)$ la probabilità che \textit{un treno arrivi o parta
+    da un fermata con $x$ minuti di ritardo} e $F_X(x)$ che \textit{un
+    treno arrivi o parta da una fermata con al più $x$ minuti di
+    ritardo}.  Il già citato \textbf{indice di puntualità} si può
+semplificare con $F_X(5)$ dove $X$ considera solo le ultime fermate di
+ogni corsa.
+
+In \figurename~\ref{figure:delay_hist} approssima con un
+\textbf{istogramma} la \textbf{funzione di massa di probabilità} dei
+ritardi in arrivo e partenza.  Da sinistra, le due
+\textbf{concentrazioni} di valori aumentano velocemente fino al valore
+0 (\textit{treno in perfetto orario}) e 1 per poi decrescere
+monotonicamente con un decadimento apparentemente esponenziale
+all'aumentare del ritardo.  Intuitivamente, all'aumentare del ritardo
+$x$, $p_X(x)$ (ovvero la probabilità che un treno arrivi o parta con
+esattamente $x$ minuti di ritardo) diminuisce notevolmente.  La
+\figurename~\ref{figure:delay_hist_acc} approssima la già citata
+\textbf{funzione di ripartizione}: ogni punto corrisponde a un
+\textit{indice di puntualità} calcolato sui treni arrivati o partiti
+da una fermata con un ritardo di $x$ minuti.  L'andamento è del tutto
+equivalente alla visualizzazione precedente: solo il 72.20\% dei treni
+arriva in fermata con al più 3 minuti di ritardo (standard Ferrovie
+Federali Svizzere \cite{SbbPuntualita}), l'83.94\% con al più 5 e il
+2.46\% con più di 20 minuti \cite[G]{StatJup}.
+
+\subsection{Andamento infragiornaliero}
+
+\begin{figure}[h]
+    \includegraphics[width=1\textwidth]{images/intraday_delay.pdf}
+    \caption{Andamento infragiornaliero dal 01/04/2023 al
+        31/08/2023~\protect{\cite[H]{StatJup}}}
+    \label{figure:intraday_delay}
+\end{figure}
+
+Con quest'analisi si vuole verificare una \textbf{correlazione} tra
+l'orario della giornata, il numero di treni circolanti e il loro
+ritardo.  La \figurename~\ref{figure:intraday_delay} è calcolata sui
+\textbf{dati medi} di 5 mesi di rilevazioni: sull'ascissa sono
+presenti gli \textbf{orari} di una giornata, sulle ordinate il
+\textbf{ritardo} e il \textbf{numero di treni circolanti}.  Ad ogni
+punto delle linee corrisponde il numero medio di treni circolanti o il
+ritardo mediano dei treni in circolazione nell'orario
+considerato\footnote{Un treno $x$ si dice \textit{in circolazione} in
+    un tempo $t$ se e solo se
+    $$\textsc{partenza}(x) \leq t <
+    \textsc{arrivo}(x)$$ dove $\textsc{partenza}(x)$ e
+    $\textsc{arrivo}(x)$ sono l'orario di partenza e arrivo
+    dall'origine alla destinazione}.  Le aree di errore
+(\textit{errorbar}) associate ad ogni serie includono il 95\%
+percentile (2.5\% -~97.5\%) delle rilevazioni.  Riguardo il numero di
+treni circolanti si può osservare dalla dimensione delle aree di
+errore la sua \textbf{notevole varianza}, in particolare nella prima
+fascia di punta (05:00 -~09:00) e nel pomeriggio.  La varianza dei
+ritardi, benché anch'essa considerevole, rimane costante nel corso
+della giornata.
+
+L'andamento dei dati segue un \textbf{\textit{pattern} comune} in
+tutte le giornate considerate: nelle ore di punta il numero di treni
+aumenta notevolmente mentre diminuisce nella fascia 09:00 -~11:00, la
+mattina presto e la sera tardi.  I \textbf{ritardi mediani} crescono
+quasi costantemente all'aumentare delle ore, con una \textbf{lieve
+    decrescita} tra le 10:00 e le 12:00.  Si ipotizza una
+\textbf{correlazione positiva} tra il numero di treni e la
+\textit{derivata prima} dei ritardi: l'effetto del traffico
+ferroviario si propaga lentamente, ma è significativo.  Come si evince
+anche numericamente in \figurename~\ref{figure:intraday_metrics},
+dalle 21:00 il ritardo medio e la sua varianza aumenta velocemente,
+forse a causa dal maggior rapporto di treni a lunga percorrenza
+circolanti (spesso più \textit{ritardatari}).
+
+\begin{figure}[h]
+    \includegraphics[width=1\textwidth]{images/intraday_metrics.pdf}
+    \caption{Metriche infragiornaliere dal 01/04/2023 al
+        31/08/2023~\protect{\cite[I]{StatJup}}}
+    \label{figure:intraday_metrics}
+\end{figure}
+
+Al fine di mostrare solo dati significativi, in
+\figurename~\ref{figure:intraday_delay}
+e~\ref{figure:intraday_metrics} sono stati considerati per ogni
+giornata \textbf{intervalli temporali} di 5 minuti con almeno 100
+treni circolanti.  Con \textit{ritardo mediano di un intervallo
+    temporale} si intende il valore mediano dei ritardi medi alle
+fermate di ogni treno circolato nell'intervallo.
 
 % -----------------------------------------------------------------
 
@@ -2216,8 +2720,7 @@ $\Rsh$ \texttt{/andamentoTreno/S01717/10124/1692136800000} \hfill (REG
 }
 \end{minted}
 
-\begin{table}[h]
-    \centering
+\begin{table}[h] \centering
     \begin{tabular}{r|l}
       Codice & Impresa ferroviaria \\
       \hline
@@ -2233,8 +2736,7 @@ $\Rsh$ \texttt{/andamentoTreno/S01717/10124/1692136800000} \hfill (REG
     \label{codice_cliente}
 \end{table}
 
-\begin{table}[h]
-    \centering
+\begin{table}[h] \centering
     \begin{tabular}{r|l}
       Lettera & Tipo di fermata \\
       \hline
