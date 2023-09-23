@@ -267,10 +267,10 @@ maggiore.  Al fine di calcolo delle penali vengono utilizzati i
 seguenti \textbf{coefficienti} \cite[app.\ 5.C, \textit{``Metodi di
     calcolo''}]{RfiPir}:
 
-\todo{AT: mi sembrano cifre molto basse, riesci a mettere un esempio
-    di calcolo reale? magari paragonandolo al "costo di esercizio" (di
-    un viaggio), per capire se è un deterrente/incentivo sensato \\
-    M: fatto}
+%\todo{AT: mi sembrano cifre molto basse, riesci a mettere un esempio
+%    di calcolo reale? magari paragonandolo al "costo di esercizio" (di
+%    un viaggio), per capire se è un deterrente/incentivo sensato \\
+%    M: fatto}
 \begin{itemize}
 	\item $P_\text{u}$: penale unitaria pari a 1,00€ al minuto;
 	\item $P_\text{sop}$: penale unitaria per ogni treno soppresso
@@ -434,16 +434,17 @@ possibile tracciare le richieste invocate dal frontend in JavaScript a
 seguito delle azioni dell'utente e farsi un'idea dei metodi API
 disponibili.
 
-\todo{AT: da qualche parte fare un piccolo excursus su "alla ricerca
-    delle API perdute"? sui tentativi (sia tecnici che legislativi) di
-    estrarre info "sensate" (4-5 stelle Berners-Lee) \\
-    M: ho messo i tentativi della community in Appendice A.2}
+%\todo{AT: da qualche parte fare un piccolo excursus su "alla ricerca
+%    delle API perdute"? sui tentativi (sia tecnici che legislativi) di
+%    estrarre info "sensate" (4-5 stelle Berners-Lee) \\
+%    M: ho messo i tentativi della community in Appendice A.2}
 
 \todo{AT: btw da qualche parte farei un microexcursus sulle
     classificazioni opendata (lo puoi riassumere dal secondo volume di
     CDT che ti posso mandare, è in fase di review ora) \\
     M: ho citato la classificazione di Berners-Lee e ho valutato gli
-    ``open data'' che ho analizzato in sezione 1.3.2, va bene?}
+    ``open data'' che ho analizzato in sezione 1.3.2, va bene?
+AT: fai un ulteriore sforzo e usa anche quella di Davies, così li stronchiamo definitivamente ;)}
 
 \subsection{Sito web di Trenord}
 
@@ -805,7 +806,7 @@ più approfondite tali dati potrebbero risultare utili.
 
 \textbf{Aldo Salani}, responsabile dell'Area Commerciale FER e
 interpellato via posta elettronica durante il lavoro di Tesi,
-rivela\footnote{Enfasi aggiunta} che \textcquote{Salani}{FER non solo
+rivela\footnote{Enfasi aggiunta}\todo{AT: manca enfasi latex?} che \textcquote{Salani}{FER non solo
     ha a disposizione la \textbf{propria banca dati} di
     programmazione, gestione e contabilizzazione dei dati di
     circolazione, ma ha anche accesso a quella del gestore nazionale
@@ -1036,7 +1037,7 @@ che differiscono non solo per periodo ma anche per
 In questo capitolo dell'elaborato è descritta la \textbf{parte
     implementativa} del lavoro di Tesi.  L'obiettivo è stato creare un
 \textbf{software} per \textbf{scaricare} programmaticamente i dati
-della circolazione ferroviaria, \textbf{convertirli in Open Data} e
+della circolazione ferroviaria, \textbf{convertirli in Open Data}\todo{AT: tecnicamente non è che li ``converti in opendata'' (anche perché non li stai rilasciando), casomai li ``rendi fruibili per una futura liberazione'', o simili} e
 \textbf{analizzarli} proponendo statistiche descrittive e
 visualizzazioni.
 
@@ -1134,9 +1135,9 @@ circolazione ferroviaria verificando nel contempo la correttezza di
 quanto letto.  Considerando che la circolazione ferroviaria è
 \textit{sempre in movimento} e le API non offrono tipicamente
 l'accesso ai dati storici, è inoltre fondamentale salvare le
-informazioni in \textbf{modo incrementale}.  Le particolarità e i casi
-eccezionali, molto frequenti nelle API considerate, devono essere
-gestiti opportunamente.
+informazioni in \textbf{modo incrementale}\todo{AT: i.e., campionando con una frequenza ``opportuna''}.
+Le particolarità e i casi eccezionali, molto frequenti nelle API considerate, devono essere
+gestiti opportunamente\todo{AT: sinonimo più esplicito, magari ``integrando/incrociando dati e/o calcolando informazione'')}.
 
 \subsection{Progettazione}
 
@@ -1451,7 +1452,7 @@ salvare i dati delle fermate non ancora superate.
             \State \Call{sleep}{\text{1 hour}}
         \EndWhile
     \end{algorithmic}
-\end{algorithm}
+\end{algorithm}\todo{AT: caption e indica che formalismo stai usando, e cita il tutto nel testo}
 
 Di seguito è illustrato ad alto livello l'algoritmo dello
 \textit{scraper}.  L'unico \textbf{input} richiesto è l'insieme delle
@@ -1499,7 +1500,8 @@ stessa istanza tra esecuzioni diverse anche al variare degli attributi
 L'\textbf{esecuzione infinita} di un programma può risultare poco
 pratica.  Per ovviare al problema si può utilizzare un applicativo
 come \textbf{crontab} per implementare l'esecuzione controllata del
-codice ogni ora.  La continuità e la persistenza sono ottenute grazie
+codice ogni ora\todo{AT: da qualche parte spieghi il perché della scelta del periodo di campionamento?}.
+La continuità e la persistenza sono ottenute grazie
 alla \textbf{serializzazione} e \textbf{deserializzazione} iniziale e
 finale dei dizionari \texttt{station\_cache} ($S$),
 \texttt{fetched\_trains} ($T^*$) e \texttt{unfetched\_trains} ($T$)
