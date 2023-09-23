@@ -50,8 +50,10 @@
 % Package per la grafica
 \usepackage{graphicx}				% Funzioni avanzate per le immagini
 \usepackage{hologo}					% Bibtex logo with \hologo{BibTeX}
-\usepackage{enumitem}
+\usepackage[shortlabels]{enumitem}
 \usepackage{array}
+\usepackage{caption, subcaption}
+\usepackage{rotating}
 
 % Citazioni e bibliografia
 \usepackage[style=italian]{csquotes}
@@ -935,25 +937,99 @@ chiedere al Ministero di selezionare i soli dati di performance
 (ritardi e cancellazioni) perché comporterebbe una \textit{ulteriore
     elaborazione} non ammessa nella normativa Foia.
 
-\subsubsection{Regione Lombardia e Trenitalia}
+\subsubsection{Regione Lombardia per Trenord}
 
-\todo{Marco: inserire risultato Foia Lombardia}
+In Lombardia l'oggetto della richiesta riguardava tre punti:
+\begin{enumerate}[a)]
+    \item i dati relativi agli ``\textit{\textbf{indici di puntualità
+            per direttrice o linea}, le soppressioni, il rispetto
+        delle composizioni programmate, i risultati medi delle
+        verifiche sulla pulizia e sull'efficienza dei rotabili, il
+        consuntivo statistico dei reclami presentati e la
+        frequentazione dei treni}'' \cite[allegato 11]{LombardiaDati};
+    \item i \textbf{report mensili} della Sala Operativa Trenord
+    \cite[art.\@ 31, paragrafo 3]{LombardiaDati};
+    \item copia delle ``\textit{\textbf{richieste di chiarimenti sui
+            disservizi}, compresi dati significativi sulle singole
+        corse}'' \cite[art.\@ 32, paragrafo 6]{LombardiaDati} avvenute
+    durante il periodo di riferimento e relative risposte di Trenord.
+\end{enumerate}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-convallis et lorem at accumsan. Curabitur varius pellentesque
-tincidunt. Proin tristique finibus dolor, nec vestibulum nisi
-fermentum vel. Aenean quis orci id libero scelerisque commodo vitae at
-libero. Nulla laoreet fringilla erat ac commodo. Curabitur faucibus
-dui non auctor ultricies. Pellentesque ac tortor feugiat, rutrum eros
-vitae, molestie eros. Maecenas dapibus porta viverra. Nullam vitae
-erat felis. Aenean scelerisque vehicula nisl, eu ultrices orci
-pulvinar vel. Morbi tincidunt sed lectus non condimentum. Pellentesque
-urna augue, finibus non neque id, pulvinar mattis massa. Cras congue,
-justo nec egestas mattis, nisi magna bibendum tortor, vitae blandit
-leo ante eget augue. Etiam molestie, dui sit amet sollicitudin
-lacinia, lacus est faucibus quam, vel mollis mi arcu ac
-nunc. Suspendisse gravida vel eros sed aliquet. Vestibulum quis odio
-pretium, interdum magna in, bibendum augue.
+La Regione ha \textbf{accolto le richieste} del punto a) ma ha
+\textbf{negato l'accesso} per i documenti di cui i punti b) e c).
+Trenord, individuata come \textbf{soggetto controinteressato},
+\textcquote{FoiaLomb}{si è opposta alla trasmissione completa ai dati
+    richiesti in quanto lesiva di interessi economici e commerciali
+    dell’azienda}.  Le ragioni \textbf{non sono state ulteriormente
+    elaborate}, nonostante la normativa Foia preveda di motivare
+accuratamente i dinieghi~\cite[art.\ 5, comma 6]{Dlgs33}.  I dati di
+cui il punto b) riguardano i \textcquote[art.\@ 31, paragrafo
+3]{LombardiaDati}{dati di vendita, anagrafica del materiale rotabile,
+    dati di frequentazione di tutti i treni del trasporto regionale
+    circolanti sul territorio lombardo, andamento della puntualità e
+    delle soppressioni, posti offerti sui treni nelle fasce di punta
+    dal lunedì al venerdì, ritardo medio ponderato per passeggero,
+    costi economici}.  A differenza del Foia precedente, l'autore
+dell'istanza \textbf{non ritiene} che la divulgazione dei dati in
+oggetto possa essere in alcun modo
+\textcquote{FoiaLomb}{\textit{lesiva di interessi economici e
+        commerciali dell'azienda}}.  A Trenord, \textit{impresa
+    pubblica}, è affidato, senza gara, l'intero \textit{servizio
+    pubblico} di trasporto ferroviario regionale.  L'azienda è
+sovvenzionata da \textit{risorse pubbliche} della Regione e
+\textbf{non ha concorrenza}, così come una biblioteca comunale non
+\textit{concorre} con le librerie della città.  Non sussiste nessun
+ragionevole motivo per cui gli \textit{stakeholder} e i finanziatori
+principali del servizio (i Cittadini) non potrebbero conoscere i
+\textbf{dati di frequentazione}, i \textbf{posti offerti} e i
+\textbf{costi sostenuti} dall'azienda appaltatrice.
+
+L'articolo 32 del Contratto di Servizio sancisce che
+\textcquote[art.\@ 32, paragrafo 6]{LombardiaDati}{la Regione si
+    riserva la facoltà di chiedere per iscritto a Trenord chiarimenti
+    sui disservizi, compresi dati significativi relativi a singole
+    corse [...]}.  Tale corrispondenza citata nel punto c) \textbf{non
+    è stata trasmessa}.  Il diniego è ancor meno giustificabile: il
+risultato di attività ispettiva e monitoraggio, \textbf{se esiste},
+non può essere \textit{nascosto} per proteggere gli \textit{interessi
+    economici e commerciali dell'azienda}.
+
+Per quanto concerne i documenti che sono stati invece trasmessi, essi
+sono riferiti, come richiesto, all'anno 2022 e riguardano gli
+\textbf{indici di puntualità} e \textbf{affidabilità} mensili di tutte
+le direttrici, i report sulla \textbf{composizione} e \textbf{pulizia
+    dei treni} e il conteggio dei \textbf{reclami} presentati.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{images/lomb_heatmap.pdf}
+    \caption{Indice di puntualità delle direttrici Trenord per il
+        2022}
+    \label{figure:lomb_heatmap}
+\end{figure}
+
+In \figurename~\ref{figure:lomb_heatmap}\todo{Marco: collegare foglio
+    Jupyter} sono mostrati i dati trasmessi da Regione Lombardia
+riguardo la \textbf{puntualità}\footnote{Come già detto, per
+    \textit{indice di puntualità} si intende la percentuale di treni
+    arrivata a destino con un ritardo di al più 5 minuti} delle corse
+Trenord nel 2022.  La tabella originale è stata rielaborata in
+modalità \textit{heatmap} per agevolarne la lettura.  La
+\figurename~\ref{figure:lomb_boxplot} rende ancora più evidente
+l'\textbf{importanza dei dati disaggregati}: i dati ufficiali
+pubblicati sul sito della Regione (vedi
+\figurename~\ref{lombardia_puntualita} e~\ref{lombardia_affidabilita})
+non riescono ad esprimere accuratamente le \textbf{diverse criticità},
+che differiscono non solo per periodo ma anche per
+\textbf{direttrice}.
+
+\begin{sidewaysfigure}[p]
+    \centering
+    \includegraphics[width=1\textwidth]{images/lomb_boxplot.pdf}
+    \caption{Boxplot dell'indice mensile di puntualità delle
+        direttrici Trenord per il 2022}
+    \label{figure:lomb_boxplot}
+\end{sidewaysfigure}
 
 \chapter{Progettazione e implementazione}
 
