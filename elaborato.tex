@@ -717,22 +717,44 @@ Tim Berners-Lee ha proposto \cite{W3LinkedData} uno schema di
     altri dati per fornire il contesto.
 \end{itemize}
 
+Un'altra proposta, avanzata da Tim Davies~\cite{DaviesOpenData},
+valuta gli \textbf{aspetti più \textit{umani}}:
+
+\begin{itemize}
+    \item $\star$ (\textit{be demand driven}): le scelte su quali dati
+    rilasciare, la loro struttura e gli strumenti sono guidate dalla
+    domanda della comunità e dall'utilità effettiva;
+    \item $\star\,\star$ (\textit{put data in context}): sono fornite
+    informazioni chiare su \textit{quali} dati sono disponibili,
+    inclusa la frequenza degli aggiornamenti, i formati e la qualità;
+    \item $\star \star \star$ (\textit{support conversation around
+        data}): la comunità può partecipare commentando e avanzando
+    proposte, anche offline e in modo strutturato;
+    \item $\star \star \star\,\star$ (\textit{build capacity, skills
+        and networks}): sono forniti strumenti, guide e aiuto a coloro
+    che desiderano interpretare ed utilizzare i dati;
+    \item $\star \star \star \star \star$ (\textit{collaborate on data
+    as a common resource}): sono in essere processi e meccanismi per
+permettere alla community di migliorare i \textit{dataset} e creare
+nuove risorse basate su quanto già pubblicato.
+\end{itemize}
+
 Nella prossima sezione verranno illustrati e valutati alcuni dati
 pubblicati dagli Enti titolari di contratto di servizio con le imprese
 ferroviarie.
 
 \subsubsection{Monitoraggio nei contratti di servizio}
 
-Nella totalità dei contratti di servizio esaminati (vedi Sezione
-\ref{servizio_pubblico}) sono presenti accordi di \textbf{verifica} e
-\textbf{monitoraggio} dell'operato delle imprese ferroviarie, che
+Nella totalità dei contratti di servizio esaminati (vedi
+\S~\ref{servizio_pubblico}) sono presenti accordi di \textbf{verifica}
+e \textbf{monitoraggio} dell'operato delle imprese ferroviarie, che
 devono corrispondere agli Enti committenti \textbf{penali} in base ad
 alcune \textbf{metriche di puntualità} e \textbf{affidabilità}.
 Confrontare le metriche di Enti o imprese diverse è spesso
 \textbf{impossibile}: nonostante le formule RFI della
-\textit{performance regime} (vedi Sezione \ref{performance_regime})
-siano spesso utilizzate come base di partenza, ogni contratto è
-diverso.  L'accesso ai c.d.\ ``\textit{dati elementari di base}'' (le
+\textit{performance regime} (vedi \S~\ref{performance_regime}) siano
+spesso utilizzate come base di partenza, ogni contratto è diverso.
+L'accesso ai c.d.\ ``\textit{dati elementari di base}'' (le
 rilevazioni grezze) è spesso garantito solo all'Ente committente, non
 al Cittadino.  Le metriche sono spesso pubblicate in \textbf{modalità
     aggregata}, o non pubblicate affatto.  I Cittadini sono gli
@@ -783,11 +805,12 @@ ugualmente, mentre le fermate intermedie non vengono considerate.  Il
 Le \textbf{responsabilità tra le parti} delle perturbazioni al
 servizio \textbf{non sono \textit{rivelate}}, nonostante siano
 certamente state \textit{rilevate} ai fini di contratto di servizio e
-\textit{performance regime}.  Infine, i dati \textbf{non sono
-    aggiornati} da più di 11 mesi e il formato PDF non li rende
-facilmente analizzabili meccanicamente: secondo la classificazione
-proposta da Tim Berners-Lee, sono valutati con solo 1 stella
-($\star$).
+\textit{performance regime}.  Infine, il formato PDF non li rende
+facilmente analizzabili meccanicamente e i dati \textbf{non sono
+    aggiornati} da più di 11 mesi risultando poco utili al pubblico:
+sono quindi rispettivamente valutati con \textbf{1 stella} ($\star$) e
+\textbf{0 stelle} secondo la classificazioni proposte da Tim
+Berners-Lee e Tim Davies.
 
 \paragraph{Emilia-Romagna}
 Un panorama diverso si presenta in Emilia-Romagna, dove FER (gestore
@@ -838,8 +861,10 @@ si è dimostrato aperto ai miglioramenti del portale e precisa che
     successive (soprattutto in merito alle cause dei ritardi)}.
 
 L'uso di formati liberi e \textit{machine-readable} premia i dati
-messi a disposizione da Regione Emilia-Romagna con 3 stelle
-($\star\,\star\,\star$) secondo la classificazione di Tim Berners-Lee.
+messi a disposizione da Regione Emilia-Romagna con \textbf{3 stelle}
+($\star \star \star$) secondo la classificazione di Tim Berners-Lee ma
+solamente \textbf{2 stelle} ($\star\,\star$) di Tim Davies, in quanto
+alla communità manca la possibilità di commentare e interagire.
 
 \begin{figure}[h] \centering
     \includegraphics[width=1\textwidth]{images/fer_dati.png}
@@ -1848,12 +1873,12 @@ soppresse.  Un treno avente alcune fermate sorppresse è detto
 
 \section{API di Viaggiatreno}
 
-Le API di Viaggiatreno (vedi la Sezione~\ref{viaggiatreno}) non
-dispongono di una documentazione ufficiale e non sono conformi alla
-architettura REST o ad altri standard \textit{de facto} \cite{Giunta}.
-Numerosi tentativi sono stati fatti dalla comunità open source
-italiana per documentarle: in particolare si ringraziano Stefano
-(sabas) \cite{Sabas}, Luca Grandi \cite{Grandi} e Fabrizio Tarizzo
+Le API di Viaggiatreno (vedi \S~\ref{viaggiatreno}) non dispongono
+di una documentazione ufficiale e non sono conformi alla architettura
+REST o ad altri standard \textit{de facto} \cite{Giunta}.  Numerosi
+tentativi sono stati fatti dalla comunità open source italiana per
+documentarle: in particolare si ringraziano Stefano (sabas)
+\cite{Sabas}, Luca Grandi \cite{Grandi} e Fabrizio Tarizzo
 \cite{Tarizzo} per il loro fondamentale contributo.  I metodi sono
 generalmente accessibili al percorso
 \texttt{/infomobilita/\-resteasy/\-viaggiatreno/\-$M$/\-$P_1$/\-$P_2$/\-$\dots$/\-$P_n$}
