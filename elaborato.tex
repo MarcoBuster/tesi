@@ -50,7 +50,7 @@
 % Package per la grafica
 \usepackage{graphicx}				% Funzioni avanzate per le immagini
 \usepackage{hologo}					% Bibtex logo with \hologo{BibTeX}
-\usepackage{enumitem}
+\usepackage[shortlabels]{enumitem}
 \usepackage{array}
 \usepackage{caption, subcaption}
 \usepackage{rotating}
@@ -268,10 +268,10 @@ maggiore.  Al fine di calcolo delle penali vengono utilizzati i
 seguenti \textbf{coefficienti} \cite[app.\ 5.C, \textit{``Metodi di
     calcolo''}]{RfiPir}:
 
-\todo{AT: mi sembrano cifre molto basse, riesci a mettere un esempio
-    di calcolo reale? magari paragonandolo al "costo di esercizio" (di
-    un viaggio), per capire se è un deterrente/incentivo sensato \\
-    M: fatto}
+% \todo{AT: mi sembrano cifre molto basse, riesci a mettere un esempio
+% di calcolo reale? magari paragonandolo al "costo di esercizio" (di
+% un viaggio), per capire se è un deterrente/incentivo sensato \\
+% M: fatto}
 \begin{itemize}
 	\item $P_\text{u}$: penale unitaria pari a 1,00€ al minuto;
 	\item $P_\text{sop}$: penale unitaria per ogni treno soppresso
@@ -435,16 +435,19 @@ possibile tracciare le richieste invocate dal frontend in JavaScript a
 seguito delle azioni dell'utente e farsi un'idea dei metodi API
 disponibili.
 
-\todo{AT: da qualche parte fare un piccolo excursus su "alla ricerca
-    delle API perdute"? sui tentativi (sia tecnici che legislativi) di
-    estrarre info "sensate" (4-5 stelle Berners-Lee) \\
-    M: ho messo i tentativi della community in Appendice A.2}
+% \todo{AT: da qualche parte fare un piccolo excursus su "alla ricerca
+% delle API perdute"? sui tentativi (sia tecnici che legislativi) di
+% estrarre info "sensate" (4-5 stelle Berners-Lee) \\
+% M: ho messo i tentativi della community in Appendice A.2}
 
 \todo{AT: btw da qualche parte farei un microexcursus sulle
     classificazioni opendata (lo puoi riassumere dal secondo volume di
     CDT che ti posso mandare, è in fase di review ora) \\
     M: ho citato la classificazione di Berners-Lee e ho valutato gli
-    ``open data'' che ho analizzato in sezione 1.3.2, va bene?}
+    ``open data'' che ho analizzato in sezione 1.3.2, va bene? \\
+    AT: fai un ulteriore sforzo e usa anche quella di Davies, così li
+    stronchiamo definitivamente ;) \\
+    M: fatto}
 
 \subsection{Sito web di Trenord}
 
@@ -470,8 +473,8 @@ stessa, come i regionali di Trenitalia o l'alta velocità.  Nonostante
 ciò, le API Trenord si sono rilevate utili per verificare e correggere
 alcune incongruenze riscontrate in quelle di Viaggiatreno. \\
 
-In Appendice~\ref{documentazione} sono documentati alcuni metodi
-rilevanti delle due API.
+In \S~\ref{documentazione} sono documentati alcuni metodi rilevanti
+delle due API.
 
 \section{Panorama giuridico, politico e legislativo}
 
@@ -716,22 +719,44 @@ Tim Berners-Lee ha proposto \cite{W3LinkedData} uno schema di
     altri dati per fornire il contesto.
 \end{itemize}
 
+Un'altra proposta, avanzata da Tim Davies~\cite{DaviesOpenData},
+valuta gli \textbf{aspetti più \textit{umani}}:
+
+\begin{itemize}
+    \item $\star$ (\textit{be demand driven}): le scelte su quali dati
+    rilasciare, la loro struttura e gli strumenti sono guidate dalla
+    domanda della comunità e dall'utilità effettiva;
+    \item $\star\,\star$ (\textit{put data in context}): sono fornite
+    informazioni chiare su \textit{quali} dati sono disponibili,
+    inclusa la frequenza degli aggiornamenti, i formati e la qualità;
+    \item $\star \star \star$ (\textit{support conversation around
+        data}): la comunità può partecipare commentando e avanzando
+    proposte, anche offline e in modo strutturato;
+    \item $\star \star \star\,\star$ (\textit{build capacity, skills
+        and networks}): sono forniti strumenti, guide e aiuto a coloro
+    che desiderano interpretare ed utilizzare i dati;
+    \item $\star \star \star \star \star$ (\textit{collaborate on data
+        as a common resource}): sono in essere processi e meccanismi
+    per permettere alla community di migliorare i \textit{dataset} e
+    creare nuove risorse basate su quanto già pubblicato.
+\end{itemize}
+
 Nella prossima sezione verranno illustrati e valutati alcuni dati
 pubblicati dagli Enti titolari di contratto di servizio con le imprese
 ferroviarie.
 
 \subsubsection{Monitoraggio nei contratti di servizio}
 
-Nella totalità dei contratti di servizio esaminati (vedi Sezione
-\ref{servizio_pubblico}) sono presenti accordi di \textbf{verifica} e
-\textbf{monitoraggio} dell'operato delle imprese ferroviarie, che
+Nella totalità dei contratti di servizio esaminati (vedi
+\S~\ref{servizio_pubblico}) sono presenti accordi di \textbf{verifica}
+e \textbf{monitoraggio} dell'operato delle imprese ferroviarie, che
 devono corrispondere agli Enti committenti \textbf{penali} in base ad
 alcune \textbf{metriche di puntualità} e \textbf{affidabilità}.
 Confrontare le metriche di Enti o imprese diverse è spesso
 \textbf{impossibile}: nonostante le formule RFI della
-\textit{performance regime} (vedi Sezione \ref{performance_regime})
-siano spesso utilizzate come base di partenza, ogni contratto è
-diverso.  L'accesso ai c.d.\ ``\textit{dati elementari di base}'' (le
+\textit{performance regime} (vedi \S~\ref{performance_regime}) siano
+spesso utilizzate come base di partenza, ogni contratto è diverso.
+L'accesso ai c.d.\ ``\textit{dati elementari di base}'' (le
 rilevazioni grezze) è spesso garantito solo all'Ente committente, non
 al Cittadino.  Le metriche sono spesso pubblicate in \textbf{modalità
     aggregata}, o non pubblicate affatto.  I Cittadini sono gli
@@ -782,11 +807,12 @@ ugualmente, mentre le fermate intermedie non vengono considerate.  Il
 Le \textbf{responsabilità tra le parti} delle perturbazioni al
 servizio \textbf{non sono \textit{rivelate}}, nonostante siano
 certamente state \textit{rilevate} ai fini di contratto di servizio e
-\textit{performance regime}.  Infine, i dati \textbf{non sono
-    aggiornati} da più di 11 mesi e il formato PDF non li rende
-facilmente analizzabili meccanicamente: secondo la classificazione
-proposta da Tim Berners-Lee, sono valutati con solo 1 stella
-($\star$).
+\textit{performance regime}.  Infine, il formato PDF non li rende
+facilmente analizzabili meccanicamente e i dati \textbf{non sono
+    aggiornati} da più di 11 mesi risultando poco utili al pubblico:
+sono quindi rispettivamente valutati con \textbf{1 stella} ($\star$) e
+\textbf{0 stelle} secondo la classificazioni proposte da Tim
+Berners-Lee e Tim Davies.
 
 \paragraph{Emilia-Romagna}
 Un panorama diverso si presenta in Emilia-Romagna, dove FER (gestore
@@ -805,16 +831,16 @@ più approfondite tali dati potrebbero risultare utili.
 
 \textbf{Aldo Salani}, responsabile dell'Area Commerciale FER e
 interpellato via posta elettronica durante il lavoro di Tesi,
-rivela\footnote{Enfasi aggiunta} che \textcquote{Salani}{FER non solo
-    ha a disposizione la \textbf{propria banca dati} di
-    programmazione, gestione e contabilizzazione dei dati di
-    circolazione, ma ha anche accesso a quella del gestore nazionale
-    tramite i sistemi dell'impresa ferroviaria che espleta il
-    servizio; ciò consente, attraverso un sistema di \textbf{gestione
-        big data}, di elaborare un cruscotto informatico che gestisce
-    e mostra i dati autonomamente con \textbf{precisione} e
-    \textbf{profondità}, evitando di ricevere prospetti
-    preconfezionati e poco versatili.  Tra l'altro oltre al
+rivela\footnote{Nelle citazioni che seguono, le enfasi sono aggiunte}
+che \textcquote{Salani}{FER non solo ha a disposizione la
+    \textbf{propria banca dati} di programmazione, gestione e
+    contabilizzazione dei dati di circolazione, ma ha anche accesso a
+    quella del gestore nazionale tramite i sistemi dell'impresa
+    ferroviaria che espleta il servizio; ciò consente, attraverso un
+    sistema di \textbf{gestione big data}, di elaborare un cruscotto
+    informatico che gestisce e mostra i dati autonomamente con
+    \textbf{precisione} e \textbf{profondità}, evitando di ricevere
+    prospetti preconfezionati e poco versatili.  Tra l'altro oltre al
     monitoraggio della puntualità e della regolarità (soppressioni),
     il cruscotto mostra anche i \textbf{dati della qualità erogata},
     dati che vengono raccolti da una \textbf{squadra di ispettori} che
@@ -837,8 +863,10 @@ si è dimostrato aperto ai miglioramenti del portale e precisa che
     successive (soprattutto in merito alle cause dei ritardi)}.
 
 L'uso di formati liberi e \textit{machine-readable} premia i dati
-messi a disposizione da Regione Emilia-Romagna con 3 stelle
-($\star\,\star\,\star$) secondo la classificazione di Tim Berners-Lee.
+messi a disposizione da Regione Emilia-Romagna con \textbf{3 stelle}
+($\star \star \star$) secondo la classificazione di Tim Berners-Lee ma
+solamente \textbf{2 stelle} ($\star\,\star$) di Tim Davies, in quanto
+alla communità manca la possibilità di commentare e interagire.
 
 \begin{figure}[h] \centering
     \includegraphics[width=1\textwidth]{images/fer_dati.png}
@@ -937,33 +965,112 @@ chiedere al Ministero di selezionare i soli dati di performance
 (ritardi e cancellazioni) perché comporterebbe una \textit{ulteriore
     elaborazione} non ammessa nella normativa Foia.
 
-\subsubsection{Regione Lombardia e Trenitalia}
+\subsubsection{Regione Lombardia per Trenord}
 
-\todo{Marco: inserire risultato Foia Lombardia}
+In Lombardia l'oggetto della richiesta riguardava tre punti:
+\begin{enumerate}[a)]
+    \item i dati relativi agli ``\textit{\textbf{indici di puntualità
+            per direttrice o linea}, le soppressioni, il rispetto
+        delle composizioni programmate, i risultati medi delle
+        verifiche sulla pulizia e sull'efficienza dei rotabili, il
+        consuntivo statistico dei reclami presentati e la
+        frequentazione dei treni}'' \cite[allegato 11]{LombardiaDati};
+    \item i \textbf{report mensili} della Sala Operativa Trenord
+    \cite[art.\@ 31, paragrafo 3]{LombardiaDati};
+    \item copia delle ``\textit{\textbf{richieste di chiarimenti sui
+            disservizi}, compresi dati significativi sulle singole
+        corse}'' \cite[art.\@ 32, paragrafo 6]{LombardiaDati} avvenute
+    durante il periodo di riferimento e relative risposte di Trenord.
+\end{enumerate}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-convallis et lorem at accumsan. Curabitur varius pellentesque
-tincidunt. Proin tristique finibus dolor, nec vestibulum nisi
-fermentum vel. Aenean quis orci id libero scelerisque commodo vitae at
-libero. Nulla laoreet fringilla erat ac commodo. Curabitur faucibus
-dui non auctor ultricies. Pellentesque ac tortor feugiat, rutrum eros
-vitae, molestie eros. Maecenas dapibus porta viverra. Nullam vitae
-erat felis. Aenean scelerisque vehicula nisl, eu ultrices orci
-pulvinar vel. Morbi tincidunt sed lectus non condimentum. Pellentesque
-urna augue, finibus non neque id, pulvinar mattis massa. Cras congue,
-justo nec egestas mattis, nisi magna bibendum tortor, vitae blandit
-leo ante eget augue. Etiam molestie, dui sit amet sollicitudin
-lacinia, lacus est faucibus quam, vel mollis mi arcu ac
-nunc. Suspendisse gravida vel eros sed aliquet. Vestibulum quis odio
-pretium, interdum magna in, bibendum augue.
+La Regione ha \textbf{accolto le richieste} del punto a) ma ha
+\textbf{negato l'accesso} per i documenti di cui i punti b) e c).
+Trenord, individuata come \textbf{soggetto controinteressato},
+\textcquote{FoiaLomb}{si è opposta alla trasmissione completa ai dati
+    richiesti in quanto lesiva di interessi economici e commerciali
+    dell’azienda}.  Le ragioni \textbf{non sono state ulteriormente
+    elaborate}, nonostante la normativa Foia preveda di motivare
+accuratamente i dinieghi~\cite[art.\ 5, comma 6]{Dlgs33}.  I dati di
+cui il punto b) riguardano i \textcquote[art.\@ 31, paragrafo
+3]{LombardiaDati}{dati di vendita, anagrafica del materiale rotabile,
+    dati di frequentazione di tutti i treni del trasporto regionale
+    circolanti sul territorio lombardo, andamento della puntualità e
+    delle soppressioni, posti offerti sui treni nelle fasce di punta
+    dal lunedì al venerdì, ritardo medio ponderato per passeggero,
+    costi economici}.  A differenza del Foia precedente, l'autore
+dell'istanza \textbf{non ritiene} che la divulgazione dei dati in
+oggetto possa essere in alcun modo
+\textcquote{FoiaLomb}{\textit{lesiva di interessi economici e
+        commerciali dell'azienda}}.  A Trenord, \textit{impresa
+    pubblica}, è affidato, senza gara, l'intero \textit{servizio
+    pubblico} di trasporto ferroviario regionale.  L'azienda è
+sovvenzionata da \textit{risorse pubbliche} della Regione e
+\textbf{non ha concorrenza}, così come una biblioteca comunale non
+\textit{concorre} con le librerie della città.  Non sussiste nessun
+ragionevole motivo per cui gli \textit{stakeholder} e i finanziatori
+principali del servizio (i Cittadini) non potrebbero conoscere i
+\textbf{dati di frequentazione}, i \textbf{posti offerti} e i
+\textbf{costi sostenuti} dall'azienda appaltatrice.
+
+L'articolo 32 del Contratto di Servizio sancisce che
+\textcquote[art.\@ 32, paragrafo 6]{LombardiaDati}{la Regione si
+    riserva la facoltà di chiedere per iscritto a Trenord chiarimenti
+    sui disservizi, compresi dati significativi relativi a singole
+    corse [...]}.  Tale corrispondenza citata nel punto c) \textbf{non
+    è stata trasmessa}.  Il diniego è ancor meno giustificabile: il
+risultato di attività ispettiva e monitoraggio, \textbf{se esiste},
+non può essere \textit{nascosto} per proteggere gli \textit{interessi
+    economici e commerciali dell'azienda}.
+
+I documenti che sono stati invece trasmessi sono riferiti, come
+richiesto, all'anno 2022 e riguardano gli \textbf{indici di
+    puntualità} e \textbf{affidabilità} mensili di tutte le
+direttrici, i report sulla \textbf{composizione} e \textbf{pulizia dei
+    treni} e il conteggio dei \textbf{reclami} presentati.
+
+\begin{sidewaysfigure}[p]
+    \centering
+    \includegraphics[width=1\textwidth]{images/lomb_heatmap.pdf}
+    \caption{Indice di puntualità delle direttrici Trenord per il
+        2022}
+    \label{figure:lomb_heatmap}
+\end{sidewaysfigure}
+
+In \figurename~\ref{figure:lomb_heatmap}\todo{Marco: collegare foglio
+    Jupyter} sono mostrati i dati trasmessi da Regione Lombardia
+riguardo la \textbf{puntualità}\footnote{Come già detto, per
+    \textit{indice di puntualità} si intende la percentuale di treni
+    arrivata a destino con un ritardo di al più 5 minuti, escludendo
+    le perturbazioni dovute a \textit{cause di forza maggiore},
+    scioperi e lavori programmati} delle corse Trenord nel 2022.  La
+tabella originale è stata rielaborata in modalità \textit{heatmap} per
+agevolarne la lettura.  La \figurename~\ref{figure:lomb_boxplot} rende
+ancora più evidente l'\textbf{importanza dei dati disaggregati}: i
+dati ufficiali pubblicati sul sito della Regione (vedi
+\figurename~\ref{lombardia_puntualita} e~\ref{lombardia_affidabilita})
+non riescono ad esprimere accuratamente le \textbf{diverse criticità},
+che differiscono non solo per periodo ma anche per
+\textbf{direttrice}.
+
+\begin{sidewaysfigure}[p]
+    \centering
+    \includegraphics[width=1\textwidth]{images/lomb_boxplot.pdf}
+    \caption{Boxplot dell'indice mensile di puntualità delle
+        direttrici Trenord per il 2022}
+    \label{figure:lomb_boxplot}
+\end{sidewaysfigure}
 
 \chapter{Progettazione e implementazione}
 
 In questo capitolo dell'elaborato è descritta la \textbf{parte
     implementativa} del lavoro di Tesi.  L'obiettivo è stato creare un
 \textbf{software} per \textbf{scaricare} programmaticamente i dati
-della circolazione ferroviaria, \textbf{convertirli in Open Data} e
-\textbf{analizzarli} proponendo statistiche descrittive e
+della circolazione ferroviaria, \textbf{renderli fruibili in formati
+    aperti}
+% \todo{AT: tecnicamente non è che li ``converti in opendata'' (anche
+% perché non li stai rilasciando), casomai li ``rendi fruibili per una
+% futura liberazione'', o simili}
+e \textbf{analizzarli} proponendo statistiche descrittive e
 visualizzazioni.
 
 
@@ -1059,9 +1166,14 @@ circolazione ferroviaria verificando nel contempo la correttezza di
 quanto letto.  Considerando che la circolazione ferroviaria è
 \textit{sempre in movimento} e le API non offrono tipicamente
 l'accesso ai dati storici, è inoltre fondamentale salvare le
-informazioni in \textbf{modo incrementale}.  Le particolarità e i casi
-eccezionali, molto frequenti nelle API considerate, devono essere
-gestiti opportunamente.
+informazioni \textbf{incrementalmente} campionando con una frequenza
+opportuna.
+% \todo{AT: i.e., campionando con una frequenza ``opportuna''}.
+Le particolarità e i casi eccezionali, molto frequenti nelle API
+considerate, devono essere gestiti \textit{incronciando} i dati con
+quelli già raccolti ed eseguendo continui \textit{sanity check}.
+% \todo{AT: sinonimo più esplicito, magari ``integrando/incrociando
+% dati e/o calcolando informazione'')}.
 
 \subsection{Progettazione}
 
@@ -1169,23 +1281,23 @@ presente il diagramma UML delle classi principali: \texttt{Train},
 \texttt{Station}, \texttt{TrainStop} e \texttt{TrainStopTime}.
 Intuitivamente, ogni classe rappresenta un concetto della ferrovia e
 richiama la terminologia già definita in Appendice
-(\ref{terminologia}).  Durante lo \textit{scraping} non tutte le
+(\S~\ref{terminologia}).  Durante lo \textit{scraping} non tutte le
 informazioni sono immediatamente disponibili: si pensi ad esempio
 all'orario di arrivo effettivo di un treno in una fermata o al binario
 di partenza.  Di conseguenza, i campi indicati con $^*$ possono essere
 nulli.
 
 I metodi \texttt{departures()} e \texttt{arrivals()} di
-\texttt{Station} (vedi Appendice~\ref{partenzeArrivi}) ritornano degli
+\texttt{Station} (vedi \S~\ref{partenzeArrivi}) ritornano degli
 oggetti \texttt{Train} parzialmente inizializzati.  Chiamando il
 metodo \texttt{fetch()} su di essi, viene letta tra le altre la
-risposta API di \texttt{andamentoTreno} (vedi
-Appendice~\ref{andamentoTreno}) e sono quindi istanziati gli attributi
-e oggetti relativi a fermate, stazioni e tempi tramite metodi come
-\texttt{\_from\_raw\_data()}.  L'\textbf{approccio \textit{top-down}}
-nell'inizializzazione permette di minimizzare il numero di richieste
-API e delegare opportunamente le responsabilità di decodifica e
-\textit{interpretazione} delle risposte.
+risposta API di \texttt{andamentoTreno} (vedi \S~\ref{andamentoTreno})
+e sono quindi istanziati gli attributi e oggetti relativi a fermate,
+stazioni e tempi tramite metodi come \texttt{\_from\_raw\_data()}.
+L'\textbf{approccio \textit{top-down}} nell'inizializzazione permette
+di minimizzare il numero di richieste API e delegare opportunamente le
+responsabilità di decodifica e \textit{interpretazione} delle
+risposte.
 
 Le classi \texttt{ViaggiaTrenoAPI} e \texttt{TrenordAPI} espongono dei
 metodi utili a interfacciarsi alle API e persistono le sessioni
@@ -1211,7 +1323,7 @@ in seguito.
 \subsubsection{Stazioni}
 
 Osservando le risposte API del metodo \texttt{cercaStazione} di
-Viaggiatreno (vedi Appendice~\ref{cercaStazione}) si può supporre che
+Viaggiatreno (vedi \S~\ref{cercaStazione}) si può supporre che
 \textit{tutte e sole} le stazioni italiane abbiano un \textbf{codice
     identificativo univoco} e almeno un \textbf{nome}, lungo o breve.
 Ciò si verifica quasi sempre, ma si possono trovare:
@@ -1233,9 +1345,9 @@ nella lista delle fermate dei treni che sostano.  Un esempio è Arcene
 delle fermate di un treno sulla tratta Treviglio $\leftrightarrow$
 Bergamo.  Infine, il metodo \texttt{elencoStazioni} (che dovrebbe
 mostrare tutte le stazioni di una regione, vedi
-Appendice~\ref{elencoStazioni}) può \textit{piazzare} una stazione in
-più regioni differenti, anche se ciò non ha naturalmente riscontro con
-la realtà.
+\S~\ref{elencoStazioni}) può \textit{piazzare} una stazione in più
+regioni differenti, anche se ciò non ha naturalmente riscontro con la
+realtà.
 
 Per facilitare le successive analisi, le stazioni con \textit{forti
     problematiche} (come la mancanza di un nome) hanno l'attributo
@@ -1246,8 +1358,8 @@ Per facilitare le successive analisi, le stazioni con \textit{forti
 Durante il funzionamento normale del programma, i treni sono prima
 recuperati dalle \textit{partenze} di una stazione e solo
 successivamente viene interrogato il metodo \texttt{andamentoTreno}
-(vedi Appendice~\ref{andamentoTreno}).  Talvolta, specialmente in caso
-di treni parzialmente o totalmente cancellati, l'API ritorna codici di
+(vedi \S~\ref{andamentoTreno}).  Talvolta, specialmente in caso di
+treni parzialmente o totalmente cancellati, l'API ritorna codici di
 errore come HTTP 204 (No Content) o HTTP 404 (Not Found).  In questi
 casi nessuna ulteriore informazione può essere reperita, nemmeno la
 lista delle fermate programmate.
@@ -1261,22 +1373,22 @@ deve escludere dalle analisi.  I dati ritornati dalla API di
 Viaggiatreno vengono quindi integrati con quelli dell'API di Trenord,
 prediligendo la seconda in caso di conflitti.
 
-Come già detto (vedi Appendice~\ref{terminologia}), un treno è
-identificato univocamente anche dalla \textit{data di partenza}, in
-quanto quest'ultima può essere di complicata determinazione se la
-corsa si sviluppa in più giornate.  Trenord rappresenta gli orari con
-stringhe \texttt{HH:MM:SS} senza le informazioni sulla data; è quindi
-difficile convertirle programmaticamente in \textit{timestamp}.  Il
-metodo \texttt{\_fix\_intraday\_datetimes()} di \texttt{Train} tenta
-di risolvere il problema con un algoritmo che considera come
-appartenenti al giorno successivo le fermate cui ora di arrivo o
-partenza è minore di una costante
-\texttt{INTRADAY\_\-SPLIT\_\-HOUR}\footnote{La costante è
-    \textit{empiricamente} impostata a 4, in quanto non ci sono treni
-    operati da Trenord aventi ora di partenza prima della mezzanotte e
-    ora di arrivo oltre le 4}.  Se nella prima fermata il treno parte
-prima della mezzanotte, gli orari delle fermate successive oltre la
-mezzanotte ed entro la soglia impostata sono aggiustati di un giorno.
+Come già detto (vedi \S~\ref{terminologia}), un treno è identificato
+univocamente anche dalla \textit{data di partenza}, in quanto
+quest'ultima può essere di complicata determinazione se la corsa si
+sviluppa in più giornate.  Trenord rappresenta gli orari con stringhe
+\texttt{HH:MM:SS} senza le informazioni sulla data; è quindi difficile
+convertirle programmaticamente in \textit{timestamp}.  Il metodo
+\texttt{\_fix\_intraday\_datetimes()} di \texttt{Train} tenta di
+risolvere il problema con un algoritmo che considera come appartenenti
+al giorno successivo le fermate cui ora di arrivo o partenza è minore
+di una costante \texttt{INTRADAY\_\-SPLIT\_\-HOUR}\footnote{La
+    costante è \textit{empiricamente} impostata a 4, in quanto non ci
+    sono treni operati da Trenord aventi ora di partenza prima della
+    mezzanotte e ora di arrivo oltre le 4}.  Se nella prima fermata il
+treno parte prima della mezzanotte, gli orari delle fermate successive
+oltre la mezzanotte ed entro la soglia impostata sono aggiustati di un
+giorno.
 
 Similmente alle stazioni, i treni con dati incongruenti o che non
 effettuano servizio viaggiatori hanno l'attributo \texttt{\_phantom}
@@ -1288,9 +1400,7 @@ Per aumentare le performance e ridurre al minimo il numero di
 richieste inoltrate alle API, è stato implementato un meccanismo di
 \textit{caching} delle \textbf{stazioni}.  Si suppone infatti che le
 informazioni di una stazione non cambino durante l'esecuzione del
-programma.
-
-Il dizionario (\textit{hash map}) \texttt{\_cached} di
+programma.  Il dizionario (\textit{hash map}) \texttt{\_cached} di
 \texttt{Station} associa ad ogni \textit{codice stazione} un'istanza
 della classe.  Prima di procedere con la loro esecuzione, i metodi
 statici \texttt{\_from\_raw} e \texttt{by\_code} controllano la
@@ -1303,7 +1413,6 @@ L'obiettivo del programma è reperire più informazioni possibili da
 \textbf{tutti} i treni italiani circolanti in una giornata.
 Purtroppo, non esiste un metodo API che ritorna tutte le corse
 circolanti in un dato momento: è necessario reperirle in altro modo.
-
 Per risolvere il problema, si consideri che un treno circolante dovrà
 necessariamente comparire nel tabellone di almeno \textit{due}
 stazioni, quella di partenza e di arrivo.  Osservando i tabelloni di
@@ -1323,9 +1432,9 @@ salvare i dati delle fermate non ancora superate.
 
 \begin{algorithm}
     \caption{Scraping incrementale di tutti i treni}
-    \label{scraper_alg}
-    \begin{algorithmic}[1] \Require{Insieme $R$ delle regioni
-            italiane}
+    \label{alg:scraper}
+    \begin{algorithmic}[1]
+        \Require{Insieme $R$ delle regioni italiane}
         
         \LComment{Reperisci tutte le stazioni da tutte le regioni}
         \State $S \gets \varnothing$
@@ -1335,18 +1444,18 @@ salvare i dati delle fermate non ancora superate.
         \EndFor
 
         \State \phantom{i like trains}
-        \State $T \gets \varnothing$
+        \State $T \gets \varnothing$\label{alg:scraper:t}
         \Comment{Insieme dei treni non ancora arrivati}
-        \State $T^* \gets \varnothing$
+        \State $T^* \gets \varnothing$\label{alg:scraper:ts}
         \Comment{Insieme dei treni arrivati definitivamente}
-        \While{\textbf{true}}
+        \While{\textbf{true}}\label{alg:scraper:while}
             \LComment{Controlla lo stato dei treni non ancora arrivati
                 a destino}
-            \For{$t \in T$}
+            \For{$t \in T$}\label{alg:scraper:for1}
                 \State $t \gets $ \Call{fetch}{$t$}
-                \If{\Call{arrived}{$t$}}
-                    \State $T^* \gets T^* \cup \{t\}$
-                    \State $T \gets T \setminus \{t\}$
+                \If{\Call{arrived}{$t$}}\label{alg:scraper:for1:1}
+                    \State $T^* \gets T^* \cup \{t\}$\label{alg:scraper:for1:2}
+                    \State $T \gets T \setminus \{t\}$\label{alg:scraper:for1:3}
                 \EndIf
             \EndFor
             \State \phantom{https://youtu.be/hHkKJfcBXcw}
@@ -1354,14 +1463,14 @@ salvare i dati delle fermate non ancora superate.
                 stazioni $S$}
             \For{$s \in S$}
                 \For{$t \in $ \Call{departures}{$s$}}
-                    \If{$t \in T \textbf{ or } t \in T^*$}
+                    \If{$t \in T \textbf{ or } t \in T^*$}\label{alg:scraper:for2:1}
                         \State \textbf{continue}
                         \Comment{Ignora i treni già controllati}
                     \EndIf
                     
                     \State \phantom{ }
                     \State $t \gets $ \Call{fetch}{$t$}
-                    \If{\Call{arrived}{$t$}}
+                    \If{\Call{arrived}{$t$}}\label{alg:scraper:for2:2}
                         \State $T^* \gets T^* \cup \{t\}$
                         \Comment{Se arrivato, salva definitivamente in $T^*$}
                     \Else
@@ -1371,38 +1480,49 @@ salvare i dati delle fermate non ancora superate.
                 \EndFor
             \EndFor
             \State \phantom{ }
-            \State \Call{checkpoint}{$T, \, T^*$}
+            \State \Call{checkpoint}{$T, \, T^*$}\label{alg:scraper:checkpoint}
             \Comment{Salva su disco i progressi}
-            \State \Call{sleep}{\text{1 hour}}
+            \State \Call{sleep}{\text{1 hour}}\label{alg:scraper:sleep}
         \EndWhile
     \end{algorithmic}
 \end{algorithm}
+% \todo{AT: caption e indica che formalismo stai usando, e cita il
+% tutto nel testo}
 
-Di seguito è illustrato ad alto livello l'algoritmo dello
-\textit{scraper}.  L'unico \textbf{input} richiesto è l'insieme delle
+Di seguito è illustrato ad alto livello il funzionamento dello
+\textit{scraper} secondo le convenzioni pseudocodice di Cormen et
+al.\@~\cite{Cormen} L'unico \textbf{input} richiesto è l'insieme delle
 regioni italiane $R$ utilizzato nella prima fase di popolamento
 dell'insieme delle stazioni $S$.  Gli \textbf{insiemi} $T$ e $T^*$
-rappresentano rispettivamente i \textbf{treni non ancora arrivati} (da
-ricontrollare successivamente) e i \textbf{treni arrivati} (non più da
-controllare).
+(ll.\@~\ref{alg:scraper:t} e~\ref{alg:scraper:ts}) rappresentano
+rispettivamente i \textbf{treni non ancora arrivati} (da ricontrollare
+successivamente) e i \textbf{treni arrivati} (non più da controllare).
 
-Il \textit{cuore} dell'algoritmo è un ciclo infinito all'interno del
-quale sono inizialmente ricontrollate le \textbf{corse non ancora
-    giunte a destino} e che quindi hanno dati mancanti (come
+Il \textit{cuore} dell'algoritmo è un ciclo infinito
+(l.\@~\ref{alg:scraper:while}) all'interno del quale sono inizialmente
+ricontrollate le \textbf{corse non ancora giunte a destino}
+(l.\@~\ref{alg:scraper:for1}) e che quindi hanno dati mancanti (come
 l'\textit{orario effettivo} di arrivo).  Quando una corsa è arrivata
-allora la si salva in $T^*$ e la si rimuove da $T$.  A fine giornata
-l'insieme $T$ dovrebbe essere vuoto e $T^*$ contenere tutti i treni
-circolati e arrivati.  Similmente, i due cicli innestati successivi
-iterano tra tutti i treni in partenza da tutte le stazioni cercando
-\textbf{corse inedite}, ovvero non presenti in $T^*$ o $T$.
+(l.\@~\ref{alg:scraper:for1:1}) allora la si salva in $T^*$ e la si
+rimuove da $T$ (ll.\@~\ref{alg:scraper:for1:2}
+e~\ref{alg:scraper:for1:3}).  A fine giornata l'insieme $T$ dovrebbe
+essere vuoto e $T^*$ contenere tutti i treni circolati e arrivati.
+Similmente, i due cicli innestati successivi iterano tra tutti i treni
+in partenza da tutte le stazioni cercando \textbf{corse inedite},
+ovvero non presenti in $T^*$ o $T$ (l.\@~\ref{alg:scraper:for2:1}).
 Quest'ultime sono aggiunte alternativamente $T^*$ o a $T$ in base al
-loro stato di arrivo.
+loro stato di arrivo (l.\@~\ref{alg:scraper:for2:2}).
 
 Al termine di ogni iterazione, i dati sono salvati su disco (per
-\textbf{persistenza}) e il \textbf{programma si ferma} per un'ora
-prima di proseguire con l'esecuzione.  Controllare continuamente lo
-stato dei treni è irragionevole e porterebbe a un numero di richieste
-API esoso e ingiustificato.
+\textbf{persistenza}) (l.\@~\ref{alg:scraper:checkpoint}) e il
+\textbf{programma si ferma} per un'ora prima di proseguire con
+l'esecuzione (l.\@~\ref{alg:scraper:sleep}).  Controllare
+continuamente lo stato dei treni è irragionevole e porterebbe a un
+numero di richieste API esoso e ingiustificato: il \textbf{periodo di
+    campionamento} di un'ora è il minimo accettabile senza rischi di
+perdere anche le corse più brevi\footnote{Si noti come le corse più
+    brevi di un'ora saranno comunque campionate in quanto compariranno
+    nei tabelloni delle partenze ben prima dell'orario di partenza}.
 
 \subsubsection{Note implementative}
 
@@ -1424,8 +1544,11 @@ stessa istanza tra esecuzioni diverse anche al variare degli attributi
 L'\textbf{esecuzione infinita} di un programma può risultare poco
 pratica.  Per ovviare al problema si può utilizzare un applicativo
 come \textbf{crontab} per implementare l'esecuzione controllata del
-codice ogni ora.  La continuità e la persistenza sono ottenute grazie
-alla \textbf{serializzazione} e \textbf{deserializzazione} iniziale e
+codice ogni ora.
+% \todo{AT: da qualche parte spieghi il perché della scelta del
+% periodo di campionamento?}.
+La continuità e la persistenza sono ottenute grazie alla
+\textbf{serializzazione} e \textbf{deserializzazione} iniziale e
 finale dei dizionari \texttt{station\_cache} ($S$),
 \texttt{fetched\_trains} ($T^*$) e \texttt{unfetched\_trains} ($T$)
 tramite la libreria \texttt{pickle}.  Ogni notte alle 04:00 gli ultimi
@@ -2274,12 +2397,12 @@ soppresse.  Un treno avente alcune fermate sorppresse è detto
 
 \section{API di Viaggiatreno}
 
-Le API di Viaggiatreno (vedi la Sezione~\ref{viaggiatreno}) non
-dispongono di una documentazione ufficiale e non sono conformi alla
-architettura REST o ad altri standard \textit{de facto} \cite{Giunta}.
-Numerosi tentativi sono stati fatti dalla comunità open source
-italiana per documentarle: in particolare si ringraziano Stefano
-(sabas) \cite{Sabas}, Luca Grandi \cite{Grandi} e Fabrizio Tarizzo
+Le API di Viaggiatreno (vedi \S~\ref{viaggiatreno}) non dispongono di
+una documentazione ufficiale e non sono conformi alla architettura
+REST o ad altri standard \textit{de facto} \cite{Giunta}.  Numerosi
+tentativi sono stati fatti dalla comunità open source italiana per
+documentarle: in particolare si ringraziano Stefano (sabas)
+\cite{Sabas}, Luca Grandi \cite{Grandi} e Fabrizio Tarizzo
 \cite{Tarizzo} per il loro fondamentale contributo.  I metodi sono
 generalmente accessibili al percorso
 \texttt{/infomobilita/\-resteasy/\-viaggiatreno/\-$M$/\-$P_1$/\-$P_2$/\-$\dots$/\-$P_n$}
