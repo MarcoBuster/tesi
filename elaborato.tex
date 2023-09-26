@@ -1849,7 +1849,7 @@ In questo capitolo verranno commentati alcuni \textbf{risultati} e
 \textbf{visualizzazioni} rilevanti.  Tutti e i soli \textbf{dati
     grezzi} utilizzati sono stati raccolti dal software descritto nel
 capitolo precedente: le prossime sono le \textbf{prime analisi
-    indipendenti} sulla \textit{reale performance} della circolazione
+    indipendenti} della \textit{reale performance} della circolazione
 ferroviaria italiani.  L'autore auspica che possano essere di
 \textbf{ispirazione} per ulteriore ricerca più approfondita e
 iniziative di \textit{citizen science} mirate al \textbf{controllo
@@ -1859,17 +1859,17 @@ Amministrazioni.
 Grazie all'\textbf{ampia disponibilità} di dati accumulati è possibile
 trarre conclusioni significative.  Ove non diversamente specificato,
 le prossime analisi si intendono realizzate dai dati raccolti dallo
-scraper tra il \textbf{1° marzo 2023} il \textbf{31 agosto 2023}.
+scraper tra il \textbf{1° aprile 2023} il \textbf{31 agosto 2023}.
 
 \section{Statistiche predefinite}
 
-Il modulo \textit{analyzer} (vedi Sezione~\ref{analyzer}) offre alcune
+Il modulo \textit{analyzer} (vedi \S~\ref{analyzer}) offre alcune
 \textbf{visualizzazioni predefinite} descritte in seguito.  Uno dei
 requisiti progettuali del modulo è la \textbf{completa
     parametrizzazione} dei risultati: questo favorisce la
 \textbf{riproducibilità} ma rende difficile prevedere analisi più
-complesse e specifiche: per questo motivo ulteriori risultati sono
-discussi nella sezione successiva.
+complesse e specifiche.  Ulteriori risultati saranno discussi nella
+sezione successiva (\S~\ref{altre_analisi}).
 
 \subsection{\texttt{describe}}
 
@@ -1916,7 +1916,7 @@ programmato.
 
 L'\textbf{affollamento}\footnote{Si ricorda che i dati
     sull'affollamento sono disponibili solo per i treni Trenord}
-rilevato è tendenzialmente basso: la probabilità che questo sia sopra
+rilevato è tendenzialmente basso: la probabilità che questo superi
 l'80\% è solo dell'1.83\%~\cite[B]{StatJup}.  Il dato è da prendere
 con adeguata \textbf{diffidenza} in quanto è fornito in conflitto di
 interesse da Trenord stessa, i metodi di calcolo non sono noti e il
@@ -1993,7 +1993,7 @@ regionali (Trenitalia, Trenord e Tper).  La \textbf{durata maggiore}
 dei primi può spiegare il fenomeno; si può considerare \textit{meno
     rilevante} un ritardo di pochi minuti su un \textbf{viaggio lungo}
 (nonostante il disagio per il viaggiatore, specialmente in caso di
-coincidenze, sia lo stesso).
+coincidenze, sia potenzialmente lo stesso).
 
 Tra le tre \textbf{imprese ferroviarie regionali} considerate è lecito
 affermare che nel periodo considerato la \textbf{\textit{performance}
@@ -2070,7 +2070,7 @@ servizio anche secondo logiche di mercato.
     \caption{Numero di treni circolanti}
 \end{figure}
 
-Precedentemente (vedi Sezione \ref{linee_ferroviarie}) è stata
+Precedentemente (vedi \S~\ref{linee_ferroviarie}) è stata
 proposta una definizione puntuale di \textbf{linea ferroviaria}.
 Riassumendo, due treni $t_1$ e $t_2$ appartengono alla stessa
 \textit{linea} se e solo se sono operati dalla stessa impresa
@@ -2115,7 +2115,7 @@ colorate che collegano i punti sul piano; le \textbf{interruzioni di
     linea} sono graficate con rettangoli rossi.  Il
 DCO\footnote{Dirigente Centrale Operativo, detto informalmente
     \textit{capostazione}} utilizza costantemente le tracce orario per
-coordinare la circolazione e avere una rilevante visione d'insieme.
+coordinare la circolazione e avere una visione d'insieme rilevante.
 Essendo la piattaforma inaccessibile pubblicamente, non è possibile
 allegare immagini o ulteriore documentazione alla presente
 descrizione.  Il parametro \texttt{--stat timetable} cerca di
@@ -2148,10 +2148,11 @@ delle corse sulla linea; il resto delle tracce tratteggiate sono le
 tipologie rappresenta il \textbf{ritardo}, che come nella realtà può
 variare durante la corsa.  Ad esempio, i treni arancione e oro
 terminanti in alto a destra risultano aver accumulato \textbf{notevole
-    ritardo} (tra 30 e 45 minuti): seguendo la loro \textit{traccia} a
-ritroso si può immeditamente constatare le località ove tale ritardo
-si è generato e il successivo \textbf{progressivo deterioramento},
-probabilmente dovuto alla perdita di precedenze nella circolazione.
+    ritardo} (tra 30 e 45 minuti): seguendo a ritroso la loro
+\textit{traccia} si può immeditamente constatare le località ove tale
+ritardo si è generato e il successivo \textbf{progressivo
+    deterioramento}, probabilmente dovuto alla perdita di precedenze
+nella circolazione.
 % Al contrario, la tendenza dei treni con modesti ritardi è di il
 % \textbf{recupero} tra una fermata e l'altra.
 
@@ -2211,7 +2212,8 @@ causa dell'enorme quantità di informazioni i file HTML generati
 possono essere di \textbf{notevoli dimensioni}, nell'ordine di
 centinaia di megabyte.
 
-\section{Sulla difficoltà nella scelta dei titoli}
+\section{Altre analisi}
+\label{altre_analisi}
 
 Lo scopo di questa sezione è dimostrare tramite ulteriori analisi
 approfondite le \textbf{forti potenzialità} dei dati raccoglibili con
@@ -2251,7 +2253,6 @@ offre a chiunque la possibilità di trarre \textbf{le proprie
         \label{figure:delay_hist_acc}
     }
     \caption{Distribuzione statistica dei ritardi dei treni italiani}
-    \label{figure:timetable}
 \end{figure}
 
 In statistica, data una variabile aleatoria $X$ e una sua
@@ -2267,16 +2268,16 @@ ritardi, $p_X(x)$ la probabilità che \textit{un treno arrivi o parta
 semplificare con $F_X(5)$ dove $X$ considera solo le ultime fermate di
 ogni corsa.
 
-In \figurename~\ref{figure:delay_hist} approssima con un
+La \figurename~\ref{figure:delay_hist} approssima con un
 \textbf{istogramma} la \textbf{funzione di massa di probabilità} dei
 ritardi in arrivo e partenza.  Da sinistra, le due
 \textbf{concentrazioni} di valori aumentano velocemente fino al valore
 0 (\textit{treno in perfetto orario}) e 1 per poi decrescere
-monotonicamente con un decadimento apparentemente esponenziale
-all'aumentare del ritardo.  Intuitivamente, all'aumentare del ritardo
-$x$, $p_X(x)$ (ovvero la probabilità che un treno arrivi o parta con
-esattamente $x$ minuti di ritardo) diminuisce notevolmente.  La
-\figurename~\ref{figure:delay_hist_acc} approssima la già citata
+monotonicamente all'aumentare del ritardo con un decadimento
+apparentemente esponenziale.  Intuitivamente, all'aumentare del
+ritardo $x$, $p_X(x)$ (ovvero la probabilità che un treno arrivi o
+parta con esattamente $x$ minuti di ritardo) diminuisce notevolmente.
+La \figurename~\ref{figure:delay_hist_acc} approssima la già citata
 \textbf{funzione di ripartizione}: ogni punto corrisponde a un
 \textit{indice di puntualità} calcolato sui treni arrivati o partiti
 da una fermata con un ritardo di $x$ minuti.  L'andamento è del tutto
