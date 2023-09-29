@@ -173,6 +173,7 @@ operano sulla ferrovia:
 \end{itemize}
 
 \subsection{Le Società sul territorio}
+\label{societa_territorio}
 
 Attualmente sono certificate 18 \textbf{imprese ferroviarie} per il
 servizio passeggeri \cite{ElencoIF}, tra cui Trenitalia S.p.A.,
@@ -383,6 +384,7 @@ incentivandole a migliorare ($C_\text{base}$) al fine di aumentare la
 \textbf{performance regime} complessiva.
 
 \section{Infrastruttura tecnologica}
+\label{infrastruttura_tecnologica}
 
 La circolazione ferroviaria è regolata dal gestore
 dell'infrastruttura.  All'interno delle stazioni e in linea esistono
@@ -477,6 +479,7 @@ In \S~\ref{documentazione} sono documentati alcuni metodi rilevanti
 delle due API.
 
 \section{Panorama giuridico, politico e legislativo}
+\label{panorama_giuridico}
 
 Durante il lavoro di Tesi è stato fatto ampio uso delle informazioni
 fornite dalle API del portale Viaggiatreno, senza aver chiesto alcuna
@@ -524,6 +527,7 @@ pubblicati, ma chi cerca di reperirli o redistribuirli rischia
 Trenitalia può farlo?
 
 \subsection{Il caso Trenìt}
+\label{caso_trenit}
 
 Trenìt\footnote{https://trenit.app} è un'applicazione per Android e
 iOS che permette di cercare e confrontare soluzioni di viaggio su
@@ -877,6 +881,7 @@ alla communità manca la possibilità di commentare e interagire.
 
 
 \subsection{Accesso civico generalizzato}
+\label{foia}
 
 Dopo lunghe battaglie di cittadinanza attiva da parte di gruppi come
 Foia4Italy \cite{SilenziDiStato}, nel 2016 il ``decreto Trasparenza''
@@ -1061,6 +1066,7 @@ che differiscono non solo per periodo ma anche per
 \end{sidewaysfigure}
 
 \chapter{Progettazione e implementazione}
+\label{progettazione}
 
 In questo capitolo dell'elaborato è descritta la \textbf{parte
     implementativa} del lavoro di Tesi.  L'obiettivo è stato creare un
@@ -1158,6 +1164,7 @@ CLI\footnote{\textit{Command Line Interface}, interfaccia a riga di
 ed è rilasciata con licenza libera GPL $\geq 2.0$.
 
 \section{Scraper}
+\label{scraper}
 
 Lo scraper è il componente più importante e complesso del sistema.  Il
 suo compito è interfacciarsi con le API di Viaggiatreno e Trenord per
@@ -1408,6 +1415,7 @@ presenza in cache della stazione richiesta; se l'oggetto non è stato
 ancora creato, viene salvato in cache prima di essere ritornato.
 
 \subsection{Algoritmo di scraping incrementale}
+\label{alg_scraping}
 
 L'obiettivo del programma è reperire più informazioni possibili da
 \textbf{tutti} i treni italiani circolanti in una giornata.
@@ -1575,6 +1583,7 @@ $ docker run \
 \end{minted}
 
 \section{Extractor}
+\label{extractor}
 
 Come detto, ogni notte lo scraper produce dei file pickle serializzati
 con tutte le informazioni dei treni della giornata.  L'obiettivo
@@ -1843,6 +1852,7 @@ I parametri da linea di comando sono \texttt{--group\--by} e
 \texttt{--agg\--func}.
 
 \chapter{Analisi e risultati}
+\label{analisi}
 \todo{Sistema link bibliografia}
 
 In questo capitolo verranno commentati alcuni \textbf{risultati} e
@@ -1859,7 +1869,7 @@ Amministrazioni.
 Grazie all'\textbf{ampia disponibilità} di dati accumulati è possibile
 trarre conclusioni significative.  Ove non diversamente specificato,
 le prossime analisi si intendono realizzate dai dati raccolti dallo
-scraper tra il \textbf{1° aprile 2023} il \textbf{31 agosto 2023}.
+scraper tra il \textbf{1° aprile 2023} e il \textbf{31 agosto 2023}.
 
 \section{Statistiche predefinite}
 
@@ -1872,6 +1882,7 @@ complesse e specifiche.  Ulteriori risultati saranno discussi nella
 sezione successiva (\S~\ref{altre_analisi}).
 
 \subsection{\texttt{describe}}
+\label{stat_describe}
 
 Con il parametro \texttt{--stat describe} l'\textit{analyzer} mostra
 l'output del metodo
@@ -1930,6 +1941,7 @@ risultato non è facilmente verificabile.
 \end{figure}
 
 \subsection{\texttt{delay\_boxplot}}
+\label{stat_delay_boxplot}
 
 Il parametro \texttt{--stat delay\_\-boxplot} permette di visualizzare
 un boxplot dei dati sui \textbf{ritardi} in arrivo e partenza del
@@ -2027,6 +2039,7 @@ essere dovuti alla maggiore frequenza di \textbf{scioperi}.
 \end{figure}
 
 \subsection{\texttt{day\_train\_count}}
+\label{stat_day_train_count}
 
 Un'altra statistica interessante è l'andamento del \textbf{numero di
     treni circolanti} nel corso delle giornate.  Con il parametro
@@ -2070,16 +2083,15 @@ servizio anche secondo logiche di mercato.
     \caption{Numero di treni circolanti}
 \end{figure}
 
-Precedentemente (vedi \S~\ref{linee_ferroviarie}) è stata
-proposta una definizione puntuale di \textbf{linea ferroviaria}.
-Riassumendo, due treni $t_1$ e $t_2$ appartengono alla stessa
-\textit{linea} se e solo se sono operati dalla stessa impresa
-ferroviaria e hanno eguale \textit{insieme delle fermate}.
-L'\textit{analyzer} assegna ad ogni linea un \textbf{identificatore
-    univoco}, prodotto delle proprietà di cui sopra e utilizzabile
-successivamente per filtrare o raggruppare i dati.  Il parametro
-\texttt{--stat detect\_\-lines} genera e apre una pagina HTML
-contenente una tabella di tutte le linee rilevate (vedi
+Precedentemente (vedi \S~\ref{linee_ferroviarie}) è stata proposta una
+definizione puntuale di \textbf{linea ferroviaria}.  Riassumendo, due
+treni $t_1$ e $t_2$ appartengono alla stessa \textit{linea} se e solo
+se sono operati dalla stessa impresa ferroviaria e hanno eguale
+\textit{insieme delle fermate}.  L'\textit{analyzer} assegna ad ogni
+linea un \textbf{identificatore univoco}, prodotto delle proprietà di
+cui sopra e utilizzabile successivamente per filtrare o raggruppare i
+dati.  Il parametro \texttt{--stat detect\_\-lines} genera e apre una
+pagina HTML contenente una tabella di tutte le linee rilevate (vedi
 \figurename~\ref{figure:detect_lines}).  Le colonne della tabella
 % (\textit{identificativo linea}, \textit{stazione A},
 % \textit{stazione B}, \textit{numero di treni} e \textit{numero di
@@ -2088,6 +2100,7 @@ possono essere utilizzate come \textbf{criterio di ordinamento} e
 filtrate tramite la \textbf{barra di ricerca}.
 
 \subsection{\texttt{timetable}}
+\label{stat_timetable}
 
 \begin{figure}[p] \centering
     \subfloat[visualizzazione della giornata]{
@@ -2157,6 +2170,7 @@ nella circolazione.
 % \textbf{recupero} tra una fermata e l'altra.
 
 \subsection{\texttt{trajectories\_map}}
+\label{stat_trajectories_map}
 
 L'ultima visualizzazione predefinita proposta è di diverso formato
 rispetto alle precedenti.  Con il parametro \texttt{--stat
@@ -2241,6 +2255,7 @@ offre a chiunque la possibilità di trarre \textbf{le proprie
     conclusioni} scaricando i dati con lo strumento.
 
 \subsection{Ritardo come variabile aleatoria}
+\label{var_aleatoria}
 
 \begin{figure}[p] \centering
     \subfloat[funzione di massa di
@@ -2287,6 +2302,7 @@ Federali Svizzere \cite{SbbPuntualita}), l'83.94\% con al più 5 e il
 2.46\% con più di 20 minuti \cite[G]{StatJup}.
 
 \subsection{Andamento infragiornaliero}
+\label{andamento_infragiornaliero}
 
 \begin{figure}[h]
     \includegraphics[width=1\textwidth]{images/intraday_delay.pdf}
@@ -2345,6 +2361,231 @@ giornata \textbf{intervalli temporali} di 5 minuti con almeno 100
 treni circolanti.  Con \textit{ritardo mediano di un intervallo
     temporale} si intende il valore mediano dei ritardi medi alle
 fermate di ogni treno circolato nell'intervallo.
+
+\subsection{Ritardo relativo}
+\label{ritardo_relativo}
+
+Nelle analisi precedenti il \textit{ritardo} è stato sempre inteso in
+senso assoluto, senza considerare la \textit{durata} del viaggio.  In
+\figurename~\ref{figure:delay_box_rc} è apparso evidente il maggiore
+ritardo dei \textbf{treni a lunga percorrenza}, aventi per l'appunto
+una durata maggiore.
+
+Per \textit{ritardo relativo di una corsa} si intende il rapporto tra
+il suo \textit{ritardo assoluto mediano} e la sua \textit{durata},
+intesa come la differenza tra l'orario di partenza programmato della
+prima fermata e l'orario di arrivo all'ultima fermata.  In
+\figurename~\ref{figure:delay_box_percentage_wd} sono graficati i
+\textit{boxplot} dei \textit{ritardi relativi} delle corse di ogni
+impresa ferroviaria.  Il \textit{trend} è opposto rispetto a quanto
+osservato in \figurename~\ref{figure:delay_box_rc}: le imprese
+ferroviarie a \textbf{lunga percorrenza} hanno un \textit{ritardo
+    assoluto} maggiore, ma un \textit{ritardo relativo} minore.  Tra
+le imprese regionali, la \textbf{peggiore rimane Trenord} (ritardo
+medio in partenza 6.16\%), seguita da \textbf{Tper} (5.62\%) e
+\textbf{Trenitalia} (4.90\%).
+
+\begin{figure}[h]
+    \includegraphics[width=0.95\textwidth]{images/delay_box_percentage_wd.pdf}
+    \caption{\textit{Ritardo relativo} dei treni italiani, per impresa
+        ferroviaria~\cite[J]{StatJup}}
+    \label{figure:delay_box_percentage_wd}
+\end{figure}
+
+I dati precedenti suggeriscono una \textbf{intuitiva correlazione
+    lineare} tra la \textit{durata del viaggio} e il \textit{ritardo
+    assoluto mediano}.  In
+\figurename~\ref{figure:delay_duration_corr} è mostrata una
+\textbf{regressione lineare} tra il ritardo mediano assoluto della
+corsa e la sua durata.  Ad ogni punto nel piano corrisponde un
+\textit{50-quantile}\footnote{Il campione è diviso in 50 segmenti di
+    durate aventi la medesima dimensione} delle durate e la
+\textit{media} dei \textit{ritardi mediani} delle corse.  La
+correlazione è evidente: escludendo i valori dei quantili più estremi,
+l'\textbf{andamento} è prevalentemente \textbf{lineare}.
+All'aumentare della durata della corsa, il ritardo tendenzialmente
+aumenta.
+
+\begin{figure}[t]
+    \includegraphics[width=0.95\textwidth]{images/delay_duration_corr.pdf}
+    \caption{Correlazione tra ritardo mediano assoluto di una corsa e
+        durata~\cite[K]{StatJup}}
+    \label{figure:delay_duration_corr}
+\end{figure}
+
+\section{Conclusioni}
+
+Il lavoro di Tesi si conclude con \textbf{risultati soddisfacenti},
+nonostante molte questioni rimangano ancora oggetto di discussione.
+Si ricorda che l'\textbf{obiettivo principale} del lavoro di Tesi
+\textit{non} è stata l'analisi dei dati raccolti, ma l'attività di
+\textit{raccolta} stessa.  Dopo aver descritto le \textbf{principali
+    Società} (\S~\ref{societa_territorio}), la differenza tra
+\textbf{servizio pubblico} e \textbf{offerte a mercato}
+(\S~\ref{servizio_pubblico}) e il complesso meccanismo della
+\textbf{performance regime} (\S~\ref{performance_regime}), è stata
+mostrata e parzialmente documentata (\S~\ref{documentazione})
+l'\textbf{infrastruttura tecnologica} sfruttata ai fini del progetto
+(\S~\ref{infrastruttura_tecnologica}).  Nonostante le
+\textit{notevoli} incogruenze, la relativa semplicità delle
+\textbf{API} di Viaggiatreno e Trenord e l'assenza di
+\textit{rate-limit} o autenticazione hanno consentito di
+\textbf{scaricare ininterrottamente} considerevoli quantità di
+informazione durante i mesi tra aprile e agosto 2023.
+
+In \S~\ref{panorama_giuridico} è stato fornito un ampio resoconto del
+\textbf{panorama giuridico, politico e legislativo} con diverse
+riflessioni sulla legittimità dell'uso dei dati.  Il \textbf{caso
+    Trenìt} (\S~\ref{caso_trenit}) è emblematico: le richieste di
+Trenitalia hanno portato alla temporanea sospensione di
+un'applicazione utilizzata da migliaia di viaggiatori ogni giorno, per
+\textit{aver utilizzato dati altrui}.  Il \textbf{dato}, nella sua più
+\textit{innocente oggettività}, è conteso: può davvero una
+\textit{impresa pubblica}, titolare di contratti di \textit{servizio
+    pubblico} con \textit{enti pubblici} vantare diritti esclusivi
+sulle \textbf{informazioni in tempo reale} della circolazione
+ferroviaria?  La risposta del Tribunale è un debole \textit{no},
+basato più su tecnicismi legati alla definizione di \textit{banca
+    dati} e \textit{parte sostanziale} che sul diritto civico di
+\textbf{conoscere} e \textbf{controllare} l'operato
+dell'Amministrazione.
+
+A tale proposito, sono state inoltrate due istanze di \textbf{accesso
+    civico generalizzato} (\S~\ref{foia}): una al Ministero dei
+Trasporti per Trenitalia e una a Regione Lombardia per Trenord.  Il
+risultato della prima è stato un \textbf{diniego totale}, giustificato
+dalla \textit{tutela degli interessi commerciali} dell'impresa.  I
+dati richiesti sui ritardi, infatti, sono accorpati con quelli sulla
+occupazione dei posti a sedere e valore economico delle corse.
+Dovendo Trenitalia competere con altre imprese ferroviarie e servizi
+di trasporto a lunga percorrenza (come Italo), il diniego è stato
+ritenuto \textit{ragionevole} dall'Autore.  Regione Lombardia, d'altra
+parte, ha risposto con un \textbf{dinego parziale}, fornendo tra le
+altre cose alcuni \textit{report} su ritardi e cancellazioni di tutte
+le direttrici.  Quest'ultimi hanno ancora una volta evidenziato la
+fondamentale importanza dei \textbf{dati disaggregati}: per via della
+rilevata \textbf{forte disomogeneità} di \textit{performance} tra
+direttrici (\figurename~\ref{figure:lomb_heatmap}), i dati pubblicati
+sul sito web (\figurename~\ref{lombardia_puntualita}) sono da
+considerarsi \textbf{quasi irrilevanti}.  L'accesso ai \textbf{dati
+    grezzi}, tutt'ora non contemplato, porterebbe ad un livello di
+dettaglio tale da consentire la \textbf{totale comprensione} della
+situazione ai Cittadini più curiosi o politicamente interessati.  Le
+richieste di chiarimento sui disservizi, i dati relativi alla
+frequentazione, posti offerti e i \textit{report} sui costi sostenuti
+sono state oggetto di \textbf{diniego}, cui ragioni non sono state
+nemmeno accuratamente documentate.  Spetta al lettore il compito di
+valutare il comportamento dell'Amministrazione, anche alla luce del
+\textbf{pesante conflitto di interesse} che vede la Regione vestirsi
+del ruolo di \textit{appaltatore} e \textit{appaltante} del medesimo
+servizio.
+
+Nel secondo capitolo (cap.\@~\ref{progettazione}) è stata descritta la
+progettazione e l'implementazione dei software prodotti durante il
+lavoro di Tesi: lo \textit{scraper} (\S~\ref{scraper}),
+l'\textit{extractor} (\S~\ref{extractor}) e l'\textit{analyzer}
+(\S~\ref{analyzer}).  Il primo si occupa di scaricare con un
+\textbf{algoritmo di salvataggio incrementale} (\S~\ref{alg_scraping})
+le informazioni \textit{real-time} della circolazione ferroviaria, il
+secondo \textbf{converte} quanto salvato in comodi file CSV e l’ultimo
+propone delle \textbf{analisi predefinite} e
+\textbf{parametrizzabili}.  Tutti gli strumenti sono scritti in
+Python, sono \textit{open-source} e sono utilizzabili da linea di
+comando.  Per la prima volta è disponibile una \textit{suite} di
+strumenti utile a \textbf{scaricare}, \textbf{convertire} e
+\textbf{analizzare} in modo indipendente i dati della circolazione
+ferroviaria italiana.
+
+Per più di 5 mesi, in una macchina del \textit{Dipartimento di
+    Informatica} dell'Università degli Studi di Milano, un'istanza
+dello \textit{scraper} ha campionato informazioni dettagliate su più
+di 10 milioni \textit{eventi fermata-treno}.  Il \textit{bottino} è
+notevole non solo dal punto di vista statistico, ma anche
+\textbf{politico}: non sono mai stati ufficialmente pubblicati dati
+così specifici e \textit{densi} di informazione, nemmeno nella
+virtuosa Emilia Romagna.  Nell'ultimo capitolo (cap.\@~\ref{analisi})
+sono state proposte alcune analisi e visualizzazioni, in parte
+generate con lo strumento e in parte costruite \textit{ad-hoc}.
+Quest'ultime sono puntualmente \textbf{riproducibili} eseguendo il
+\textit{notebook} citato~\cite{StatJup}.  In pochi passi è stato
+possibile generare semplici statistiche descrittive
+(\S~\ref{stat_describe}) e osservare come generalmente i \textbf{treni
+    recuperano ritardo} sostando in una fermata.  In
+\S~\ref{stat_delay_boxplot} sono stati analizzati i
+\textbf{\textit{boxplot} dei ritardi} raggruppati per impresa
+ferroviaria e giorno della settimana.  Oltre alla curiosa
+\textit{maggiore puntualità} delle corse circolanti nel weekend, sono
+state rilevate notevoli differenze tra le imprese ferroviarie
+regionali e quelle a lunga percorrenza (approfondite successivamente
+in \S~\ref{ritardo_relativo}).  Anche il \textbf{numero di treni}
+varia nel weekend (\S~\ref{stat_day_train_count}): in particolare, il
+numero di corse regionali Trenitalia e Tper dimunisce notevolmente.
+
+Nell'ambito del lavoro di Tesi è stato necessario definire
+puntualmente il \textbf{concetto di \textit{linea ferroviaria}}
+avvalendosi delle sole informazioni a disposizione
+dell'\textit{analyzer} (\S~\ref{linee_ferroviarie}).  Con questa
+nozione è possibile produrre i c.d.\@ ``\textit{orari grafici}''
+(\S~\ref{stat_timetable}) di una linea per visualizzare tutti le corse
+effettivamente circolate in una giornata.  Un'altra visualizzazione in
+grado di offrire una ``visione di insieme'' è la \textbf{mappa
+    temporizzata} (\S~\ref{stat_trajectories_map}): ogni treno è
+rappresentanto da una \textit{linea colorata} avente come
+\textit{testa} un poligono indicante la categoria della corsa.
+
+Le \textbf{ultime analisi} hanno cercato di meglio descrivere
+attraverso ulteriori visualizzazioni la \textit{reale situazione}.
+Modellare il \textit{ritardo} come una \textbf{variabile aleatoria}
+(\S~\ref{var_aleatoria}) ha permesso di esprimere l'\textit{indice di
+    puntualità} come la sua \textit{funzione di ripartizione},
+permettendo di affermare che solo il 72.20\% dei treni arriva con al
+più 3 minuti di ritardo.  Concentrando i dati raccolti nei mesi in una
+sola giornata si ottiene l'\textbf{andamento infragiornaliero}
+(\S~\ref{andamento_infragiornaliero}): intuitivamente, nelle
+\textit{ore di punta} circolano più treni.  Si ipotizza inoltre una
+\textbf{correlazione} tra il numero di treni circolanti e la
+\textit{derivata prima} del ritardo.  Sulla \textit{falsa riga} di
+questa ipotesi, viene introdotto il concetto di \textbf{ritardo
+    relativo} (\S~\ref{ritardo_relativo}) legato alla \textit{durata}
+della corsa.  I risultati sono sorprendenti: le imprese ferroviarie a
+lunga percorrenza sono risultate \textit{relativamente più puntuali}
+delle colleghe regionali, nonostante siano \textit{assolutamente più
+    in ritardo}.  La \textit{performance} mediana di \textbf{Trenord}
+si conferma essere la peggiore nell'ambito del trasporto regionale,
+seguita da Tper e Trenitalia.  Infine, è stata dimostrata una
+intuitiva \textbf{correlazione lineare} tra il \textit{ritardo
+    assoluto} di una corsa e la sua durata.
+
+\subsection{Sviluppi futuri}
+
+L'argomento è tutt'altro che \textit{esaurito}.  Gli eventuali
+\textbf{obblighi di Legge} (anche comunitaria) riguardo l'accesso e la
+pubblicità dei dati in possesso delle imprese ferroviarie è ancora
+oggetto di discussione: \textit{può davvero essere così difficile
+    accedere ad informazioni tanto banali come l'orario effettivo di
+    arrivo di un treno?}
+
+La \textit{suite} di strumenti può essere utilizzata come base di
+partenza per \textbf{ulteriori analisi}, anche complesse.  Ad esempio,
+si potrebbe \textbf{modellare l'intera rete ferroviaria} e trovare le
+tratte più bisognose di interventi di potenziamento.  Oppure,
+implementare con tecniche di intelligenza artificiale un
+\textbf{predittore di ritardi} che, dato lo stato corrente della
+circolazione ferroviaria, condizioni ambientali e periodo stagionale,
+comunica al viaggiatore con una certa confidenza con quanto ritardo
+arriverà il treno o la probabilità di riuscire prendere una
+coincidenza.
+
+L'\textbf{accesso ai dati} è \textit{\textbf{condizione necessaria}}
+per un dialogo serio e costruttivo sul trasporto ferroviario italiano
+ed è una \textit{cartina di tornasole} della Trasparenza della nostra
+Democrazia.
+
+\vfill
+
+\epigraph{Dove un superiore pubblico interesse non imponga un
+    momentaneo segreto, la casa dell'amministrazione dovrebbe essere
+    di vetro.}{\textit{Filippo Turati}\\17 giugno 1908,~\cite{Turati}}
 
 % -----------------------------------------------------------------
 
