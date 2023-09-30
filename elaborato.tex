@@ -1053,9 +1053,14 @@ agevolarne la lettura.  La \figurename~\ref{figure:lomb_boxplot} rende
 ancora più evidente l'\textbf{importanza dei dati disaggregati}: i
 dati ufficiali pubblicati sul sito della Regione (vedi
 \figurename~\ref{lombardia_puntualita} e~\ref{lombardia_affidabilita})
-non riescono ad esprimere accuratamente le \textbf{diverse criticità}\todo{AT: dire quali o referenziare sezione relativa},
+non riescono ad esprimere accuratamente le \textbf{diverse criticità},
+%\todo{AT: dire quali o referenziare sezione relativa},
 che differiscono non solo per periodo ma anche per
-\textbf{direttrice}.
+\textbf{direttrice}.  Ad esempio, la \textit{Brescia-Paderna-Parma} ha
+un indice di puntualità medio del 67.04\%, mentre la
+\textit{Malpensa-Varese-Mendrisio-Como} (S40) del 98.26\%.  La
+\textbf{deviazione standard} tra gli indici di puntualità medi è di
+7.07.
 
 \begin{sidewaysfigure}[p]
     \centering
@@ -1884,7 +1889,7 @@ sezione successiva (\S~\ref{altre_analisi}).
 \subsection{\texttt{describe}}
 \label{stat_describe}
 
-Con il parametro \texttt{--stat describe} l'\textit{analyzer} mostra
+Con l'opzione \texttt{--stat describe} l'\textit{analyzer} mostra
 l'output del metodo
 \texttt{describe()}\footnote{\href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html}{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html}}
 del DataFrame \texttt{pandas} considerato (al netto quindi di filtri,
@@ -1943,7 +1948,7 @@ risultato non è facilmente verificabile.
 \subsection{\texttt{delay\_boxplot}}
 \label{stat_delay_boxplot}
 
-Il parametro \texttt{--stat delay\_\-boxplot} permette di visualizzare
+L'opzione \texttt{--stat delay\_\-boxplot} permette di visualizzare
 un boxplot dei dati sui \textbf{ritardi} in arrivo e partenza del
 campione selezionato.
 
@@ -2042,7 +2047,7 @@ essere dovuti alla maggiore frequenza di \textbf{scioperi}.
 \label{stat_day_train_count}
 
 Un'altra statistica interessante è l'andamento del \textbf{numero di
-    treni circolanti} nel corso delle giornate.  Con il parametro
+    treni circolanti} nel corso delle giornate.  Con l'opzione
 \texttt{--stat day\_\-\_train\_\-count} è possibile visualizzare il
 numero di treni circolati per ogni giornata considerata.
 
@@ -2090,7 +2095,7 @@ se sono operati dalla stessa impresa ferroviaria e hanno eguale
 \textit{insieme delle fermate}.  L'\textit{analyzer} assegna ad ogni
 linea un \textbf{identificatore univoco}, prodotto delle proprietà di
 cui sopra e utilizzabile successivamente per filtrare o raggruppare i
-dati.  Il parametro \texttt{--stat detect\_\-lines} genera e apre una
+dati.  L'opzione \texttt{--stat detect\_\-lines} genera e apre una
 pagina HTML contenente una tabella di tutte le linee rilevate (vedi
 \figurename~\ref{figure:detect_lines}).  Le colonne della tabella
 % (\textit{identificativo linea}, \textit{stazione A},
@@ -2131,7 +2136,7 @@ DCO\footnote{Dirigente Centrale Operativo, detto informalmente
 coordinare la circolazione e avere una visione d'insieme rilevante.
 Essendo la piattaforma inaccessibile pubblicamente, non è possibile
 allegare immagini o ulteriore documentazione alla presente
-descrizione.  Il parametro \texttt{--stat timetable} cerca di
+descrizione.  L'opzione \texttt{--stat timetable} cerca di
 \textbf{emulare} le tracce orario RFI: selezionata una linea e i dati
 di una giornata, l'applicativo \textit{traccia} su un piano i percorsi
 di tutti i treni circolati.  Le \figurename~\ref{figure:timetable} è
@@ -2152,7 +2157,7 @@ di circolazione ferroviaria tra le 10:00 e le 12:00.
 
 Ancora più interessante è la seconda visualizzazione
 (\figurename~\ref{figure:timetable_collapse}) ottenuta con l'aggiunta
-del parametro \texttt{--timetable-\-collapse}.  Come il nome
+dell'opzione \texttt{--timetable-\-collapse}.  Come il nome
 suggerisce, le tracce sono \textit{collassate} in modo che partano da
 $t = 0$: l'ascissa ora rappresenta le \textbf{durate}, non più gli
 orari.  Le due grosse tracce nere sono gli \textbf{orari programmati}
@@ -2173,9 +2178,9 @@ nella circolazione.
 \label{stat_trajectories_map}
 
 L'ultima visualizzazione predefinita proposta è di diverso formato
-rispetto alle precedenti.  Con il parametro \texttt{--stat
+rispetto alle precedenti.  Con l'opzione \texttt{--stat
     trajectories\_\-map} verrà generata in formato HTML una
-\textbf{mappa interattiva} inspirata da servizi come
+\textbf{mappa interattiva} ispirata da servizi come
 \textit{FlightRadar24}\footnote{\href{https://flightradar24.com}{https://flightradar24}
     è un portale web che consente di tracciare in tempo reale la
     posizione degli aerei per mezzo della propria rete ATS-B}.  Ogni
@@ -2385,13 +2390,6 @@ le imprese regionali, la \textbf{peggiore rimane Trenord} (ritardo
 medio in partenza 6.16\%), seguita da \textbf{Tper} (5.62\%) e
 \textbf{Trenitalia} (4.90\%).
 
-\begin{figure}[h]
-    \includegraphics[width=0.95\textwidth]{images/delay_box_percentage_wd.pdf}
-    \caption{\textit{Ritardo relativo} dei treni italiani, per impresa
-        ferroviaria~\cite[J]{StatJup}}
-    \label{figure:delay_box_percentage_wd}
-\end{figure}
-
 I dati precedenti suggeriscono una \textbf{intuitiva correlazione
     lineare} tra la \textit{durata del viaggio} e il \textit{ritardo
     assoluto mediano}.  In
@@ -2406,21 +2404,31 @@ l'\textbf{andamento} è prevalentemente \textbf{lineare}.
 All'aumentare della durata della corsa, il ritardo tendenzialmente
 aumenta.
 
-\begin{figure}[t]
-    \includegraphics[width=0.95\textwidth]{images/delay_duration_corr.pdf}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{images/delay_box_percentage_wd.pdf}
+    \caption{\textit{Ritardo relativo} dei treni italiani, per impresa
+        ferroviaria~\cite[J]{StatJup}}
+    \label{figure:delay_box_percentage_wd}
+\end{figure}
+
+\begin{sidewaysfigure}[p]
+    \centering
+    \includegraphics[width=1\textwidth]{images/delay_duration_corr.pdf}
     \caption{Correlazione tra ritardo mediano assoluto di una corsa e
         durata~\cite[K]{StatJup}}
     \label{figure:delay_duration_corr}
-\end{figure}
+\end{sidewaysfigure}
 
 \chapter{Conclusioni}
 
 Il lavoro di Tesi si conclude con \textbf{risultati soddisfacenti},
 nonostante molte questioni rimangano ancora oggetto di discussione.
-Si ricorda che l'\textbf{obiettivo principale} del lavoro di Tesi
-\textit{non} è stata l'analisi dei dati raccolti, ma l'attività di
-\textit{raccolta} stessa.\todo{AT: vero fino ad un certo punto, diciamo che è stata la raccolta e la proposta di estrazione di alcune statistiche suggerenti l'utilità del processo}
-
+% Si ricorda che l'\textbf{obiettivo principale} del lavoro di Tesi
+% \textit{non} è stata l'analisi dei dati raccolti, ma l'attività di
+% \textit{raccolta} stessa.  \todo{AT: vero fino ad un certo punto,
+%     diciamo che è stata la raccolta e la proposta di estrazione di
+%     alcune statistiche suggerenti l'utilità del processo}
 Dopo aver descritto le \textbf{principali
     Società} (\S~\ref{societa_territorio}), la differenza tra
 \textbf{servizio pubblico} e \textbf{offerte a mercato}
@@ -2540,8 +2548,9 @@ attraverso ulteriori visualizzazioni la \textit{reale situazione}.
 Modellare il \textit{ritardo} come una \textbf{variabile aleatoria}
 (\S~\ref{var_aleatoria}) ha permesso di esprimere l'\textit{indice di
     puntualità} come la sua \textit{funzione di ripartizione},
-permettendo di affermare che solo il 72.20\% dei treni arriva con al
-più 3 minuti di ritardo.\todo{AT: non sono andato indietro a controllare, invece il loro claim sui 5 minuti era veritiero?}
+permettendo di affermare che solo l'83.94\% dei treni arriva con al
+più 5 minuti di ritardo.
+% \todo{AT: non sono andato indietro a controllare, invece il loro claim sui 5 minuti era veritiero?}
 Concentrando i dati raccolti nei mesi in una
 sola giornata si ottiene l'\textbf{andamento infragiornaliero}
 (\S~\ref{andamento_infragiornaliero}): intuitivamente, nelle
@@ -2559,7 +2568,7 @@ seguita da Tper e Trenitalia.  Infine, è stata dimostrata una
 intuitiva \textbf{correlazione lineare} tra il \textit{ritardo
     assoluto} di una corsa e la sua durata.
 
-\subsection{Sviluppi futuri}
+\section*{Sviluppi futuri}
 
 L'argomento è tutt'altro che \textit{esaurito}.  Gli eventuali
 \textbf{obblighi di Legge} (anche comunitaria) riguardo l'accesso e la
