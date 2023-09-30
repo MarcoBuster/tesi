@@ -3,15 +3,15 @@
 %			TEMPLATE LATEX PER TESI                                       %
 %			______________                                                %
 %                                                                         %
-%           Ultima revisione: 13 aprile 2023                              %
+%           Ultima revisione: 30 settembre 2023                              %
 %           Revisori: G.Presti; L.A.Ludovico; F. Avanzini; M. Tiraboschi, %
 %                     Marco Aceti                                         %
 %                                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[12pt,italian]{report}
+\documentclass[12pt,a4paper,italian]{report}
 \usepackage{template}
-\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorinlistoftodos,disable]{todonotes}
 
 
 % CORSO DI LAUREA:
@@ -45,7 +45,7 @@
 \usepackage[italian]{babel}			% Supporto per l'italiano
 \usepackage[utf8]{inputenc}			% Supporto per UTF-8
 \usepackage{afterpage, lscape}
-%\usepackage[a-1b]{pdfx}			% File conforme allo standard PDF-A (obbligatorio per la consegna)
+\usepackage[a-1b]{pdfx}			% File conforme allo standard PDF-A (obbligatorio per la consegna)
 
 % Package per la grafica
 \usepackage{graphicx}				% Funzioni avanzate per le immagini
@@ -94,34 +94,30 @@
 
 \begin{document}
 
+% Pagina vuota da usare nella stampa
+% \afterpage{Pagina lasciata
+% intenzionalmente vuota.\newpage\addtocounter{page}{-1}}
+
 % Creazione automatica del frontespizio
 \frontespizio \beforepreface
 
 % DEDICA
+
 \hfill
-\begin{minipage}{15cm}
-	\hfill
-	\begin{minipage}[t]{11cm}
-		\raggedleft \large { \sl
-
-			Nei confronti di Trenord \\
-			sono state usate espressioni violente come \\
-			``disastro, incubo, degrado, punizione''. \\
-			\bigskip
-			Abbiamo sempre rispettato le opinioni di tutti,\\
-			ma dinanzi a tanta accanita disinformazione crediamo
-            doveroso rivolgerci direttamente a voi, clienti e
-            viaggiatori, per darvi i dati reali di quanto accaduto ed
-            offrirvi le corrette spiegazioni.
-
-			\bigskip }
-	\end{minipage} \\
-	\raggedleft \large
-	% \textbf{-- Paolo Garavaglia} \\
-	% \textrm{Direttore Comunicazioni e Relazioni Esterne, Trenord} \\
-
-	\textbf{Trenord, Lettera ai clienti} \\
-	Milano, 2 febbraio 2022
+\begin{minipage}{8.5cm}
+    % \renewcommand{\epigraphflush}{left}
+    % \renewcommand{\sourceflush}{left}
+    \setlength\epigraphwidth{\linewidth} \epigraph{%
+        \large\sl Nei confronti di Trenord
+        sono state usate espressioni violente come \\
+        ``disastro, incubo, degrado, punizione''.\\
+        \bigskip Abbiamo sempre rispettato le opinioni di tutti, ma
+        dinanzi a tanta accanita disinformazione crediamo doveroso
+        rivolgerci direttamente a voi, clienti e viaggiatori, per
+        darvi i dati \textit{reali} di quanto accaduto ed offrirvi le \\
+        \textit{corrette} spiegazioni.}{%
+        \textrm{\textbf{Trenord. Lettera ai clienti}\\
+            Milano, 2 febbraio 2022~\cite{TrenordLettera}} }
 \end{minipage}
 	
 % \prefacesection{Ringraziamenti} Questa sezione, facoltativa,
@@ -2593,14 +2589,30 @@ per un dialogo serio e costruttivo sul trasporto ferroviario italiano
 ed è una \textit{cartina di tornasole} della Trasparenza della nostra
 Democrazia.
 
-\vfill
+\pagebreak
 
-\epigraph{Dove un superiore pubblico interesse non imponga un
-    momentaneo segreto, la casa dell'amministrazione dovrebbe essere
-    di vetro.}{\textit{Filippo Turati}\\17 giugno 1908,~\cite{Turati}}
+\vspace*{\fill}
+
+\begin{center}
+    \begin{minipage}[t]{0.90\linewidth}
+        \renewcommand{\epigraphflush}{center}
+        \renewcommand{\sourceflush}{center}
+        \setlength\epigraphwidth{\linewidth}
+        
+        \epigraph{%
+            \centering Dove un superiore pubblico interesse non imponga un
+            momentaneo segreto, \\la casa dell'amministrazione dovrebbe
+            essere di vetro.
+            % 
+        }{\textsc{Filippo Turati} \\17 giugno 1908,~\cite{Turati} }
+    \end{minipage}
+\end{center}
+
+\vspace*{\fill}
 
 % -----------------------------------------------------------------
 
+\renewcommand*{\bibfont}{\small}
 \printbibliography
 
 \addcontentsline{toc}{chapter}{Bibliografia}
@@ -3290,9 +3302,9 @@ Malpensa Aeroporto)
 Dalla pandemia di COVID-19, Trenord ha implementato nell'app mobile un
 meccanismo di \textit{geofence} per \textbf{stimare} l'affollamento
 dei treni.  La posizione dei viaggiatori viene trasmessa anonimanente
-ai sistemi di Trenord che quindi generano delle stime.  È bene quindi
+ai sistemi di Trenord che quindi generano delle stime.  È bene
 sottolineare che i dati sono approssimativi e potrebbero non fornire
-una visione accurata: si possono trovare anche valori negativi o
+una visione accurata: si possono trovare valori negativi o
 superiori a 100.
 
 \end{document}
