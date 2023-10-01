@@ -18,6 +18,7 @@
 \def\myCDL{Corso di Laurea in Informatica}
 
 % TITOLO TESI:
+
 \def\myTitle{Trasporto ferroviario e Open Data}
 
 % AUTORE:
@@ -438,14 +439,14 @@ disponibili.
 % estrarre info "sensate" (4-5 stelle Berners-Lee) \\
 % M: ho messo i tentativi della community in Appendice A.2}
 
-\todo{AT: btw da qualche parte farei un microexcursus sulle
-    classificazioni opendata (lo puoi riassumere dal secondo volume di
-    CDT che ti posso mandare, è in fase di review ora) \\
-    M: ho citato la classificazione di Berners-Lee e ho valutato gli
-    ``open data'' che ho analizzato in sezione 1.3.2, va bene? \\
-    AT: fai un ulteriore sforzo e usa anche quella di Davies, così li
-    stronchiamo definitivamente ;) \\
-    M: fatto}
+% \todo{AT: btw da qualche parte farei un microexcursus sulle
+%     classificazioni opendata (lo puoi riassumere dal secondo volume di
+%     CDT che ti posso mandare, è in fase di review ora) \\
+%     M: ho citato la classificazione di Berners-Lee e ho valutato gli
+%     ``open data'' che ho analizzato in sezione 1.3.2, va bene? \\
+%     AT: fai un ulteriore sforzo e usa anche quella di Davies, così li
+%     stronchiamo definitivamente ;) \\
+%     M: fatto}
 
 \subsection{Sito web di Trenord}
 
@@ -627,8 +628,7 @@ Il 5 settembre dello stesso anno, il Tribunale di Roma \textbf{revoca}
 il provvedimento cautelare emesso in precedenza \cite{TrenitSentenza}:
 \textbf{Trenìt può continuare ad operare}.  Secondo il giudice, Trenìt
 ha estratto una \textquote{\textbf{parte non sostanziale}} del
-contenuto della banca dati.  Secondo l'art.\ 102 ter
-LDA\footnote{Legge sul diritto d'autore}, infatti,
+contenuto della banca dati.  L'art.\@ 102 ter LDA sancisce infatti che
 \textquote{\textbf{non sono soggette all'autorizzazione} del
     costitutore della banca dati \textbf{messa per qualsiasi motivo a
         disposizione del pubblico} le attività di estrazione o
@@ -641,11 +641,16 @@ Trenitalia ad oggi non ha presentato ulteriori ricorsi.
 \subsubsection{Osservazioni}
 
 Carlo Piana, noto avvocato italiano attivo nel campo del Software
-Libero\todo{AT: footnote o altro che racconti in due parole cosa si intende, dato che poi dici che il tuo è GPL (ma manca un ref alla licenza! metterlo)}, ha pubblicato delle osservazioni su alcuni punti della
-sentenza nel suo articolo ``\textit{Scraping di dati pubblici per non
-    perdere il treno della concorrenza}'' \cite{TrenitPiana} per
-TechEconomy2030.
-
+Libero\footnote{\label{sw_libero}Un Software si dice \textit{Libero}
+    quando \textcquote[vedi][]{GnuSwLibero}{gli utenti hanno la
+        \textit{libertà} di eseguire, copiare, distribuire, studiare,
+        modificare e migliorare il software}.},
+% \todo{AT: footnote o altro che racconti in due parole cosa si
+% intende, dato che poi dici che il tuo è GPL (ma manca un ref alla
+% licenza!  metterlo)}
+ha pubblicato delle osservazioni su alcuni punti della sentenza nel
+suo articolo ``\textit{Scraping di dati pubblici per non perdere il
+    treno della concorrenza}''~\cite{TrenitPiana} per TechEconomy2030.
 Nel 2010 LastMinute e Ryanair sono andati in causa perché la prima
 offriva al pubblico uno \textbf{strumento di comparazione dei prezzi}
 con i dati della seconda.  La sentenza \cite{RyanairSentenza} del
@@ -1033,18 +1038,18 @@ direttrici, i report sulla \textbf{composizione} e \textbf{pulizia dei
     \centering
     \includegraphics[width=1\textwidth]{images/lomb_heatmap.pdf}
     \caption{Indice di puntualità delle direttrici Trenord per il
-        2022}
+        2022~\cite{FoiaLomb,StatJup}}
     \label{figure:lomb_heatmap}
 \end{sidewaysfigure}
 
-In \figurename~\ref{figure:lomb_heatmap}\todo{Marco: collegare foglio
-    Jupyter} sono mostrati i dati trasmessi da Regione Lombardia
-riguardo la \textbf{puntualità}\footnote{Come già detto, per
-    \textit{indice di puntualità} si intende la percentuale di treni
-    arrivata a destino con un ritardo di al più 5 minuti, escludendo
-    le perturbazioni dovute a \textit{cause di forza maggiore},
-    scioperi e lavori programmati} delle corse Trenord nel 2022.  La
-tabella originale è stata rielaborata in modalità \textit{heatmap} per
+In \figurename~\ref{figure:lomb_heatmap} sono mostrati i dati
+trasmessi da Regione Lombardia riguardo la
+\textbf{puntualità}\footnote{Come già detto, per \textit{indice di
+        puntualità} si intende la percentuale di treni arrivata a
+    destino con un ritardo di al più 5 minuti, escludendo le
+    perturbazioni dovute a \textit{cause di forza maggiore}, scioperi
+    e lavori programmati} delle corse Trenord nel 2022.  La tabella
+originale è stata rielaborata in modalità \textit{heatmap} per
 agevolarne la lettura.  La \figurename~\ref{figure:lomb_boxplot} rende
 ancora più evidente l'\textbf{importanza dei dati disaggregati}: i
 dati ufficiali pubblicati sul sito della Regione (vedi
@@ -1062,7 +1067,7 @@ un indice di puntualità medio del 67.04\%, mentre la
     \centering
     \includegraphics[width=1\textwidth]{images/lomb_boxplot.pdf}
     \caption{Boxplot dell'indice mensile di puntualità delle
-        direttrici Trenord per il 2022}
+        direttrici Trenord per il 2022~\cite{FoiaLomb,StatJup}}
     \label{figure:lomb_boxplot}
 \end{sidewaysfigure}
 
@@ -1854,7 +1859,6 @@ I parametri da linea di comando sono \texttt{--group\--by} e
 
 \chapter{Analisi e risultati}
 \label{analisi}
-\todo{Sistema link bibliografia}
 
 In questo capitolo verranno commentati alcuni \textbf{risultati} e
 \textbf{visualizzazioni} rilevanti.  Tutti e i soli \textbf{dati
@@ -2396,7 +2400,8 @@ corsa e la sua durata.  Ad ogni punto nel piano corrisponde un
     durate aventi la medesima dimensione} delle durate e la
 \textit{media} dei \textit{ritardi mediani} delle corse.  La
 correlazione è evidente: escludendo i valori dei quantili più estremi,
-l'\textbf{andamento} è prevalentemente \textbf{lineare}.
+l'\textbf{andamento} è prevalentemente \textbf{lineare} ($\rho =
+0.73$,~\cite[K]{StatJup}).
 All'aumentare della durata della corsa, il ritardo tendenzialmente
 aumenta.
 
@@ -2496,11 +2501,15 @@ le informazioni \textit{real-time} della circolazione ferroviaria, il
 secondo \textbf{converte} quanto salvato in comodi file CSV e l’ultimo
 propone delle \textbf{analisi predefinite} e
 \textbf{parametrizzabili}.  Tutti gli strumenti sono scritti in
-Python, sono \textbf{liberi} (nel senso di \textit{Software Libero}\todo{AT: aggiungi un "vedi sopra" e vedi mia altra nota zona Carlo Piana}) e sono utilizzabili da linea di
-comando.  Per la prima volta è disponibile una \textit{suite} di
-strumenti utile a \textbf{scaricare}, \textbf{convertire} e
-\textbf{analizzare} in modo indipendente i dati della circolazione
-ferroviaria italiana.
+Python, sono \textbf{liberi} (nel senso di \textit{Software
+    Libero}\footnote{Vedi nota~\ref{sw_libero} in
+    \S~\ref{caso_trenit}}
+% \todo{AT: aggiungi un "vedi sopra" e vedi mia altra nota zona Carlo
+% Piana})
+e sono utilizzabili da linea di comando.  Per la prima volta è
+disponibile una \textit{suite} di strumenti utile a
+\textbf{scaricare}, \textbf{convertire} e \textbf{analizzare} in modo
+indipendente i dati della circolazione ferroviaria italiana.
 
 Per più di 5 mesi, in una macchina del \textit{Dipartimento di
     Informatica} dell'Università degli Studi di Milano, un'istanza
